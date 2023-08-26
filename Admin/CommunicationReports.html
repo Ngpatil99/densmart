@@ -1,0 +1,100 @@
+﻿<div class="container">
+    <div class="page-wrapper bg-white">
+
+        <div class="page-body">
+            <ul class="line nav nav-tabs">
+                <li class="nav-item" data-id="61">
+                    <a class="nav-link waves-effect active" data-toggle="tab" href="#SMS">SMS</a>
+                </li>
+                <li id="liSMS" class="nav-item" data-id="62">
+                    <a class="nav-link waves-effect" data-toggle="tab" href="#SMSHistory" target="_self">SMS History</a>
+                </li>
+                <li id="liWA" class="nav-item" data-id="63">
+                    <a class="nav-link waves-effect" data-toggle="tab" href="#SMSHistory" target="_self">Whatsup History</a>
+                </li>
+
+
+            </ul>
+            <div class="tab-content">
+                <div class="tab-pane fade show active p-3" id="SMS">
+                    <div id="divFilters"></div>
+                    <div class="row">
+                        <div class="form-group col-12 text-center">
+                            <button id="btnSearchResult" class="btn btn-first">Show Result</button>
+                        </div>
+                        <div class="col-12" style="display:flex;margin-bottom:5px;">
+                            <div>
+
+
+                                <label class="btn-file btn btn-first mr-1">
+                                    <input type="file" id="uplImageUpload" accept="Image/*" />
+                                    <i class="fa fa-check"></i><span id="spnImageLabel">Choose Image</span>
+                                </label>
+                                <button onclick="javascript:fn_UploadImages();" class="btn btn-first">
+                                    <i class="fa fa-cloud-upload"></i><span>Sent Whats App</span>
+                                </button>
+                            </div>
+                            <!--<textarea style="width:80%"></textarea>
+                            <button id="btnSendSMS" class="btn btn-first">SMS</button>-->
+                        </div>
+                        <div class="col-12">
+                            <div id="GridResult"></div>
+                        </div>
+                    </div>
+                </div>
+
+
+                <div class="tab-pane fade p-3" id="SMSHistory">
+                    <div class="row">
+                        <div class="col-3">
+                            <div class="form-group">
+                                <label>
+                                    Clinic Name<span style="color: Red;">*</span>
+                                </label>
+                                <select class="form-control" id="ddlClinicList"></select>
+                            </div>
+                        </div>
+                        <div class="col-3 form-inline">
+                            <button onclick="fillGrid()" class="btn btn-first">Search</button>
+                        </div>
+                        <div class="col-12">
+                            <div id="GridResult1"></div>
+                        </div>
+                    </div>
+                </div>
+
+
+
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="modal fade" id="mdlResponse" tabindex="-1" role="large" aria-hidden="true" style="display: none;">
+    <div class="modal-dialog modal-lg">
+        <div class="modal-content">
+            <div class="modal-header">
+
+                <h4 class="modal-title">
+                    Response Message
+                </h4>
+            </div>
+            <div class="modal-body">
+                <div class="row">
+                    <div class="col-12">
+                        <div id="divMessage"></div>
+
+                    </div>
+
+
+
+                </div>
+            </div>
+
+        </div>
+    </div>
+</div>
+
+<script type="text/javascript" src="JS/Controllers/CommunicationReports.js?v=1"></script>
+
+

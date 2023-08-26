@@ -1,0 +1,565 @@
+﻿<div class="container">
+    <div class="page-wrapper bg-white">
+
+        <div class="page-body">
+            <ul class="line nav nav-tabs">
+                <li class="nav-item">
+                    <a class="nav-link waves-effect active" data-toggle="tab" href="#SMS">SMS</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link waves-effect" data-toggle="tab" href="#SMSHistory">SMS History</a>
+                </li>
+            </ul>
+            <div class="tab-content">
+                <div class="tab-pane fade show active p-3" id="SMS">
+                    <div class="row">
+                        <div class="form-group col-sm-6 col-md-4 col-lg-3">
+                            <select id="ddlCategory" class="form-control">
+                                <option value="Select">Select</option>
+                                <option value="PatientRegistrationDate">Patient Registration Date</option>
+                                <option value="PatientName">Patient Name</option>
+                                <option value="PatientGender">Patient Gender</option>
+                                <option value="PatientAge">Patient Age</option>
+                                <option value="PatientAddress">Patient Address</option>
+                                <option value="PatientMobileNo">Patient Mobile No</option>
+                                <option value="PatientEmail">Patient Email</option>
+                                <option value="PatientMedicalHistory">Patient Medical History</option>
+                                <option value="PatientPID">Patient PID</option>
+                                <option value="PatientCustomPID">Patient Custom PID</option>
+                                <option value="TreatmentName">Treatment Name</option>
+                                <option value="ToothNo">Tooth No</option>
+                                <option value="TreatmentDate">Treatment Date</option>
+                                <option value="FeesPaid">Fees Paid</option>
+                                <option value="FeesRemaining">Fees Remaining</option>
+                                <option value="DoctorName">Doctor Name</option>
+                                <option value="PatientReferredBy">Patient Ref. By</option>
+                            </select>
+                        </div>
+                        <div class="form-group col-sm-6 col-md-4 col-lg-3">
+                            <select id="ddlSubCategory" class="form-control">
+                            </select>
+                        </div>
+                        <div class="form-group col-sm-6 col-md-4 col-lg-3">
+                            <input id="txtSelValue" type="text" class="form-control" />
+
+                        </div>
+                        <div class="form-group col-sm-6 col-md-4 col-lg-3">
+                            <select id="ddlSelValue" class="form-control"></select>
+
+                        </div>
+                        <div class="form-group col-sm-6 col-md-12 col-lg-3 text-center">
+                            <button id="btnShowResult" class="btn btn-first">Add</button>
+                        </div>
+                        <div class="col-12">
+                            <div class="table-responsive">
+                                <table class="table table-bordered m-0">
+
+                                    <thead><tr><th>SrNo</th><th>Category</th><th>Criteria 1</th><th>Selected Value</th><th></th></tr></thead>
+                                    <tbody id="tblSelectedCriteria"></tbody>
+                                </table>
+                            </div>
+                        </div>
+                        <div class="form-group col-12 text-center">
+                            <button id="btnSearchResult" class="btn btn-first">Search</button>
+                        </div>
+                        <div class="col-12">
+                            <div id="GridResult"></div>
+                        </div>
+                    </div>
+                </div>
+                <div class="tab-pane fade p-3" id="SMSHistory">
+
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script type="text/javascript">
+
+    $(document).ready(function () {
+        $("#txtSelValue").parent().hide();
+        $("#ddlSelValue").parent().hide();
+
+        $("#ddlCategory").change(function () {
+            var $ddlSub = $("#ddlSubCategory");
+            $("#txtSelValue").parent().hide();
+            $("#ddlSelValue").parent().hide();
+            $ddlSub.html('');
+            $('<option></option').attr('value', '').text('--').appendTo($ddlSub);
+            if ($("#ddlCategory").val() == 'PatientRegistrationDate' || $("#ddlCategory").val() == 'TreatmentDate') {
+                $('<option></option').attr('value', 'On').text('On').appendTo($ddlSub);
+                $('<option></option').attr('value', 'OnorAfter').text('On or After').appendTo($ddlSub);
+                $('<option></option').attr('value', 'OnorBefore').text('On or Before').appendTo($ddlSub);
+                $('<option></option').attr('value', 'Yesterday').text('Yesterday').appendTo($ddlSub);
+                $('<option></option').attr('value', 'Today').text('Today').appendTo($ddlSub);
+                $('<option></option').attr('value', 'ThisMonth').text('This Month').appendTo($ddlSub);
+                $('<option></option').attr('value', 'LastMonth').text('Last Month').appendTo($ddlSub);
+                $('<option></option').attr('value', 'ThisYear').text('This Year').appendTo($ddlSub);
+                $('<option></option').attr('value', 'LastYear').text('Last Year').appendTo($ddlSub);
+                $('<option></option').attr('value', 'LastXDays').text('Last X Days').appendTo($ddlSub);
+
+            } else if ($("#ddlCategory").val() == 'PatientReferredBy' || $("#ddlCategory").val() == 'PatientName' || $("#ddlCategory").val() == 'PatientAddress' || $("#ddlCategory").val() == 'PatientMobileNo' || $("#ddlCategory").val() == 'PatientEmail' || $("#ddlCategory").val() == 'PatientMedicalHistory' || $("#ddlCategory").val() == 'PatientCustomPID' || $("#ddlCategory").val() == 'ToothNo') {
+                $('<option></option').attr('value', 'Equals').text('Equals').appendTo($ddlSub);
+                $('<option></option').attr('value', 'DoesNotEqual').text('Does Not Equal').appendTo($ddlSub);
+                $('<option></option').attr('value', 'Contains').text('Contains').appendTo($ddlSub);
+                $('<option></option').attr('value', 'DoesNotContain').text('Does Not Contain').appendTo($ddlSub);
+                $('<option></option').attr('value', 'ContainsData').text('Contains Data').appendTo($ddlSub);
+                $('<option></option').attr('value', 'DoesNotContainData').text('Does Not Contain Data').appendTo($ddlSub);
+
+
+            } else if ($("#ddlCategory").val() == 'PatientAge' || $("#ddlCategory").val() == 'PatientPID' || $("#ddlCategory").val() == 'FeesPaid' || $("#ddlCategory").val() == 'FeesRemaining') {
+                $('<option></option').attr('value', 'Equals').text('Equals').appendTo($ddlSub);
+                $('<option></option').attr('value', 'DoesNotEqual').text('Does Not Equal').appendTo($ddlSub);
+                $('<option></option').attr('value', 'IsGreaterThan').text('Is Greater Than').appendTo($ddlSub);
+                $('<option></option').attr('value', 'IsGreaterThanorEqualTo').text('Is Greater Than or EqualTo').appendTo($ddlSub);
+                $('<option></option').attr('value', 'IsLessThan').text('Is Less Than').appendTo($ddlSub);
+                $('<option></option').attr('value', 'IsLessThanorEqualTo').text('Is Less Than or Equal To').appendTo($ddlSub);
+                $('<option></option').attr('value', 'ContainsData').text('ContainsData').appendTo($ddlSub);
+                $('<option></option').attr('value', 'DoesNotContainData').text('Does Not Contain Data').appendTo($ddlSub);
+            } else if ($("#ddlCategory").val() == 'PatientGender' || $("#ddlCategory").val() == 'TreatmentName' || $("#ddlCategory").val() == 'DoctorName') {
+                $('<option></option').attr('value', 'Equals').text('Equals').appendTo($ddlSub);
+            }
+        });
+
+
+        $("#ddlSubCategory").change(function () {
+            $("#txtSelValue").parent().hide();
+            $("#ddlSelValue").parent().hide();
+            var $ddlSelvale = $("#ddlSelValue"); $ddlSelvale.html('');
+
+            if (this.value == 'On' || this.value == 'OnorAfter' || this.value == 'OnorBefore') {
+                $("#txtSelValue").val(_GlobalPatHistory.CurrentDate);
+                $("#txtSelValue").attr('type', 'date');
+                $("#txtSelValue").parent().show();
+                $("#ddlSelValue").parent().hide();
+            } else if (this.value == 'Yesterday' || this.value == 'Today' || this.value == 'ThisMonth' || this.value == 'LastMonth' || this.value == 'ThisYear' || this.value == 'LastYear' || this.value == 'ContainsData' || this.value == 'DoesNotContainData') {
+                $("#txtSelValue").parent().hide();
+                $("#ddlSelValue").parent().hide();
+            } else if (this.value == 'LastXDays') {
+                $("#txtSelValue").val('');
+                $("#txtSelValue").attr('type', 'number');
+                $("#txtSelValue").parent().show();
+                $("#ddlSelValue").parent().hide();
+            }
+
+            else if (this.value == 'Equals') {
+                if ($("#ddlCategory").val() == 'PatientGender') {
+                    $("#txtSelValue").parent().hide();
+                    $("#ddlSelValue").parent().show();
+
+                    $('<option></option').attr('value', 'Male').text('Male').appendTo($ddlSelvale);
+                    $('<option></option').attr('value', 'Female').text('Female').appendTo($ddlSelvale);
+                }
+                else if ($("#ddlCategory").val() == 'TreatmentName') {
+                    $("#txtSelValue").parent().hide();
+                    $("#ddlSelValue").parent().show();
+
+                    FillDropDown_JS(true, 'TreatmentList', 'ddlSelValue', 0, $qc.Cookie("locationid"), 0, 1, null, null, false, [], 'Params', null);
+                }
+                else if ($("#ddlCategory").val() == 'DoctorName') {
+                    $("#txtSelValue").parent().hide();
+                    $("#ddlSelValue").parent().show();
+
+                    FillDropDown_JS(true, 'Doctorlist', 'ddlSelValue', 0, $qc.Cookie("locationid"), 0, 1, null, null, false, [], 'Params', null);
+                }
+                else if ($("#ddlCategory").val() == 'PatientName') {
+                    $("#txtSelValue").val('');
+                    $("#txtSelValue").attr('type', 'text');
+                    $("#txtSelValue").parent().show();
+                    $("#ddlSelValue").parent().hide();
+                } else {
+                    $("#txtSelValue").val('');
+                    $("#txtSelValue").attr('type', 'text');
+                    $("#txtSelValue").parent().show();
+                    $("#ddlSelValue").parent().hide();
+                }
+
+            }
+            else {
+                $("#txtSelValue").val('');
+                $("#txtSelValue").attr('type', 'text');
+                $("#txtSelValue").parent().show();
+                $("#ddlSelValue").parent().hide();
+            }
+        });
+
+        $("#btnShowResult").click(function () {
+            debugger;
+            var str = $("#tblSelectedCriteria").html();
+            if ($("#ddlCategory").val() == 'PatientRegistrationDate' || $("#ddlCategory").val() == 'TreatmentDate') {
+                if ($("#txtSelValue").val() != '' && ($("#ddlSubCategory").val() == 'On' || $("#ddlSubCategory").val() == 'OnorAfter' || $("#ddlSubCategory").val() == 'OnorBefore')) {
+                    str += '<tr>';
+                    str += '<td>' + ($("#tblSelectedCriteria tr").length + 1) + '</td>';
+                    str += '<td>' + $("#ddlCategory").val() + '</td>';
+                    str += '<td>' + $("#ddlSubCategory").val() + '</td>';
+                    str += '<td>' + $("#txtSelValue").val() + '</td>';
+                    str += '<td><button class="btn btn-danger">Del</button></td>';
+                    str += '</tr>';
+                }
+
+            }
+            if ($("#ddlCategory").val() == 'PatientReferredBy' || $("#ddlCategory").val() == 'PatientName' || $("#ddlCategory").val() == 'PatientAddress' || $("#ddlCategory").val() == 'PatientMobileNo' || $("#ddlCategory").val() == 'PatientEmail' || $("#ddlCategory").val() == 'PatientMedicalHistory' || $("#ddlCategory").val() == 'PatientCustomPID' || $("#ddlCategory").val() == 'ToothNo') {
+                if ($("#txtSelValue").val() != '' && ($("#ddlSubCategory").val() == 'Equals' || $("#ddlSubCategory").val() == 'DoesNotEqual' || $("#ddlSubCategory").val() == 'Contains' || $("#ddlSubCategory").val() == 'DoesNotContain')) {
+                    str += '<tr>';
+                    str += '<td>' + ($("#tblSelectedCriteria tr").length + 1) + '</td>';
+                    str += '<td>' + $("#ddlCategory").val() + '</td>';
+                    str += '<td>' + $("#ddlSubCategory").val() + '</td>';
+                    str += '<td>' + $("#txtSelValue").val() + '</td>';
+                    str += '<td><button class="btn btn-danger">Del</button></td>';
+                    str += '</tr>';
+                } else if ($("#ddlSubCategory").val() == 'ContainsData' || $("#ddlSubCategory").val() == 'DoesNotContainData') {
+                    str += '<tr>';
+                    str += '<td>' + ($("#tblSelectedCriteria tr").length + 1) + '</td>';
+                    str += '<td>' + $("#ddlCategory").val() + '</td>';
+                    str += '<td>' + $("#ddlSubCategory").val() + '</td>';
+                    str += '<td></td>';
+                    str += '<td><button class="btn btn-danger">Del</button></td>';
+                    str += '</tr>';
+                }
+
+            }
+            if ($("#ddlCategory").val() == 'PatientGender') {
+                if ($("#ddlSubCategory").val() != '') {
+                    str += '<tr>';
+                    str += '<td>' + ($("#tblSelectedCriteria tr").length + 1) + '</td>';
+                    str += '<td>' + $("#ddlCategory").val() + '</td>';
+                    str += '<td>' + $("#ddlSubCategory").val() + '</td>';
+                    str += '<td>' + $("#ddlSelValue").val() + '</td>';
+                    str += '<td><button class="btn btn-danger">Del</button></td>';
+                    str += '</tr>';
+                }
+            }
+            if ($("#ddlCategory").val() == 'PatientAge' || $("#ddlCategory").val() == 'PatientPID' || $("#ddlCategory").val() == 'FeesPaid' || $("#ddlCategory").val() == 'FeesRemaining') {
+                if ($("#ddlSubCategory").val() != '') {
+                    if ($("#ddlSubCategory").val() == 'ContainsData' || $("#ddlSubCategory").val() == 'DoesNotContainData') {
+                        str += '<tr>';
+                        str += '<td>' + ($("#tblSelectedCriteria tr").length + 1) + '</td>';
+                        str += '<td>' + $("#ddlCategory").val() + '</td>';
+                        str += '<td>' + $("#ddlSubCategory").val() + '</td>';
+                        str += '<td></td>';
+                        str += '<td><button class="btn btn-danger">Del</button></td>';
+                        str += '</tr>';
+                    } else {
+                        str += '<tr>';
+                        str += '<td>' + ($("#tblSelectedCriteria tr").length + 1) + '</td>';
+                        str += '<td>' + $("#ddlCategory").val() + '</td>';
+                        str += '<td>' + $("#ddlSubCategory").val() + '</td>';
+                        str += '<td>' + $("#txtSelValue").val() + '</td>';
+                        str += '<td><button class="btn btn-danger">Del</button></td>';
+                        str += '</tr>';
+                    }
+                }
+            }
+            if ($("#ddlCategory").val() == 'TreatmentName' || $("#ddlCategory").val() == 'DoctorName') {
+                if ($("#ddlSubCategory").val() != '') {
+
+                    str += '<tr>';
+                    str += '<td>' + ($("#tblSelectedCriteria tr").length + 1) + '</td>';
+                    str += '<td>' + $("#ddlCategory").val() + '</td>';
+                    str += '<td>' + $("#ddlSubCategory").val() + '</td>';
+                    str += '<td>' + $("#ddlSelValue").val() + '</td>';
+                    str += '<td><button class="btn btn-danger">Del</button></td>';
+                    str += '</tr>';
+
+                }
+            }
+            if ($("#ddlCategory").val() == 'TreatmentName' || $("#ddlCategory").val() == 'DoctorName') {
+                if ($("#ddlSubCategory").val() != '') {
+
+                    str += '<tr>';
+                    str += '<td>' + ($("#tblSelectedCriteria tr").length + 1) + '</td>';
+                    str += '<td>' + $("#ddlCategory").val() + '</td>';
+                    str += '<td>' + $("#ddlSubCategory").val() + '</td>';
+                    str += '<td>' + $("#ddlSelValue option:selected").text() + '</td>';
+                    str += '<td><button class="btn btn-danger">Del</button></td>';
+                    str += '</tr>';
+
+                }
+            }
+            $("#tblSelectedCriteria").html(str);
+        });
+
+        $("#btnSearchResult").click(function () {
+            var strWhere = "";
+
+            for (var i = 0; i < $("#tblSelectedCriteria tr").length; i++) {
+                var $tr = $("#tblSelectedCriteria tr");
+                var cell0 = $($tr.children()[1]).text();
+                var cell1 = $($tr.children()[2]).text();
+                var cell2 = $($tr.children()[3]).text();
+
+                /*Patinet Registration Date*/
+                if (cell0 == 'PatientRegistrationDate' && cell1 == 'On') {
+                    if (cell2 != '') { strWhere += ' and converT(date, createddate) = convert(date,`' + cell2 + '`)'; }
+                } else if (cell0 == 'PatientRegistrationDate' && cell1 == 'OnorAfter') {
+                    if (cell2 != '') { strWhere += ' and converT(date, createddate) >= convert(date,`' + cell2 + '`)'; }
+                } else if (cell0 == 'PatientRegistrationDate' && cell1 == 'OnorBefore') {
+                    if (cell2 != '') { strWhere += ' and converT(date, createddate) <= convert(date,`' + cell2 + '`)'; }
+                } else if (cell0 == 'PatientRegistrationDate' && cell1 == 'Yesterday') {
+                    strWhere += ' and converT(date, createddate) = convert(date, getdate() - 1)';
+                } else if (cell0 == 'PatientRegistrationDate' && cell1 == 'Today') {
+                    strWhere += ' and converT(date, createddate) = convert(date, getdate())';
+                } else if (cell0 == 'PatientRegistrationDate' && cell1 == 'ThisMonth') {
+                    strWhere += ' and month(createddate) = month(getdate()) and year(createddate) = year(getdate())';
+                } else if (cell0 == 'PatientRegistrationDate' && cell1 == 'LastMonth') {
+                    strWhere += 'and month(createddate) = month(dateadd(month,-1,getdate())) and year(createddate)=year(getdate())';
+                } else if (cell0 == 'PatientRegistrationDate' && cell1 == 'ThisYear') {
+                    strWhere += ' and year(createddate) = year(getdate())';
+                } else if (cell0 == 'PatientRegistrationDate' && cell1 == 'LastYear') {
+                    strWhere += ' and year(createddate) = year(getdate())-1';
+                } else if (cell0 == 'PatientRegistrationDate' && cell1 == 'LastXDays') {
+                    if (cell2 != '') { strWhere += ' and convert(date,createddate) >= convert(date,dateadd(day,-' + cell2 + ',getdate()))'; }
+                }
+
+                /*Patinet Name*/
+                if (cell0 == 'PatientName' && cell1 == 'Equals') {
+                    if (cell2 != '') { strWhere += ' and dbo.udf_getPatientPrefName(fname,mname,lname) = `' + cell2 + '`'; }
+                } else if (cell0 == 'PatientName' && cell1 == 'DoesNotEqual') {
+                    if (cell2 != '') { strWhere += ' and dbo.udf_getPatientPrefName(fname,mname,lname) <> `' + cell2 + '`'; }
+                } else if (cell0 == 'PatientName' && cell1 == 'Contains') {
+                    if (cell2 != '') { strWhere += ' and dbo.udf_getPatientPrefName(fname,mname,lname) like `%' + cell2 + '%`'; }
+                } else if (cell0 == 'PatientName' && cell1 == 'DoesNotContain') {
+                    if (cell2 != '') { strWhere += ' and dbo.udf_getPatientPrefName(fname,mname,lname) not like `%' + cell2 + '%`'; }
+                } else if (cell0 == 'PatientName' && cell1 == 'ContainsData') {
+                    strWhere += ' and dbo.udf_getPatientPrefName(fname,mname,lname) <> ``';
+                } else if (cell0 == 'PatientName' && cell1 == 'DoesNotContainData') {
+                    strWhere += ' and dbo.udf_getPatientPrefName(fname,mname,lname) = ``';
+                }
+
+                /*Patinet referred By*/
+                if (cell0 == 'PatientReferredBy' && cell1 == 'Equals') {
+                    if (cell2 != '') { strWhere += ' and dbo.udf_ReferredByDr(RefDoctorId) = `' + cell2 + '`'; }
+                } else if (cell0 == 'PatientName' && cell1 == 'DoesNotEqual') {
+                    if (cell2 != '') { strWhere += ' and dbo.udf_ReferredByDr(RefDoctorId) <> `' + cell2 + '`'; }
+                } else if (cell0 == 'PatientName' && cell1 == 'Contains') {
+                    if (cell2 != '') { strWhere += ' and dbo.udf_ReferredByDr(RefDoctorId) like `%' + cell2 + '%`'; }
+                } else if (cell0 == 'PatientName' && cell1 == 'DoesNotContain') {
+                    if (cell2 != '') { strWhere += ' and dbo.udf_ReferredByDr(RefDoctorId) not like `%' + cell2 + '%`'; }
+                } else if (cell0 == 'PatientName' && cell1 == 'ContainsData') {
+                    strWhere += ' and dbo.udf_ReferredByDr(RefDoctorId) <> ``';
+                } else if (cell0 == 'PatientName' && cell1 == 'DoesNotContainData') {
+                    strWhere += ' and dbo.udf_ReferredByDr(RefDoctorId) = ``';
+                }
+
+
+                /*Patient Gender*/
+                if (cell0 == 'PatientGender' && cell1 == 'Equals') {
+                    if (cell2 != '') { strWhere += ' and Gender = `' + cell2 + '`'; }
+                }
+
+                /*Patient Age*/
+                if (cell0 == 'PatientAge' && cell1 == 'Equals') {
+                    if (cell2 != '') { strWhere += ' and age = `' + cell2 + '`'; }
+                } else if (cell0 == 'PatientAge' && cell1 == 'DoesNotEqual') {
+                    if (cell2 != '') { strWhere += ' and age = `' + cell2 + '`'; }
+                } else if (cell0 == 'PatientAge' && cell1 == 'IsGreaterThan') {
+                    if (cell2 != '') { strWhere += ' and age > `' + cell2 + '`'; }
+                } else if (cell0 == 'PatientAge' && cell1 == 'IsGreaterThanorEqualTo') {
+                    if (cell2 != '') { strWhere += ' and age >= `' + cell2 + '`'; }
+                } else if (cell0 == 'PatientAge' && cell1 == 'IsLessThan') {
+                    if (cell2 != '') { strWhere += ' and age < `' + cell2 + '`'; }
+                } else if (cell0 == 'PatientAge' && cell1 == 'IsLessThanorEqualTo') {
+                    if (cell2 != '') { strWhere += ' and age <= `' + cell2 + '`'; }
+                } else if (cell0 == 'PatientAge' && cell1 == 'ContainsData') {
+                    if (cell2 != '') { strWhere += ' and age <> ``'; }
+                } else if (cell0 == 'PatientAge' && cell1 == 'DoesNotContainData') {
+                    if (cell2 != '') { strWhere += ' and age = ``'; }
+                }
+                /*Patient Address*/
+                if (cell0 == 'PatientAddress' && cell1 == 'Equals') {
+                    if (cell2 != '') { strWhere += ' and PrimaryAddress = `' + cell2 + '`'; }
+                } else if (cell0 == 'PatientAddress' && cell1 == 'DoesNotEqual') {
+                    if (cell2 != '') { strWhere += ' and PrimaryAddress <> `' + cell2 + '`'; }
+                } else if (cell0 == 'PatientAddress' && cell1 == 'Contains') {
+                    if (cell2 != '') { strWhere += ' and PrimaryAddress like `%' + cell2 + '%`'; }
+                } else if (cell0 == 'PatientAddress' && cell1 == 'DoesNotContain') {
+                    if (cell2 != '') { strWhere += ' and PrimaryAddress not like `%' + cell2 + '%`'; }
+                } else if (cell0 == 'PatientAddress' && cell1 == 'ContainsData') {
+                    strWhere += ' and PrimaryAddress <> ``';
+                } else if (cell0 == 'PatientAddress' && cell1 == 'DoesNotContainData') {
+                    strWhere += ' and PrimaryAddress = ``';
+                }
+                /*Patient Mobile No*/
+                if (cell0 == 'PatientMobileNo' && cell1 == 'Equals') {
+                    if (cell2 != '') { strWhere += ' and MobileNo1 = `' + cell2 + '`'; }
+                } else if (cell0 == 'PatientMobileNo' && cell1 == 'DoesNotEqual') {
+                    if (cell2 != '') { strWhere += ' and MobileNo1 <> `' + cell2 + '`'; }
+                } else if (cell0 == 'PatientMobileNo' && cell1 == 'Contains') {
+                    if (cell2 != '') { strWhere += ' and MobileNo1 like `%' + cell2 + '%`'; }
+                } else if (cell0 == 'PatientMobileNo' && cell1 == 'DoesNotContain') {
+                    if (cell2 != '') { strWhere += ' and MobileNo1 not like `%' + cell2 + '%`'; }
+                } else if (cell0 == 'PatientMobileNo' && cell1 == 'ContainsData') {
+                    strWhere += ' and MobileNo1 <> ``';
+                } else if (cell0 == 'PatientMobileNo' && cell1 == 'DoesNotContainData') {
+                    strWhere += ' and MobileNo1 = ``';
+                }
+                /*Patient Email*/
+                if (cell0 == 'PatientEmail' && cell1 == 'Equals') {
+                    if (cell2 != '') { strWhere += ' and EmailId = `' + cell2 + '`'; }
+                } else if (cell0 == 'PatientEmail' && cell1 == 'DoesNotEqual') {
+                    if (cell2 != '') { strWhere += ' and EmailId <> `' + cell2 + '`'; }
+                } else if (cell0 == 'PatientEmail' && cell1 == 'Contains') {
+                    if (cell2 != '') { strWhere += ' and EmailId like `%' + cell2 + '%`'; }
+                } else if (cell0 == 'PatientEmail' && cell1 == 'DoesNotContain') {
+                    if (cell2 != '') { strWhere += ' and EmailId not like `%' + cell2 + '%`'; }
+                } else if (cell0 == 'PatientEmail' && cell1 == 'ContainsData') {
+                    strWhere += ' and EmailId <> ``';
+                } else if (cell0 == 'PatientEmail' && cell1 == 'DoesNotContainData') {
+                    strWhere += ' and EmailId = ``';
+                }
+                /*Patient Medical History*/
+                if (cell0 == 'PatientMedicalHistory' && cell1 == 'Equals') {
+                    if (cell2 != '') { strWhere += ' and MedicalHistory = `' + cell2 + '`'; }
+                } else if (cell0 == 'PatientMedicalHistory' && cell1 == 'DoesNotEqual') {
+                    if (cell2 != '') { strWhere += ' and MedicalHistory <> `' + cell2 + '`'; }
+                } else if (cell0 == 'PatientMedicalHistory' && cell1 == 'Contains') {
+                    if (cell2 != '') { strWhere += ' and MedicalHistory like `%' + cell2 + '%`'; }
+                } else if (cell0 == 'PatientMedicalHistory' && cell1 == 'DoesNotContain') {
+                    if (cell2 != '') { strWhere += ' and MedicalHistory not like `%' + cell2 + '%`'; }
+                } else if (cell0 == 'PatientMedicalHistory' && cell1 == 'ContainsData') {
+                    strWhere += ' and MedicalHistory <> ``';
+                } else if (cell0 == 'PatientMedicalHistory' && cell1 == 'DoesNotContainData') {
+                    strWhere += ' and MedicalHistory = ``';
+                }
+                /*Patient ID*/
+                if (cell0 == 'PatientPID' && cell1 == 'Equals') {
+                    if (cell2 != '') { strWhere += ' and PatientId = `' + cell2 + '`'; }
+                } else if (cell0 == 'PatientPID' && cell1 == 'DoesNotEqual') {
+                    if (cell2 != '') { strWhere += ' and PatientId = `' + cell2 + '`'; }
+                } else if (cell0 == 'PatientPID' && cell1 == 'IsGreaterThan') {
+                    if (cell2 != '') { strWhere += ' and PatientId > `' + cell2 + '`'; }
+                } else if (cell0 == 'PatientPID' && cell1 == 'IsGreaterThanorEqualTo') {
+                    if (cell2 != '') { strWhere += ' and PatientId >= `' + cell2 + '`'; }
+                } else if (cell0 == 'PatientPID' && cell1 == 'IsLessThan') {
+                    if (cell2 != '') { strWhere += ' and PatientId < `' + cell2 + '`'; }
+                } else if (cell0 == 'PatientPID' && cell1 == 'IsLessThanorEqualTo') {
+                    if (cell2 != '') { strWhere += ' and PatientId <= `' + cell2 + '`'; }
+                } else if (cell0 == 'PatientPID' && cell1 == 'ContainsData') {
+                   strWhere += ' and PatientId <> ``';
+                } else if (cell0 == 'PatientPID' && cell1 == 'DoesNotContainData') {
+                  strWhere += ' and PatientId = ``'; 
+                }
+                /*Patient Custom PID*/
+                if (cell0 == 'PatientCustomPID' && cell1 == 'Equals') {
+                    if (cell2 != '') { strWhere += ' and CustomId = `' + cell2 + '`'; }
+                } else if (cell0 == 'PatientCustomPID' && cell1 == 'DoesNotEqual') {
+                    if (cell2 != '') { strWhere += ' and CustomId <> `' + cell2 + '`'; }
+                } else if (cell0 == 'PatientCustomPID' && cell1 == 'Contains') {
+                    if (cell2 != '') { strWhere += ' and CustomId like `%' + cell2 + '%`'; }
+                } else if (cell0 == 'PatientCustomPID' && cell1 == 'DoesNotContain') {
+                    if (cell2 != '') { strWhere += ' and CustomId not like `%' + cell2 + '%`'; }
+                } else if (cell0 == 'PatientCustomPID' && cell1 == 'ContainsData') {
+                    strWhere += ' and CustomId <> ``';
+                } else if (cell0 == 'PatientCustomPID' && cell1 == 'DoesNotContainData') {
+                    strWhere += ' and CustomId = ``';
+                }
+
+                /*Treatment Name*/
+                if (cell0 == 'TreatmentName' && cell1 == 'Equals') {
+                    if (cell2 != '') { strWhere += ' and Patientid in (select PatientId from PatTreatCard p inner join treatmentmaster tm on tm.TreatId = p.PID and tm.LocationId=' + $qc.Cookie("locationid") + ' and tm.deleted=0 where tm.TreatmentName = `' + cell2 + '` and p.deleted=0 and p.LocationId = ' + $qc.Cookie("locationid") + ')'; }
+                }
+                /*Doctor Name*/
+                if (cell0 == 'DoctorName' && cell1 == 'Equals') {
+                    if (cell2 != '') { strWhere += ' and Patientid in (select PatientId from AppointmentHistory a  left join doctorinfo d on d.doctorid = a.doctorid  where d.doctorname=`' + cell2 + '` and a.LocationId=' + $qc.Cookie("locationid") + ' and a.deleted=0)'; }
+                }
+                /*ToothNo*/
+                if (cell0 == 'PatientMedicalHistory' && cell1 == 'Equals') {
+                    if (cell2 != '') { strWhere += ' and Patientid in (select PatientId from PatTreatCard p inner join treatmentmaster tm on tm.TreatId = p.PID and tm.LocationId=' + $qc.Cookie("locationid") + ' and tm.deleted=0 where tm.toothno = `' + cell2 + '` and p.deleted=0 and p.LocationId = ' + $qc.Cookie("locationid") + ')'; }
+                } else if (cell0 == 'PatientMedicalHistory' && cell1 == 'DoesNotEqual') {
+                    if (cell2 != '') { strWhere += ' and Patientid in (select PatientId from PatTreatCard p inner join treatmentmaster tm on tm.TreatId = p.PID and tm.LocationId=' + $qc.Cookie("locationid") + ' and tm.deleted=0 where tm.toothno <> `' + cell2 + '` and p.deleted=0 and p.LocationId = ' + $qc.Cookie("locationid") + ')'; }
+                } else if (cell0 == 'PatientMedicalHistory' && cell1 == 'Contains') {
+                    if (cell2 != '') { strWhere += ' and Patientid in (select PatientId from PatTreatCard p inner join treatmentmaster tm on tm.TreatId = p.PID and tm.LocationId=' + $qc.Cookie("locationid") + ' and tm.deleted=0 where tm.toothno in (select content from dbo.stringsplit(`' + cell2 + '`,`,`) and p.deleted=0 and p.LocationId = ' + $qc.Cookie("locationid") + ')'; }
+                } else if (cell0 == 'PatientMedicalHistory' && cell1 == 'DoesNotContain') {
+                    if (cell2 != '') { strWhere += ' and Patientid in (select PatientId from PatTreatCard p inner join treatmentmaster tm on tm.TreatId = p.PID and tm.LocationId=' + $qc.Cookie("locationid") + ' and tm.deleted=0 where tm.toothno not in (select content from dbo.stringsplit(`' + cell2 + '`,`,`) and p.deleted=0 and p.LocationId = ' + $qc.Cookie("locationid") + ')'; }
+                }
+                //else if (cell0 == 'PatientMedicalHistory' && cell1 == 'ContainsData') {
+                //    strWhere += ' and MedicalHistory <> ``';
+                //} else if (cell0 == 'PatientMedicalHistory' && cell1 == 'DoesNotContainData') {
+                //    strWhere += ' and MedicalHistory = ``';
+                //}
+                /*FeesRemaining*/
+                if (cell0 == 'FeesRemaining' && cell1 == 'Equals') {
+                    if (cell2 != '') { strWhere += ' and PatientId in (select PatientId from PatTreatCard p where p.balancefees = ' + cell2+' and p.deleted=0 and p.LocationId = ' + $qc.Cookie("locationid") + ')'; }
+                } else if (cell0 == 'FeesRemaining' && cell1 == 'DoesNotEqual') {
+                    if (cell2 != '') { strWhere += ' and PatientId in (select PatientId from PatTreatCard p where p.balancefees <> ' + cell2 + ' and p.deleted=0 and p.LocationId = ' + $qc.Cookie("locationid") + ')'; }
+                } else if (cell0 == 'FeesRemaining' && cell1 == 'IsGreaterThan') {
+                    if (cell2 != '') { strWhere += ' and PatientId in (select PatientId from PatTreatCard p where p.balancefees > ' + cell2 + ' and p.deleted=0 and p.LocationId = ' + $qc.Cookie("locationid") + ')'; }
+                } else if (cell0 == 'FeesRemaining' && cell1 == 'IsGreaterThanorEqualTo') {
+                    if (cell2 != '') { strWhere += ' and PatientId in (select PatientId from PatTreatCard p where p.balancefees >= ' + cell2 + ' and p.deleted=0 and p.LocationId = ' + $qc.Cookie("locationid") + ')'; }
+                } else if (cell0 == 'FeesRemaining' && cell1 == 'IsLessThan') {
+                    if (cell2 != '') { strWhere += ' and PatientId in (select PatientId from PatTreatCard p where p.balancefees < ' + cell2 + ' and p.deleted=0 and p.LocationId = ' + $qc.Cookie("locationid") + ')'; }
+                } else if (cell0 == 'FeesRemaining' && cell1 == 'IsLessThanorEqualTo') {
+                    if (cell2 != '') { strWhere += ' and PatientId in (select PatientId from PatTreatCard p where p.balancefees >= ' + cell2 + ' and p.deleted=0 and p.LocationId = ' + $qc.Cookie("locationid") + ')'; }
+                }
+                //else if (cell0 == 'FeesRemaining' && cell1 == 'ContainsData') {
+                //    strWhere += ' and PatientId <> ``';
+                //} else if (cell0 == 'FeesRemaining' && cell1 == 'DoesNotContainData') {
+                //    strWhere += ' and PatientId = ``';
+                //}
+                /*FeesPaid*/
+                if (cell0 == 'FeesPaid' && cell1 == 'Equals') {
+                    if (cell2 != '') { strWhere += ' and PatientId in (select PatientId from PatTreatCard p where p.PaidFees = ' + cell2 + ' and p.deleted=0 and p.LocationId = ' + $qc.Cookie("locationid") + ')'; }
+                } else if (cell0 == 'FeesPaid' && cell1 == 'DoesNotEqual') {
+                    if (cell2 != '') { strWhere += ' and PatientId in (select PatientId from PatTreatCard p where p.PaidFees <> ' + cell2 + ' and p.deleted=0 and p.LocationId = ' + $qc.Cookie("locationid") + ')'; }
+                } else if (cell0 == 'FeesPaid' && cell1 == 'IsGreaterThan') {
+                    if (cell2 != '') { strWhere += ' and PatientId in (select PatientId from PatTreatCard p where p.PaidFees > ' + cell2 + ' and p.deleted=0 and p.LocationId = ' + $qc.Cookie("locationid") + ')'; }
+                } else if (cell0 == 'FeesPaid' && cell1 == 'IsGreaterThanorEqualTo') {
+                    if (cell2 != '') { strWhere += ' and PatientId in (select PatientId from PatTreatCard p where p.PaidFees >= ' + cell2 + ' and p.deleted=0 and p.LocationId = ' + $qc.Cookie("locationid") + ')'; }
+                } else if (cell0 == 'FeesPaid' && cell1 == 'IsLessThan') {
+                    if (cell2 != '') { strWhere += ' and PatientId in (select PatientId from PatTreatCard p where p.PaidFees < ' + cell2 + ' and p.deleted=0 and p.LocationId = ' + $qc.Cookie("locationid") + ')'; }
+                } else if (cell0 == 'FeesPaid' && cell1 == 'IsLessThanorEqualTo') {
+                    if (cell2 != '') { strWhere += ' and PatientId in (select PatientId from PatTreatCard p where p.PaidFees <= ' + cell2 + ' and p.deleted=0 and p.LocationId = ' + $qc.Cookie("locationid") + ')'; }
+                }
+                //else if (cell0 == 'FeesPaid' && cell1 == 'ContainsData') {
+                //    strWhere += ' and PatientId <> ``';
+                //} else if (cell0 == 'FeesPaid' && cell1 == 'DoesNotContainData') {
+                //    strWhere += ' and PatientId = ``';
+                //}
+
+                /*End*/
+            }
+
+
+            var _objParams = [$qc.Cookie("locationid"), strWhere];
+            GetDataFromDatabase(57, "GetData", _objParams,"DentalParams");
+        });
+
+    });
+
+
+    function onGetDataSuccess(data, context) {
+        data = (data == '' ? '[]' : data);
+        var JSONDATA = 'var _objGridResult=' + data + ';'; eval(JSONDATA);
+
+        var objVarable = {
+            CtrlId: '',
+            header: ['SNo', 'PatientId', 'Patient Name', 'Mobile', 'Email'],
+            dataArr: [],
+            width: [25, 80, 0, 0, 0, 0, 0, 20],
+            headerval: [1, 1, 1, 2, 3, 4, 5],
+            IsActionButton: null,
+            isTools: false,
+            checkbox: true,
+            IsAddBlankRow: false,
+            ColumnShow: [],
+            DefaultRow: '50',
+            SortType: [1, 1, 2, 2, 2, 2, 2, 2],
+            header_align: ['', '', '', '', '', ''],
+            chkVal: 1,
+            advSearch: true,
+            IsLinkButton: false,
+            LinkButtonColumns: [2],
+            objectJSON: _objGridResult
+        }
+        ctlDetails = new fn_arvGrid(objVarable);
+        ctlDetails.FillGrid(3, 1, 0);
+
+        $(".clsDefaultSorting").attr('title', 1);
+        $(".clsDefaultSorting").addClass('desending');
+        $(".clsDefaultSorting").removeClass('ascending');
+        ctlDetails.AscendingDescendingArr($(".clsDefaultSorting"));
+    }
+</script>
+
+

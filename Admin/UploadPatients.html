@@ -1,0 +1,199 @@
+﻿
+<style type="text/css">
+
+
+    .jeexcelWrp {
+        overflow: auto;
+    }
+
+        .jeexcelWrp::-webkit-scrollbar {
+            width: 10px;
+            height: 10px;
+        }
+
+        .jeexcelWrp::-webkit-scrollbar-button {
+            background-size: 100%;
+            height: 10px;
+            width: 10px;
+        }
+
+        .jeexcelWrp::-webkit-scrollbar-track {
+            background: #f8f8f8;
+        }
+
+        .jeexcelWrp::-webkit-scrollbar-thumb {
+            background: #aaa;
+        }
+
+            .jeexcelWrp::-webkit-scrollbar-thumb:hover {
+                background: #989898;
+            }
+
+            .jeexcelWrp::-webkit-scrollbar-thumb:active {
+                background: #808080;
+            }
+</style>
+
+
+<div class="container">
+    <div class="page-wrapper bg-white">
+
+        <div class="page-body">
+
+            <div class="tab-content">
+                <div class="row">
+
+                    <div class="col-12" style="padding:20px;">
+                        <div class="form-group">
+                            <input type="file" id="file" style="float:left;" ng-model="csvFile" onchange="ExcelExport(event)" />
+                            <button id="btnUploadExcel" data-rname="Upload Excel" style="display:none;" class="btnRights btn btn-primary" data-lang="button">
+                                Upload excel
+                            </button>
+                            <a id="btnDownloadExcel" style="color:#007bff;font-size:16px;float:right" title="download sample excel template" href="javascript:undefined;">
+                                <i class="mdi mdi-cloud-download"></i><span data-lang="span">Download template</span>
+                            </a>
+                        </div>
+
+
+                    </div>
+
+
+                    <div class="col-12" style="padding:20px;overflow:auto">
+                        <div id="GridResult" class="mdl">
+                        </div>
+                        <div class="col-12" style="padding:20px;">
+                            <div style="padding:20px;">
+                                Note: Accept Only MM-DD-YYYY Date formats.
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<script type="text/javascript">
+    var _objdata = [], counterror = 0, _result = [];
+    var resultrow = {};
+    var LocationID = $qc.cookie("locationid");
+
+    var objheader = ["SrNo", "FName", "MName", "LName", "gender", "DateOfBirth", "MobileNo", "WhatsAppNo", "EmailId", "PrimaryAddress", 'SecondaryAddress', "Action"];
+    var objheaderval = [1, 1, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10];
+
+    $(document).ready(function () {
+
+        // SelectDefaultValues('ddlAcademicYear', 'ddlClass', 'ddlDivision', LocationID);
+        //GetDataFromDatabase(719, 'getddldata', "1|" + LocationID + '|' + $qc.Cookie("_CategoryId"), 'Params');
+
+        $("#btnDownloadExcel").click(function () {
+            var param = "0|" + LocationID + "|Patient";
+            GetDataForExcel(717, 'downloadexcel', param, 'Params');
+        });
+
+        $("#btnUploadExcel").click(function () {
+            var xmlstring = '{"subroot":' + JSON.stringify(_result) + '}';
+            var param = "Patient|" + LocationID + "|" + xmlstring;
+            UpdateDataToDatabase(718, "uploadexcel", param, 'Params');
+        });
+    });
+
+    function fn_RefreshGrid() {
+        var trFirstRow = document.getElementById('tblResult_Head');
+        $("#tblResult tr").each(function () {
+            if ($(this).hasClass('btmbdr') == true) {
+                debugger;
+
+                for (var i = 1; i < $(this).children().length; i++) {
+                    var cellHeader = trFirstRow.rows[0].cells[i].innerHTML;
+                    var cellData = ($($(this).children()[i]).text()).replace(/^\s+|\s+$/g, '');
+                    resultrow[cellHeader] = cellData;
+
+
+
+                }
+                //resultrow["CountryCode"] = pgLoadVariableQaurus.CountryId;
+                //resultrow["CreatedBy"] = $qc.Cookie("_UserId");
+                //resultrow["UserCategory"] = $qc.Cookie("_CategoryId");
+                _result.push(resultrow);
+                resultrow = {};
+                if (counterror == 0) { $("#btnUploadExcel").show(); }
+                else { $("#btnUploadExcel").hide(); }
+            }
+        });
+    }
+
+    function ExcelExport(event) {
+        var input = event.target;
+        var reader = new FileReader();
+        reader.onload = function () {
+
+            var fileData = reader.result;
+            var wb = XLSX.read(fileData, { type: 'binary' });
+
+            //wb.SheetNames.forEach(function (sheetName) {
+            var sheetName = wb.SheetNames[0];
+            var rowObj = XLSX.utils.sheet_to_row_object_array(wb.Sheets[sheetName]);
+            //$scope.objdata = rowObj;
+            var objdata = [];
+            //var count = 0;
+            //for (var key in rowObj[0]) {
+            //    //objheader.push(key);
+            //    count++
+            //    objheaderval.push(count);
+            //}
+            //objheader.push("Action");
+
+            for (var i = 0; i < rowObj.length; i++) {
+                var _a = {};
+                var j = 1;
+                if (typeof rowObj[i][objheader[1]] != 'undefined' && rowObj[i][objheader[1]] != undefined && rowObj[i][objheader[1]] != null) {
+                    for (var k = 1; k <= objheader.length; k++) {
+                        _a[j] = (typeof rowObj[i][objheader[k]] != 'undefined' ? rowObj[i][objheader[k]] : '');
+                        j++;
+                    }
+                    objdata.push(_a);
+                }
+            }
+
+            //var jsonObj = JSON.stringify(rowObj);
+            //console.log(jsonObj)
+            var objVarable = {
+                CtrlId: '',
+                header: objheader,
+                dataArr: [],
+                width: [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
+                headerval: objheaderval,
+                IsActionButton: ['Delete'], //, 'PayNow'
+                isTools: false,
+                checkbox: false,
+                IsAddBlankRow: false,
+                ColumnShow: [],
+                DefaultRow: '5000',
+                SortType: [1, 1, 2, 2, 2, 2, 2, 2],
+                header_align: ['', '', '', '', '', ''],
+                chkVal: 1,
+                advSearch: true,
+                IsLinkButton: false,
+                LinkButtonColumns: [],
+                objectJSON: objdata
+            }
+            ctlDetails = new fn_arvGrid(objVarable);
+            ctlDetails.FillGrid(3, 1, 0);
+
+            // });
+        };
+        reader.readAsBinaryString(input.files[0]);
+    };
+
+    function onGetDataSuccess(data, context) {
+        if (context == "downloadexcel") {
+            window.open(RootFolderPath("Downloads/Patient_Sample.xlsx"), '_blank');
+        }
+
+        else if (context == "uploadexcel") {
+            $("#GridResult").html("");
+            $("#btnUploadExcel").hide();
+            alert('Upload Success');
+        }
+    }
+</script>

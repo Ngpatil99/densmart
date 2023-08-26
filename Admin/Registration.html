@@ -1,0 +1,594 @@
+﻿
+<div class="container">
+    <div class="row">
+        <div class="col-lg-6 mb-4 mb-lg-0">
+            <div class="page-wrapper bg-white">
+                <div class="page-header">
+                    <h2>Personal Information</h2>
+                </div>
+                <div class="page-body p-4">
+                    <div class="form-group">
+                        <label>Logo</label>
+                        <div class="edit-logo">
+                            <img id="imgClinicPhoto" src="images/cliniclogo.jpg" alt="" />
+                            <label class="btn-file btn btn-first" data-toggle="tooltip" title="Choose File">
+                                <input type="file" id="uplFileUpload" />
+                                <i class="fa fa-pencil"></i>
+                            </label>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label>Clinic Name</label>
+                        <input id="txtClinicName" type="text" class="form-control" />
+                    </div>
+                    <fieldset>
+                        <legend>Doctor Details</legend>
+                        <div class="edit-DrPhoto mb-3">
+                            <img id="imgDoctorPhoto_1" src="images/photo.jpg" alt="" />
+                            <label class="btn-file btn btn-first" data-toggle="tooltip" title="Choose Photo">
+                                <input type="file" id="uplDoctorPhoto_1" />
+                                <i class="fa fa-pencil"></i>
+                            </label>
+                        </div>
+                        <div class="mb-3">
+                            <label>Doctor Name</label>
+                            <div class="row">
+                                <div class="col-sm-4 mb-2">
+                                    <input id="txtFName" type="text" class="form-control" placeholder="First Name" />
+                                </div>
+                                <div class="col-sm-4 mb-2">
+                                    <input id="txtMName" type="text" class="form-control" placeholder="Middle Name" />
+                                </div>
+                                <div class="col-sm-4 mb-2">
+                                    <input id="txtLName" type="text" class="form-control" placeholder="Last Name" />
+                                </div>
+                            </div>
+                        </div>
+                        <div class=" mb-3">
+                            <label>Doctor Reg No</label>
+                            <input id="txtDoctorRegNo" type="text" class="form-control" />
+                        </div>
+                        <div class=" mb-3">
+                            <label>Qualification</label>
+                            <input id="txtQualification" type="text" class="form-control" />
+                        </div>
+                        <div class="edit-Sign">
+                            <img id="imgDoctorSign_1" src="../images/DemoSign.jpg" alt="" />
+                            <label class="btn-file btn btn-first" data-toggle="tooltip" title="Choose File">
+                                <input type="file" id="uplDoctorSign_1" />
+                                <i class="fa fa-pencil"></i>
+                            </label>
+                        </div>
+                    </fieldset>
+                    <fieldset>
+                        <legend>Doctor 2 Details</legend>
+                        <div class="edit-DrPhoto mb-3">
+                            <img id="imgDoctorPhoto_2" src="images/photo.jpg" alt="" />
+                            <label class="btn-file btn btn-first" data-toggle="tooltip" title="Choose Photo">
+                                <input type="file" id="uplDoctorPhoto_2" />
+                                <i class="fa fa-pencil"></i>
+                            </label>
+                        </div>
+                        <div class="mb-3">
+                            <label>Doctor Name</label>
+                            <div class="row">
+                                <div class="col-sm-4 mb-2">
+                                    <input id="txtFName_1" type="text" class="form-control" placeholder="First Name" />
+                                </div>
+                                <div class="col-sm-4 mb-2">
+                                    <input id="txtMName_1" type="text" class="form-control" placeholder="Middle Name" />
+                                </div>
+                                <div class="col-sm-4 mb-2">
+                                    <input id="txtLName_1" type="text" class="form-control" placeholder="Last Name" />
+                                </div>
+                            </div>
+                        </div>
+                        <div class=" mb-3">
+                            <label>Doctor Reg No</label>
+                            <input id="txtDoctorRegNo_1" type="text" class="form-control" />
+                        </div>
+                        <div class=" mb-3">
+                            <label>Qualification</label>
+                            <input id="txtQualification_1" type="text" class="form-control" />
+                        </div>
+                        <div class="edit-Sign">
+                            <img id="imgDoctorSign_2" src="../images/DemoSign.jpg" alt="" />
+                            <label class="btn-file btn btn-first" data-toggle="tooltip" title="Choose File">
+                                <input type="file" id="uplDoctorSign_2" />
+                                <i class="fa fa-pencil"></i>
+                            </label>
+                        </div>
+                    </fieldset>
+                    <div class="form-group">
+                        <label>Address</label>
+                        <input type="text" id="txtAddress" class="form-control" />
+                    </div>
+                    <fieldset>
+                        <legend>Status Images</legend>
+                        <div class="text-right mb-3" style="display:none;">
+
+
+                            <label class="btn-file btn btn-first">
+                                <input type="file" id="uplStatusImg" />
+                                <i class="fa fa-cloud-upload"></i><span>Choose File</span>
+                            </label>
+                        </div>
+                        <div class="SaveImgContainer">
+                            <div class="SaveImg">
+                                <img id="imgStatusImg_1" src="../images/cliniclogo.jpg" />
+                                <div class="hoverbtn">
+                                    <a href="javascript:undefined;" onclick="UploadStatusImage(1)"><i class="fa fa-upload"></i></a>
+                                    <a href="javascript:undefined;" class="delete" onclick="DeleteStatusImage(1)"><i class="fa fa-trash-o"></i></a>
+                                </div>
+                            </div>
+                            <div class="SaveImg">
+                                <img id="imgStatusImg_2" src="../images/cliniclogo.jpg" />
+                                <div class="hoverbtn">
+                                    <a href="javascript:undefined;" onclick="UploadStatusImage(2)"><i class="fa fa-upload"></i></a>
+                                    <a href="javascript:undefined;" class="delete" onclick="DeleteStatusImage(2)"><i class="fa fa-trash-o"></i></a>
+                                </div>
+                            </div>
+                            <div class="SaveImg">
+                                <img id="imgStatusImg_3" src="../images/cliniclogo.jpg" />
+                                <div class="hoverbtn">
+                                    <a href="javascript:undefined;" onclick="UploadStatusImage(3)"><i class="fa fa-upload"></i></a>
+                                    <a href="javascript:undefined;" class="delete" onclick="DeleteStatusImage(3)"><i class="fa fa-trash-o"></i></a>
+                                </div>
+                            </div>
+                        </div>
+                    </fieldset>
+                </div>
+            </div>
+        </div>
+        <div class="col-lg-6">
+            <div class="page-wrapper bg-white height100">
+                <div class="page-header">
+                    <h2>Contact Information</h2>
+                </div>
+                <div class="page-body p-4">
+                    <div class="row">
+                        <div class="col-sm-6 form-group">
+                            <label>Contact No. 1</label>
+                            <input id="txtContact1" type="number" pattern="/^-?\d+\.?\d*$/" onKeyPress="if(this.value.length==10) return false;" class="form-control" />
+                        </div>
+                        <div class="col-sm-6 form-group">
+                            <label>Contact No. 2</label>
+                            <input id="txtContact2" type="number" pattern="/^-?\d+\.?\d*$/" onKeyPress="if(this.value.length==10) return false;" class="form-control" />
+                        </div>
+                        <div class="col-12 form-group">
+                            <label>Website</label>
+                            <input id="txtWebsite" type="text" class="form-control" />
+                        </div>
+                        <div class="col-12 form-group">
+                            <label>E-Mail</label>
+                            <input id="txtEmail" type="text" class="form-control" />
+                        </div>
+                        <div class="col-12 form-group">
+                            <label>Weekly Off</label>
+                            <select id="ddlWeeklyOff" class="form-control">
+                                <option value="">Select</option>
+                                <option value="Sunday">Sunday</option>
+                                <option selected="selected" value="Monday">Monday</option>
+                                <option value="Tuesday">Tuesday</option>
+                                <option value="Wednesday">Wednesday</option>
+                                <option value="Thursday">Thursday</option>
+                                <option value="Friday">Friday</option>
+                                <option value="Saturday">Saturday</option>
+                            </select>
+                        </div>
+                        <div class="col-12 text-center">
+                            <button id="btnSubmitData" class="btn btn-first">Update Information</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<script type="text/javascript">
+    var _LocationId = $qc.Cookie('locationid');
+    var _ChildClinicId = $qc.Cookie("sublocationid");
+    var StatusIamge = 1;
+
+    $(document).ready(function () {
+        var objRecords = ["GetClinicDetails", _LocationId, "1"];
+        GetDataFromDatabase(2, 'getEditRecords', objRecords, 'DentalParams');
+
+        $("#btnSubmitData").click(function () {
+            if (rtnCtrlVal("txtClinicName", "") == '') { alert('Clinic name is not empty'); return false; }
+            fn_UpdateClinicReords();
+        });
+
+        $("#uplFileUpload").change(function () {
+            var input = this;
+            var url = $(this).val();
+            var ext = url.substring(url.lastIndexOf('.') + 1).toLowerCase();
+            if (input.files && input.files[0] && (ext == "gif" || ext == "png" || ext == "jpeg" || ext == "jpg")) {
+                var reader = new FileReader();
+                reader.onload = function (e) {
+                    $('#imgClinicPhoto').attr('src', e.target.result);
+
+                }
+                reader.readAsDataURL(input.files[0]);
+            }
+            else {
+                $('#imgClinicPhoto').attr('src', 'images/cliniclogo.jpg');
+            }
+            /*Upload File*/
+            var fileUpload = $(this).get(0);
+            var files = fileUpload.files;
+            var _ClinicLogo = '';
+
+            if (files.length > 0) {
+                var _extension = fn_getFileExtension(files[0].name).replace('jpeg', 'jpg');
+                _ClinicLogo = 'ClinicLogo/' + _LocationId + '.' + _extension;
+                var fileparams = { FolderName: "ClinicLogo", FileName: _LocationId, Extension: _extension };
+
+                if (files[0].size <= 2151043) {
+                    UploadImage(files[0], 'ClinicLogo', fileparams);
+
+                } else {
+                    if (URL) { this.inputURL = URL.createObjectURL(files[0]); }
+                    CompressUploadedImage(files[0], fileparams, 'ClinicLogo', 0.8, 200);
+
+                }
+            }
+            fn_UpdateLogoURL(_LocationId, _ClinicLogo, 'ClinicLogo');
+        });
+
+
+        $("#uplDoctorPhoto_1").change(function () {
+            var input = this;
+            var url = $(this).val();
+            var ext = url.substring(url.lastIndexOf('.') + 1).toLowerCase();
+            if (input.files && input.files[0] && (ext == "gif" || ext == "png" || ext == "jpeg" || ext == "jpg")) {
+                var reader = new FileReader();
+                reader.onload = function (e) {
+                    $('#imgDoctorPhoto_1').attr('src', e.target.result);
+
+                }
+                reader.readAsDataURL(input.files[0]);
+            }
+            else {
+                $('#imgDoctorPhoto_1').attr('src', 'images/photo.jpg');
+            }
+            /*Upload File*/
+            var fileUpload = $(this).get(0);
+            var files = fileUpload.files;
+            var _Doctorphoto1 = '';
+
+            if (files.length > 0) {
+                var _extension = fn_getFileExtension(files[0].name).replace('jpeg', 'jpg');
+                _Doctorphoto1 = 'DoctorPhoto/' + _LocationId + '/Doctor_1.' + _extension;
+                var fileparams = { FolderName: "DoctorPhoto/" + _LocationId, FileName: 'Doctor_1', Extension: _extension };
+
+                if (files[0].size <= 2151043) {
+                    UploadImage(files[0], 'DoctorPhoto1', fileparams);
+
+                } else {
+                    if (URL) { this.inputURL = URL.createObjectURL(files[0]); }
+                    CompressUploadedImage(files[0], fileparams, 'DoctorPhoto1', 0.8, 200);
+
+                }
+            }
+            fn_UpdateLogoURL(_LocationId, _Doctorphoto1, 'DoctorPhoto1');
+        });
+
+        $("#uplDoctorPhoto_2").change(function () {
+            var input = this;
+            var url = $(this).val();
+            var ext = url.substring(url.lastIndexOf('.') + 1).toLowerCase();
+            if (input.files && input.files[0] && (ext == "gif" || ext == "png" || ext == "jpeg" || ext == "jpg")) {
+                var reader = new FileReader();
+                reader.onload = function (e) {
+                    $('#imgDoctorPhoto_2').attr('src', e.target.result);
+                }
+                reader.readAsDataURL(input.files[0]);
+            }
+            else {
+                $('#imgDoctorPhoto_2').attr('src', 'images/photo.jpg');
+            }
+            /*Upload File*/
+            var fileUpload = $(this).get(0);
+            var files = fileUpload.files;
+            var _Doctorphoto1 = '';
+
+            if (files.length > 0) {
+                var _extension = fn_getFileExtension(files[0].name).replace('jpeg', 'jpg');
+                _Doctorphoto1 = 'DoctorPhoto/' + _LocationId + '/Doctor_2.' + _extension;
+                var fileparams = { FolderName: "DoctorPhoto/" + _LocationId, FileName: 'Doctor_2', Extension: _extension };
+
+                if (files[0].size <= 2151043) {
+                    UploadImage(files[0], 'DoctorPhoto2', fileparams);
+
+                } else {
+                    if (URL) { this.inputURL = URL.createObjectURL(files[0]); }
+                    CompressUploadedImage(files[0], fileparams, 'DoctorPhoto2', 0.8, 200);
+
+                }
+            }
+            fn_UpdateLogoURL(_LocationId, _Doctorphoto1, 'DoctorPhoto2');
+        });
+
+        $("#uplDoctorSign_1").change(function () {
+            var input = this;
+            var url = $(this).val();
+            var ext = url.substring(url.lastIndexOf('.') + 1).toLowerCase();
+            if (input.files && input.files[0] && (ext == "gif" || ext == "png" || ext == "jpeg" || ext == "jpg")) {
+                var reader = new FileReader();
+                reader.onload = function (e) {
+                    $('#imgDoctorSign_1').attr('src', e.target.result);
+                }
+                reader.readAsDataURL(input.files[0]);
+            }
+            else {
+                $('#imgDoctorSign_1').attr('src', 'images/DemoSign.jpg');
+            }
+            /*Upload File*/
+            var fileUpload = $(this).get(0);
+            var files = fileUpload.files;
+            var _DoctorSign1 = '';
+
+            if (files.length > 0) {
+                var _extension = fn_getFileExtension(files[0].name).replace('jpeg', 'jpg');
+                _DoctorSign1 = 'DoctorPhoto/' + _LocationId + '/DoctorSign_1.' + _extension;
+                var fileparams = { FolderName: "DoctorPhoto/" + _LocationId, FileName: 'DoctorSign_1', Extension: _extension };
+
+                if (files[0].size <= 2151043) {
+                    UploadImage(files[0], 'DoctorSign1', fileparams);
+
+                } else {
+                    if (URL) { this.inputURL = URL.createObjectURL(files[0]); }
+                    CompressUploadedImage(files[0], fileparams, 'DoctorSign1', 0.8, 200);
+
+                }
+            }
+            fn_UpdateLogoURL(_LocationId, _DoctorSign1, 'DoctorSign1');
+        });
+
+        $("#uplDoctorSign_2").change(function () {
+            var input = this;
+            var url = $(this).val();
+            var ext = url.substring(url.lastIndexOf('.') + 1).toLowerCase();
+            if (input.files && input.files[0] && (ext == "gif" || ext == "png" || ext == "jpeg" || ext == "jpg")) {
+                var reader = new FileReader();
+                reader.onload = function (e) {
+                    $('#imgDoctorSign_2').attr('src', e.target.result);
+                }
+                reader.readAsDataURL(input.files[0]);
+            }
+            else {
+                $('#imgDoctorSign_2').attr('src', 'images/DemoSign.jpg');
+            }
+            /*Upload File*/
+            var fileUpload = $(this).get(0);
+            var files = fileUpload.files;
+            var _DoctorSign2 = '';
+
+            if (files.length > 0) {
+                var _extension = fn_getFileExtension(files[0].name).replace('jpeg', 'jpg');
+                _DoctorSign2 = 'DoctorPhoto/' + _LocationId + '/DoctorSign_2.' + _extension;
+                var fileparams = { FolderName: "DoctorPhoto/" + _LocationId, FileName: 'DoctorSign_2', Extension: _extension };
+
+                if (files[0].size <= 2151043) {
+                    UploadImage(files[0], 'DoctorSign2', fileparams);
+
+                } else {
+                    if (URL) { this.inputURL = URL.createObjectURL(files[0]); }
+                    CompressUploadedImage(files[0], fileparams, 'DoctorSign2', 0.8, 200);
+
+                }
+            }
+            fn_UpdateLogoURL(_LocationId, _DoctorSign2, 'DoctorSign2');
+        });
+
+
+        $("#uplStatusImg").change(function () {
+            var input = this;
+            var url = $(this).val();
+            var ext = url.substring(url.lastIndexOf('.') + 1).toLowerCase();
+            if (input.files && input.files[0] && (ext == "gif" || ext == "png" || ext == "jpeg" || ext == "jpg")) {
+                var reader = new FileReader();
+                reader.onload = function (e) {
+
+                    $('#imgStatusImg_' + StatusIamge).attr('src', e.target.result);
+
+                }
+                reader.readAsDataURL(input.files[0]);
+            }
+            else {
+                $('#imgStatusImg_' + StatusIamge).attr('src', 'images/cliniclogo.jpg');
+            }
+            /*Upload File*/
+            var fileUpload = $(this).get(0);
+            var files = fileUpload.files;
+            var _DoctorSign2 = '';
+
+            if (files.length > 0) {
+                var _extension = fn_getFileExtension(files[0].name).replace('jpeg', 'jpg');
+                _DoctorSign2 = 'ClinicLogo/' + _LocationId + '_StatusImg_' + StatusIamge + '.' + _extension;
+                var fileparams = { FolderName: "ClinicLogo", FileName: _LocationId + '_StatusImg_' + StatusIamge, Extension: _extension };
+
+                if (files[0].size <= 2151043) {
+                    UploadImage(files[0], 'StatusImage', fileparams);
+
+                } else {
+                    if (URL) { this.inputURL = URL.createObjectURL(files[0]); }
+                    CompressUploadedImage(files[0], fileparams, 'StatusImage', 0.8, 200);
+
+                }
+            }
+            fn_UpdateLogoURL(_LocationId, _DoctorSign2, 'StatusImage');
+        })
+
+
+    });
+
+    function DeleteStatusImage(type) {
+        if ($("#imgStatusImg_" + type).attr('data-attr') != '' && typeof $("#imgStatusImg_" + type).attr('data-attr') != 'undefined') {
+            var imgURL = $("#imgStatusImg_" + type).attr('data-attr');
+            var _objRecords = ["DeleteStatusImages_" + type, _LocationId, _LocationId, ""];
+            UpdateDataToDatabase(1, 'DeleteStatusImg', _objRecords, 'DentalParams');
+
+            $("#imgStatusImg_" + type).attr('src', 'images/cliniclogo.jpg');
+
+            DeleteFile(imgURL,"DeleteFileFromServer");
+        }
+    }
+
+    function UploadStatusImage(type) {
+        $("#uplStatusImg").click(); StatusIamge = type;
+    }
+
+    function fn_UpdateClinicReords() {
+        var _objRecords = ["InsertUpdate", _LocationId, _ChildClinicId
+            , rtnCtrlVal("txtClinicName", "")
+            , rtnCtrlVal("txtDoctorRegNo", "")
+            , rtnCtrlVal("txtFName", "")
+            , rtnCtrlVal("txtMName", "")
+            , rtnCtrlVal("txtLName", "")
+            , rtnCtrlVal("txtQualification", "")
+            , rtnCtrlVal("txtAddress", "")
+            , rtnCtrlVal("txtContact1", "")
+            , rtnCtrlVal("txtContact2", "")
+            , rtnCtrlVal("txtWebsite", "")
+            , rtnCtrlVal("txtEmail", "")
+            , rtnCtrlVal("ddlWeeklyOff", "")
+            , ""
+            , ""//pwd
+            , ""
+            , rtnCtrlVal("txtDoctorRegNo_1", "")
+            , rtnCtrlVal("txtFName_1", "")
+            , rtnCtrlVal("txtMName_1", "")
+            , rtnCtrlVal("txtLName_1", "")
+            , rtnCtrlVal("txtQualification_1", "")
+            , ""
+            , "" //ExpiryFDate
+            , "" //ExpiryTDate
+            , "" //Software Type
+
+        ];
+        UpdateDataToDatabase(6, 'UpdateClinicRecords', _objRecords, 'DentalParams')
+    }
+
+    function onGetDataSuccess(data, context) {
+        if (context == 'getEditRecords') {
+            if (data == 0 || data == '') { return false; }
+
+            $("#txtClinicName").val(data.split('|')[2]);
+            $("#txtDoctorRegNo").val(data.split('|')[3]);
+            $("#txtFName").val(data.split('|')[4]);
+            $("#txtMName").val(data.split('|')[5]);
+            $("#txtLName").val(data.split('|')[6]);
+            $("#txtQualification").val(data.split('|')[7]);
+            $("#txtAddress").val(data.split('|')[8]);
+            $("#txtContact1").val(data.split('|')[9]);
+            $("#txtContact2").val(data.split('|')[10]);
+            $("#txtWebsite").val(data.split('|')[11]);
+            $("#txtEmail").val(data.split('|')[12]);
+            $("#ddlWeeklyOff").val(data.split('|')[13]);
+
+            $("#txtDoctorRegNo_1").val(data.split('|')[20]);
+            $("#txtFName_1").val(data.split('|')[17]);
+            $("#txtMName_1").val(data.split('|')[18]);
+            $("#txtLName_1").val(data.split('|')[19]);
+            $("#txtQualification_1").val(data.split('|')[21]);
+
+            if (data.split('|')[16] != '') { $("#imgDoctorSign_1").attr('src', RootFolderPath(data.split('|')[16])); }
+            else { $("#imgDoctorSign_1").attr('src', 'images/DemoSign.jpg'); }
+
+            if (data.split('|')[22] != '') { $("#imgDoctorSign_2").attr('src', RootFolderPath(data.split('|')[22])); }
+            else { $("#imgDoctorSign_2").attr('src', 'images/DemoSign.jpg'); }
+
+            if (data.split('|')[26] != '') { $("#imgDoctorPhoto_1").attr('src', RootFolderPath(data.split('|')[26])); }
+            else { $("#imgDoctorPhoto_1").attr('src', 'images/photo.jpg'); }
+
+            if (data.split('|')[27] != '') { $("#imgDoctorPhoto_2").attr('src', RootFolderPath(data.split('|')[27])); }
+            else { $("#imgDoctorPhoto_2").attr('src', 'images/photo.jpg'); }
+
+
+            if (data.split('|')[23] != '') {
+                $("#imgStatusImg_1").attr('src', RootFolderPath(data.split('|')[23]));
+                $("#imgStatusImg_1").attr('data-attr', data.split('|')[23]);
+            }
+            else { $("#imgStatusImg_1").attr('src', 'images/cliniclogo.jpg'); }
+
+            if (data.split('|')[24] != '') {
+                $("#imgStatusImg_2").attr('src', RootFolderPath(data.split('|')[24]));
+                $("#imgStatusImg_2").attr('data-attr', data.split('|')[24]);
+            }
+            else { $("#imgStatusImg_2").attr('src', 'images/cliniclogo.jpg'); }
+
+            if (data.split('|')[25] != '') {
+                $("#imgStatusImg_3").attr('src', RootFolderPath(data.split('|')[25]));
+                $("#imgStatusImg_3").attr('data-attr', data.split('|')[25]);
+            }
+            else { $("#imgStatusImg_3").attr('src', 'images/cliniclogo.jpg'); }
+
+
+            if (data.split('|')[14] != '') { $("#imgClinicPhoto").attr('src', RootFolderPath(data.split('|')[14])); }
+            else {
+                $("#imgClinicPhoto").attr('src', 'images/cliniclogo.jpg');
+            }
+        }
+        else if (context == 'UpdateClinicRecords') {
+            if (data == '' || data == 0) { alert('500 error fired..'); return false; }
+            alert('Update Successfully');
+
+
+        }
+    }
+
+    function fn_UpdateLogoURL(ClinicID, imgURL, ImageType) {
+        if (ClinicID == '0' && ClinicID == '') { return false; }
+        if (ImageType == 'ClinicLogo') {
+            var objRecords = ["UpdateSQL", "Update ClinicInfo set ClinicLogo=`" + imgURL + "` where ClinicID=" + ClinicID];
+            UpdateDataToDatabase(13, 'UpdateImgURL', objRecords, 'DentalParams');
+
+            setTimeout(function () {
+                $("#userphoto").attr('src', RootFolderPath(imgURL + '?v=' + Math.random()));
+            }, 1000);
+           
+          
+            
+
+            $qc.setCookie("imgurl", imgURL);
+        }
+        else if (ImageType == 'DoctorPhoto1') {
+            var objRecords = ["UpdateSQL", "Update ClinicInfo set DoctorPhoto1=`" + imgURL + "` where ClinicID=" + ClinicID];
+            UpdateDataToDatabase(13, 'UpdateImgURL', objRecords, 'DentalParams');
+        }
+        else if (ImageType == 'DoctorPhoto2') {
+            var objRecords = ["UpdateSQL", "Update ClinicInfo set DoctorPhoto2=`" + imgURL + "` where ClinicID=" + ClinicID];
+            UpdateDataToDatabase(13, 'UpdateImgURL', objRecords, 'DentalParams');
+        }
+        else if (ImageType == 'DoctorSign1') {
+            var objRecords = ["UpdateSQL", "Update ClinicInfo set DoctorSign=`" + imgURL + "` where ClinicID=" + ClinicID];
+            UpdateDataToDatabase(13, 'UpdateImgURL', objRecords, 'DentalParams');
+        }
+        else if (ImageType == 'DoctorSign2') {
+            var objRecords = ["UpdateSQL", "Update ClinicInfo set DoctorSign_1=`" + imgURL + "` where ClinicID=" + ClinicID];
+            UpdateDataToDatabase(13, 'UpdateImgURL', objRecords, 'DentalParams');
+        }
+        else if (ImageType == 'StatusImage') {
+            var objRecords = ["UpdateSQL", "Update ClinicInfo set StatusImage" + StatusIamge + "=`" + imgURL + "` where ClinicID=" + ClinicID];
+            UpdateDataToDatabase(13, 'UpdateImgURL', objRecords, 'DentalParams');
+        }
+
+    }
+
+    function onImageUploadSuccess(data, context) {
+        if (context == 'ClinicLogo') {
+            if (data == 0) {
+                alert('Logo upload error.');
+                return false;
+            }
+
+            // $("#imgClinicPhoto").attr('src', RootFolderPath("ClinicLogo/" + _ClinicLogo));
+
+        } else if (context =='StatusImage') {
+            alert('Upload Successfully');
+        }
+    }
+
+</script>

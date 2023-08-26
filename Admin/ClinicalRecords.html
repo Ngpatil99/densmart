@@ -1,0 +1,788 @@
+﻿<!--@{
+    ViewBag.Title = "Clinical Records";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}-->
+
+<div class="container-fluid">
+    <div class="page-wrapper bg-white">
+        <!--@*<div class="page-header">
+            <h2></h2>
+        </div>*@-->
+        <div class="page-body">
+            <ul class="line nav nav-tabs">
+                <li id="liLabRecord" data-mid="41" data-tab="1" class="nav-item clsSubClinicRights">
+                    <a class="nav-link waves-effect active" data-toggle="tab" href="#LabRecords" target="_self">Lab Records</a>
+                </li>
+                <li id="liMaterialRecord" data-mid="42" data-tab="2" class="nav-item clsSubClinicRights">
+                    <a class="nav-link waves-effect" data-toggle="tab" href="#MaterialRecords" target="_self">Material Records</a>
+                </li>
+                <li id="liMaintenanceRecord" data-mid="43" data-tab="3" class="nav-item clsSubClinicRights">
+                    <a class="nav-link waves-effect" data-toggle="tab" href="#MaintenanceRecords" target="_self">Maintenance Records</a>
+                </li>
+                <li id="liSalaryRecord" data-mid="44" data-tab="4" class="nav-item clsSubClinicRights">
+                    <a class="nav-link waves-effect" data-toggle="tab" href="#SalaryRecords" target="_self">Salary Records</a>
+                </li>
+                <li id="liConsumeMaterial"  data-mid="45" data-tab="5" class="nav-item clsSubClinicRights">
+                    <a class="nav-link waves-effect" data-toggle="tab" href="#ConsumeMaterial" target="_self">Consume Material</a>
+                </li>
+                <li id="liStockHistory" data-mid="46" data-tab="6" class="nav-item clsSubClinicRights">
+                    <a class="nav-link waves-effect" data-toggle="tab" href="#StockHistory" target="_self">Stock History</a>
+                </li>
+                <li id="liConsultingFee"  data-mid="47" data-tab="7" class="nav-item clsSubClinicRights">
+                    <a class="nav-link waves-effect" data-toggle="tab" href="#ConsultingFee" target="_self">Consulting Fee</a>
+                </li>
+            </ul>
+            <div class="tab-content">
+                <div class="tab-pane show active fade p-3" id="LabRecords">
+                    <div class="row withoutlabelblock">
+                        <div class="col-lg-4">
+                            <div class="form-inline">
+                                <select class="form-control mr-2" id="ddlLabs">
+                                </select>
+                                <label class="radiobutton mr-2">
+                                    <input id="rdoLabRecord" type="radio" checked="checked" name="rdoLabRecord" />
+                                    <i></i><span>Records</span>
+                                </label>
+                                <label class="radiobutton mr-2">
+                                    <input id="rdoLabPayments" type="radio" name="rdoLabRecord" />
+                                    <i></i><span>Payments</span>
+                                </label>
+                            </div>
+                        </div>
+                        <div class="col-lg-5">
+                            <div class="form-inline">
+                                <select id="LabRecord_Datetype" class="form-control">
+                                    <option selected="selected" value="All Dates">All Dates</option>
+                                    <option value="Impression Date">Impression Date</option>
+                                    <option value="Send Date">Send Date</option>
+                                    <option value="Received Date">Received Date</option>
+                                    <option value="Fixed Date">Fixed Date</option>
+                                </select>
+                                <span class="fromtodate">
+                                    <label>From</label>
+                                    <input id="txtFromDate" type="date" class="form-control" />
+                                    <label>To</label>
+                                    <input id="txtToDate" type="date" class="form-control" />
+                                </span>
+                            </div>
+                        </div>
+                        <div class="col-lg-3">
+                            <div class="input-group">
+                                <input id="txtSearchLabRecord" type="text" class="form-control" placeholder="Search" />
+                                <div class="input-group-append">
+                                    <button class="btn btn-first" onclick="fn_FillLabRecords();"><i class="fa fa-search"></i></button>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="col-12" style="margin-top:5px;">
+                            <div id="GridResult" class="table-responsive">
+                            </div>
+                        </div>
+
+                        <div id="divLabPaymentHis" class="col-12" style="margin-top:5px;display:none;">
+                            <div style="margin-top: 5px; padding-left: 23px; color: #dc3545; font-weight: 600;">Paid payment history</div>
+                            <div id="GridResult1" class="table-responsive">
+                            </div>
+                        </div>
+                    </div>
+
+
+                    <!--<table class="table table-bordered m-0">
+                        <thead>
+                            <tr>
+                                <th class="text-center">Patient Name   </th>
+                                <th class="text-center">Mobile No      </th>
+                                <th class="text-center">Lab Work       </th>
+                                <th class="text-center">Lab Name       </th>
+                                <th class="text-center">Impression Date</th>
+                                <th class="text-center">Send Date      </th>
+                                <th class="text-center">Received Date  </th>
+                                <th class="text-center">Insertion Date </th>
+                                <th class="text-center">Lab Charges    </th>
+                                <th class="text-center">
+                                    <a href="#LabRecordsModal" data-toggle="modal" class="btn btn-light">Add New</a>
+                                </th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td>Ulhas Jayvant Kambale         </td>
+                                <td class="text-center">9665664484                    </td>
+                                <td>test                          </td>
+                                <td>Lab Gurukrupa                 </td>
+                                <td class="text-center">25/02/2022                    </td>
+                                <td class="text-center">25/02/2022                    </td>
+                                <td class="text-center">25/02/2022                    </td>
+                                <td class="text-center">25/02/2022                    </td>
+                                <td class="text-center"><span class="inr">12200</span></td>
+                                <td class="text-center">
+                                    <div class="dropdown d-inline-block">
+                                        <button type="button" class="btn icon-round-btn dropdown-toggle no-arrow waves-effect" data-toggle="dropdown">
+                                            <i class="fa fa-ellipsis-h"></i>
+                                        </button>
+                                        <div class="dropdown-menu dropdown-menu-right">
+                                            <a class="dropdown-item" href="#" target="_self"><i class="fa fa-print"></i><span>Print</span></a>
+                                            <a class="dropdown-item" href="#LabRecordsModal" data-toggle="modal" target="_self"><i class="fa fa-pencil"></i><span>Edit</span></a>
+                                            <a class="dropdown-item" href="#" target="_self"><i class="fa fa-trash-o"></i><span>Delete</span></a>
+                                        </div>
+                                    </div>
+                                </td>
+                            </tr>
+
+                        </tbody>
+                    </table>-->
+
+                </div>
+                <div class="tab-pane fade p-3" id="MaterialRecords">
+                    <div class="row withoutlabelblock">
+                        <div class="col-lg-5">
+                            <div class="form-inline">
+                                <select class="form-control mr-2" id="ddlDealers">
+                                </select>
+                                <label class="radiobutton mr-2">
+                                    <input id="rdoMaterialRecord" checked type="radio" name="rdoMaterialRecord" />
+                                    <i></i><span>Records</span>
+                                </label>
+                                <label class="radiobutton mr-2">
+                                    <input id="rdoMaterialPayment" type="radio" name="rdoMaterialRecord" />
+                                    <i></i><span>Payments</span>
+                                </label>
+                            </div>
+                        </div>
+                        <div class="col-lg-4">
+                            <div class="form-inline">
+                                <span class="fromtodate">
+                                    <label>From</label>
+                                    <input id="txtMaterialFDate" type="date" class="form-control" />
+                                    <label>To</label>
+                                    <input id="txtMaterialTDate" type="date" class="form-control" />
+                                </span>
+                            </div>
+                        </div>
+                        <div class="col-lg-3">
+                            <div class="input-group">
+                                <input id="txtSearchMaterialRecord" type="text" class="form-control" placeholder="Search" />
+                                <div class="input-group-append">
+                                    <button class="btn btn-first" onclick="fn_FillMaterialRecords();"><i class="fa fa-search"></i></button>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-12" style="margin-top:5px;">
+                            <!--<div style="margin-top: 5px; padding-left: 23px; color: #dc3545; font-weight: 600;">Total Material Payments</div>-->
+                            <div id="GridResult2" class="table-responsive"></div>
+                        </div>
+                        <div id="divMaterialPaymentHis" class="col-12" style="margin-top:5px;display:none;">
+                            <div style="margin-top: 5px; padding-left: 23px; color: #dc3545; font-weight: 600;">Paid payment history</div>
+                            <div id="GridResult3" class="table-responsive">
+                            </div>
+                        </div>
+                    </div>
+
+                    
+                </div>
+                <div class="tab-pane fade p-3" id="MaintenanceRecords">
+                    <div class="row withoutlabelblock">
+                        <div class="col-lg-4">
+
+                        </div>
+                        <div class="col-lg-5">
+                            <div class="form-inline">
+                                <span class="fromtodate">
+                                    <label>From</label>
+                                    <input id=txtMR_FromDate type="date" class="form-control" />
+                                    <label>To</label>
+                                    <input id="txtMR_ToDate" type="date" class="form-control" />
+                                </span>
+                            </div>
+                        </div>
+                        <div class="col-lg-3">
+                            <div class="input-group">
+                                <input id="txtMRSearch" type="text" class="form-control" placeholder="Search" />
+                                <div class="input-group-append">
+                                    <button id="btnSearchMR" onclick="fn_FillMainWorkRecords();" class="btn btn-first"><i class="fa fa-search"></i></button>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-12" style="margin-top:5px;">
+                            <div class="table-responsive" id="GridResult4"></div>
+                        </div>
+                    </div>
+
+                    <!--<table class="table table-bordered table-width-max-content">
+                        <thead>
+                            <tr>
+                                <th class="text-center">Date         </th>
+                                <th class="text-center">Maintenance Work	</th>
+                                <th class="text-center">Charges Paid</th>
+                                <th class="text-center">
+                                    <a href="#MaintenanceRecordsModal" data-toggle="modal" class="btn btn-light" target="_self">Add New</a>
+                                </th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td class="text-center">12/02/2022</td>
+                                <td class="text-center">Maintenance Work</td>
+                                <td class="text-center"><span class="inr">500</span></td>
+                                <td class="text-center">
+                                    <div class="dropdown d-inline-block">
+                                        <button type="button" class="btn icon-round-btn dropdown-toggle no-arrow waves-effect" data-toggle="dropdown">
+                                            <i class="fa fa-ellipsis-h"></i>
+                                        </button>
+                                        <div class="dropdown-menu dropdown-menu-right">
+                                            <a class="dropdown-item" href="#MaintenanceRecordsModal" data-toggle="modal" target="_self"><i class="fa fa-pencil"></i><span>Edit</span></a>
+                                            <a class="dropdown-item" href="#" target="_self"><i class="fa fa-trash-o"></i><span>Delete</span></a>
+                                        </div>
+                                    </div>
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>-->
+                </div>
+                <div class="tab-pane fade p-3" id="SalaryRecords">
+                    <div class="row withoutlabelblock">
+                        <div class="col-lg-4">
+                        </div>
+                        <div class="col-lg-5">
+                            <div class="form-inline">
+                                <span class="fromtodate">
+                                    <label>From</label>
+                                    <input id="txtSalary_FDate" type="date" class="form-control" />
+                                    <label>To</label>
+                                    <input id="txtSalary_TDate" type="date" class="form-control" />
+                                </span>
+                            </div>
+                        </div>
+                        <div class="col-lg-3">
+                            <div class="input-group">
+                                <input id="txtSalary_Search" type="text" class="form-control" placeholder="Search" />
+                                <div class="input-group-append">
+                                    <button id="btnSalarySearch" onclick="fn_FillSalaryRecords();" class="btn btn-first"><i class="fa fa-search"></i></button>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-12" style="margin-top:5px;">
+                            <div class="table-responsive" id="GridResult5"></div>
+                        </div>
+                    </div>
+
+                </div>
+                <div class="tab-pane fade p-3" id="ConsumeMaterial">
+                    <div class="row withoutlabelblock">
+                        <div class="col-lg-4">
+                        </div>
+                        <div class="col-lg-5">
+                            <div class="form-inline">
+                                <span class="fromtodate">
+                                    <label>From</label>
+                                    <input id="txtCM_FDate" type="date" class="form-control" />
+                                    <label>To</label>
+                                    <input id="txtCM_TDate" type="date" class="form-control" />
+                                </span>
+                            </div>
+                        </div>
+                        <div class="col-lg-3">
+                            <div class="input-group">
+                                <input id="txtCM_Search" type="text" class="form-control" placeholder="Search" />
+                                <div class="input-group-append">
+                                    <button id="btnCMSearch" onclick="fn_FillConsumeMaterials();" class="btn btn-first"><i class="fa fa-search"></i></button>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-12" style="margin-top:5px;">
+                            <div class="table-responsive" id="GridResult6"></div>
+                        </div>
+                    </div>
+
+                </div>
+                <div class="tab-pane fade p-3" id="StockHistory">
+                    <div class="row withoutlabelblock">
+                        <div class="col-lg-4">
+                        </div>
+                        <div class="col-md-5">
+                            <div class="form-inline">
+                                <span class="fromtodate">
+                                    <label>Expiry From</label>
+                                    <input id="txtExp_FDate" type="date" class="form-control" />
+                                    <label>To</label>
+                                    <input id="txtExp_TDate" type="date" class="form-control" />
+                                </span>
+                            </div>
+                        </div>
+                        <div class="col-md-3">
+                            <div class="input-group">
+                                <input id="txtExp_Search" type="text" class="form-control" placeholder="Enter Material Name" />
+                                <div class="input-group-append">
+                                    <button onclick="fn_FillStockMaterials();" class="btn btn-first"><i class="fa fa-search"></i></button>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-12" style="margin-top:5px;">
+                            <div class="table-responsive" id="GridResult7"></div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="tab-pane fade p-3" id="ConsultingFee">
+                    <div class="row withoutlabelblock">
+                        <div class="col-lg-4">
+                            <div class="form-inline">
+                                <select class="form-control mr-2"  onchange="fn_FillConsultingDrInfo()" id="ddlConsultingDr">
+                                </select>
+                                <label class="radiobutton mr-2">
+                                    <input id="rdoConsultingDrRecord" checked type="radio" name="rdoConsultingDrRecord" />
+                                    <i></i><span>Records</span>
+                                </label>
+                                <label class="radiobutton mr-2">
+                                    <input id="rdoConsultingDrPayment" type="radio" name="rdoConsultingDrRecord" />
+                                    <i></i><span>Payments</span>
+                                </label>
+                            </div>
+                        </div>
+                        <div class="col-lg-5">
+                            <div class="form-inline">
+                                <span class="fromtodate">
+                                    <label>From</label>
+                                    <input id="txtConsultingDrFDate" onchange="fn_FillConsultingDrInfo()" type="date" class="form-control" />
+                                    <label>To</label>
+                                    <input id="txtConsultingDrTDate" onchange="fn_FillConsultingDrInfo()" type="date" class="form-control" />
+                                </span>
+                            </div>
+                        </div>
+                        <div class="col-lg-3">
+                            <div class="input-group">
+                                <input id="txtSearchConsultingDrRecord"  onchange="fn_FillConsultingDrInfo()" type="text" class="form-control" placeholder="Search" />
+                                <div class="input-group-append">
+                                    <button class="btn btn-first" onclick="fn_FillConsultingDrInfo();"><i class="fa fa-search"></i></button>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="col-12" style="margin-top:5px;">
+                            <div id="GridResult9" class="table-responsive"></div>
+                        </div>
+                        <div id="divConsultingPaymentHis" class="col-12" style="margin-top:5px;">
+                            <div style="margin-top: 5px; padding-left: 23px; color: #dc3545; font-weight: 600;">Paid payment history</div>
+                            <div id="GridResult10" class="table-responsive">
+                            </div>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+<div class="modal fade" data-backdrop="static" id="mdlLabRecordsModal">
+    <div class="modal-dialog modal-middle">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h4 class="modal-title">Lab Records</h4>
+                <button type="button" class="close" data-dismiss="modal">&times;</button>
+            </div>
+            <div class="modal-body">
+                <div class="row">
+                    <div class="form-group col-sm-6">
+                        <label>Patient Name</label>
+                        <input id="txtLabPatName" type="text" class="form-control" />
+                    </div>
+                    <div class="form-group col-sm-6">
+                        <label>Mobile No</label>
+                        <input id="txtLAbMobileNo" type="number" class="form-control" />
+                    </div>
+                    <div class="form-group col-sm-6">
+                        <label>Lab Work</label>
+                        <input id="txtLabWork" type="text" class="form-control" />
+                    </div>
+                    <div class="form-group col-sm-6">
+                        <label>Lab Name</label>
+                        <select id="ddlLabs1" class="form-control">
+                        </select>
+                    </div>
+                    <div class="form-group col-sm-6">
+                        <label>Impression Date</label>
+                        <input id="txtLabImpDate" type="date" class="form-control" />
+                    </div>
+                    <div class="form-group col-sm-6">
+                        <label>Send Date</label>
+                        <input id="txtLabSendDate" type="date" class="form-control" />
+                    </div>
+                    <div class="form-group col-sm-6">
+                        <label>Received Date</label>
+                        <input id="txtLabReceiveDate" type="date" class="form-control" />
+                    </div>
+                    <div class="form-group col-sm-6">
+                        <label>Insertion Date</label>
+                        <input id="txtLabInsertionDate" type="date" class="form-control" />
+                    </div>
+                    <div class="form-group col-sm-6">
+                        <label>Lab Charges </label>
+                        <input id="txtLabCharges" type="number" class="form-control" />
+                    </div>
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button id="btnSubmitLabRecord" type="button" class="btn btn-success waves-effect">Save</button>
+                <button type="button" class="btn btn-danger waves-effect" data-dismiss="modal">Cancel</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!--<div class="modal fade" data-backdrop="static" id="mdlLabPaymentModal">
+    <div class="modal-dialog modal-middle">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h4 class="modal-title">Lab Records</h4>
+                <button type="button" class="close" data-dismiss="modal">&times;</button>
+            </div>
+            <div class="modal-body">
+                <div class="row">
+                    <div class="form-group col-sm-6">
+                        <label>Date</label>
+                        <input id="txtLabPayDate" type="date" class="form-control" />
+                    </div>
+
+
+                    <div class="form-group col-sm-6">
+                        <label>Lab Name</label>
+                        <select id="ddlLabs2" class="form-control">
+                        </select>
+                    </div>
+                    <div class="form-group col-sm-6">
+                        <label>Previous Remaining Amount</label>
+                        <input id="txtLabpayPrevRemAmt" readonly type="number" class="form-control" />
+                    </div>
+                    <div class="form-group col-sm-6">
+                        <label>New Amount</label>
+                        <input id="txtLabPayNewAmt" readonly type="number" class="form-control" />
+                    </div>
+                    <div class="form-group col-sm-6">
+                        <label>Total Amount</label>
+                        <input id="txtLabPayTotalAmt" readonly type="number" class="form-control" />
+                    </div>
+                    <div class="form-group col-sm-6">
+                        <label>Paid Amount</label>
+                        <input id="txtLabPayPaidAmt" type="number" class="form-control" />
+                    </div>
+                    <div class="form-group col-sm-6">
+                        <label>Remaining Amount </label>
+                        <input id="txtLabPayRemainingAmt" readonly type="number" class="form-control" />
+                    </div>
+                    <div class="form-group col-sm-6">
+                        <label>Mode Of Payment </label>
+                        <input id="txtLabPayPayMode" type="text" class="form-control" />
+                    </div>
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button id="btnSubmitLabRecord" type="button" class="btn btn-success waves-effect">Save</button>
+                <button type="button" class="btn btn-danger waves-effect" data-dismiss="modal">Cancel</button>
+            </div>
+        </div>
+    </div>
+</div>-->
+
+<div class="modal fade" data-backdrop="static" id="mdlLabPaymentMode">
+    <div class="modal-dialog modal-middle">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h4 class="modal-title">Lab Payment Details</h4>
+                <button type="button" class="close" data-dismiss="modal">&times;</button>
+            </div>
+            <div class="modal-body">
+                <div class="row">
+                    <div class="form-group col-sm-6">
+                        <label>Total Amount</label>
+                        <input id="txtLabPayTotalAmt" readonly type="number" class="form-control" />
+                    </div>
+                    <div class="form-group col-sm-6">
+                        <label>Paid Amount</label>
+                        <input id="txtLabPayPaidAmt" onchange="changeLabPayDetails();" type="number" class="form-control" />
+                    </div>
+                    <div class="form-group col-sm-6">
+                        <label>Remaining Amount </label>
+                        <input id="txtLabPayRemainingAmt" readonly type="number" class="form-control" />
+                    </div>
+                 
+                    <div class="form-group col-sm-6">
+                        <label>Mode Of Payment </label>
+                        <select id="txtLabPayPayMode" class="form-control"></select>
+                    </div>
+                    <div class="form-group col-sm-6">
+                        <label>Payment Date</label>
+                        <input id="txtLabPayDate" type="date" class="form-control" />
+                    </div>
+                    <div class="form-group col-sm-6">
+                        <label>Transaction History</label>
+                        <input id="txtLabPayTranHistory" type="text" class="form-control" />
+                    </div>
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button id="btnSubmitLabPayment" type="button" class="btn btn-success waves-effect">Save</button>
+                <button type="button" class="btn btn-danger waves-effect" data-dismiss="modal">Cancel</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="modal fade" data-backdrop="static" id="mdlMaterialPaymentMode">
+    <div class="modal-dialog modal-middle">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h4 class="modal-title">Material Payment Details</h4>
+                <button type="button" class="close" data-dismiss="modal">&times;</button>
+            </div>
+            <div class="modal-body">
+                <div class="row">
+                    <div class="form-group col-sm-6">
+                        <label>Total Amount</label>
+                        <input id="txtMaterialTotalAmt" readonly type="number" class="form-control" />
+                    </div>
+                    <div class="form-group col-sm-6">
+                        <label>Paid Amount</label>
+                        <input id="txtMaterialPaidAmt" onchange="changeMaterialDetails();" type="number" class="form-control" />
+                    </div>
+                    <div class="form-group col-sm-6">
+                        <label>Remaining Amount </label>
+                        <input id="txtMaterialRemainingAmt" readonly type="number" class="form-control" />
+                    </div>
+                   
+                    <div class="form-group col-sm-6">
+                        <label>Mode Of Payment </label>
+                        <select id="txtMaterialPayMode" class="form-control"></select>
+                    </div>
+                    <div class="form-group col-sm-6">
+                        <label>Payment Date</label>
+                        <input id="txtMaterialPayDate" type="date" class="form-control" />
+                    </div>
+                    <div class="form-group col-sm-6">
+                        <label>Transaction History</label>
+                        <input id="txtMaterialTranHistory" type="text" class="form-control" />
+                    </div>
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button id="btnSubmitMaterialPayment" type="button" class="btn btn-success waves-effect">Save</button>
+                <button type="button" class="btn btn-danger waves-effect" data-dismiss="modal">Cancel</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="modal fade" data-backdrop="static" id="mdlMaterialRecordsModal">
+    <div class="modal-dialog modal-middle">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h4 class="modal-title">Material Records</h4>
+                <button type="button" class="close" data-dismiss="modal">&times;</button>
+            </div>
+            <div class="modal-body">
+                <div class="row">
+                    <div class="form-group col-sm-6">
+                        <label>Date</label>
+                        <input id="txtMaterialDate" type="date" class="form-control" />
+                    </div>
+                    <div class="form-group col-sm-6">
+                        <label>Expiry Date</label>
+                        <input id="txtMaterialExpDate" type="date" class="form-control" />
+                    </div>
+                    <div class="form-group col-sm-6">
+                        <label>Dealer Name</label>
+                        <select id="ddlDealers1" class="form-control">
+                        </select>
+                    </div>
+                    <div class="form-group col-sm-6">
+                        <label>Material Name</label>
+                        <input id="txtMaterialName" type="text" class="form-control" />
+                    </div>
+                    <div class="form-group col-sm-6" style="display:none">
+                        <label>Lab Name</label>
+                        <input id="txtMaterialLabName" type="text" class="form-control" />
+                    </div>
+                    <div class="form-group col-sm-6">
+                        <label>Charges/Quantity</label>
+                        <input id="txtMaterialCharges" onchange="calculatetotalmaterialcharges();" value="0" type="number" class="form-control" />
+                    </div>
+                    <div class="form-group col-sm-6">
+                        <label>Quantity</label>
+                        <input id="txtMaterialQty" onchange="calculatetotalmaterialcharges();" value="1" type="number" class="form-control" />
+                    </div>
+                    <div class="form-group col-sm-6">
+                        <label>Total Charges</label>
+                        <input id="txtTotalMaterialCharges" readonly="readonly" value="0" type="number" class="form-control" />
+                    </div>
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button id="btnSubmitMaterialRecords" type="button" class="btn btn-success waves-effect">Save</button>
+                <button type="button" class="btn btn-danger waves-effect" data-dismiss="modal">Cancel</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="modal fade" data-backdrop="static" id="mdlMaintenanceRecordsModal">
+    <div class="modal-dialog modal-middle">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h4 class="modal-title">Maintenance Records</h4>
+                <button type="button" class="close" data-dismiss="modal">&times;</button>
+            </div>
+            <div class="modal-body">
+                <div class="row">
+                    <div class="form-group col-sm-6">
+                        <label>Date</label>
+                        <input id="txtMR_Date" type="date" class="form-control" />
+                    </div>
+                    <div class="form-group col-sm-6">
+                        <label>Maintenance Work</label>
+                        <input id="txtMR_Work" type="text" class="form-control" />
+                    </div>
+                    <div class="form-group col-sm-6">
+                        <label>Charges Paid</label>
+                        <input id="txtMR_Charges" type="number" class="form-control" />
+                    </div>
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button id="btnSubmitMaintainceWork" type="button" class="btn btn-success waves-effect">Save</button>
+                <button type="button" class="btn btn-danger waves-effect" data-dismiss="modal">Cancel</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="modal fade" data-backdrop="static" id="mdlSalaryRecordsModal">
+    <div class="modal-dialog modal-middle">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h4 class="modal-title">Salary Records</h4>
+                <button type="button" class="close" data-dismiss="modal">&times;</button>
+            </div>
+            <div class="modal-body">
+                <div class="row">
+                    <div class="form-group col-sm-6">
+                        <label>Date</label>
+                        <input id="txtSalary_Date" type="date" class="form-control" />
+                    </div>
+                    <div class="form-group col-sm-6">
+                        <label>Employee Name</label>
+                        <input id="txtSalary_EmpName" type="text" class="form-control" />
+                    </div>
+                    <div class="form-group col-sm-6">
+                        <label>Salary Paid</label>
+                        <input id="txtSalary_Charges" type="number" value="0" class="form-control" />
+                    </div>
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button id="btnSubmitSalaryPaid" type="button" class="btn btn-success waves-effect">Save</button>
+                <button type="button" class="btn btn-danger waves-effect" data-dismiss="modal">Cancel</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="modal fade" data-backdrop="static" id="mdlConsumeMaterialModal">
+    <div class="modal-dialog modal-middle">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h4 class="modal-title">Consume Material</h4>
+                <button type="button" class="close" data-dismiss="modal">&times;</button>
+            </div>
+            <div class="modal-body">
+                <div class="row">
+                    <div class="form-group col-sm-6">
+                        <label>Date</label>
+                        <input id="txtCM_Date" type="date" class="form-control" />
+                    </div>
+                    <div class="form-group col-sm-6">
+                        <label>Material Name</label>
+                        <select id="ddlMaterialName" class="form-control"></select>
+                    </div>
+                    <div class="form-group col-sm-6">
+                        <label>Total Stock</label>
+                        <input id="txtCM_TotalQty" readonly type="number" class="form-control" />
+                    </div>
+                    <div class="form-group col-sm-6">
+                        <label>Used Stock</label>
+                        <input id="txtCM_UsedQty" readonly type="number" class="form-control" />
+                    </div>
+                    <div class="form-group col-sm-6">
+                        <label>Balance Qty</label>
+                        <input id="txtCM_BalanceQty" readonly type="number" class="form-control" />
+                    </div>
+                    <div class="form-group col-sm-6">
+                        <label>Consume Qty</label>
+                        <input id="txtCM_ConsumeQty" onchange="changeOfConsumeMaterial();" type="number" class="form-control" />
+                    </div>
+
+
+                    <div class="form-group col-sm-6">
+                        <label>Expiry Date</label>
+                        <input id="txtCM_ExpiryDate" type="text" readonly class="form-control" />
+                    </div>
+                    <div class="form-group col-sm-6">
+                        <label>Expiry Left Days</label>
+                        <input id="txtCM_ExpiryLeftDays" type="text" readonly class="form-control" />
+                    </div>
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button id="btnSubmitConsumeMaterial" type="button" class="btn btn-success waves-effect">Save</button>
+                <button type="button" class="btn btn-danger waves-effect" data-dismiss="modal">Cancel</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+<div class="modal fade" data-backdrop="static" id="mdlConsultingDrPaymentMode">
+    <div class="modal-dialog modal-middle">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h4 class="modal-title">Consulting Doctor Payment Details</h4>
+                <button type="button" class="close" data-dismiss="modal">&times;</button>
+            </div>
+            <div class="modal-body">
+                <div class="row">
+                    <div class="form-group col-sm-6">
+                        <label>Total Amount</label>
+                        <input id="txtConsultingDrTotalAmt" readonly type="number" class="form-control" />
+                    </div>
+                    <div class="form-group col-sm-6">
+                        <label>Paid Amount</label>
+                        <input id="txtConsultingDrPaidAmt" value="0" onchange="changeConsultingDrDetails();" type="number" class="form-control" />
+                    </div>
+                    <div class="form-group col-sm-6">
+                        <label>Remaining Amount </label>
+                        <input id="txtConsultingDrRemainingAmt" readonly value="0" type="number" class="form-control" />
+                    </div>
+                    <div class="form-group col-sm-6">
+                        <label>Mode Of Payment </label>
+                        <select id="ddlConsultingDrPayMode" class="form-control" ></select>
+                    </div>
+                    <div class="form-group col-sm-6">
+                        <label>Payment Date</label>
+                        <input id="txtConsultingDrPayDate" type="date" class="form-control" />
+                    </div>
+                    <div class="form-group col-sm-6">
+                        <label>Transaction History</label>
+                        <input id="txtConsultingDrTranHistory" type="text" class="form-control" />
+                    </div>
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button id="btnSubmitConsultingDrPayment" type="button" class="btn btn-success waves-effect">Save</button>
+                <button type="button" class="btn btn-danger waves-effect" data-dismiss="modal">Cancel</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script type="text/javascript" src="JS/Controllers/ClinicalReords.js"></script>

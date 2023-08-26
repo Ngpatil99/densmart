@@ -1,0 +1,137 @@
+﻿<style type="text/css">
+    .fc-time-grid .fc-event, .fc-time-grid .fc-bgevent {
+        color: #fff;
+    }
+
+    .fc-state-active {
+        background: #b58a0a !important;
+        color: #fff;
+    }
+
+    .fc-border-separate thead.sticky {
+        width: 100%;
+        position: fixed;
+        top: 0px;
+        left: 0px;
+        display: table;
+        background: #fff;
+    }
+
+    .fc-toolbar.fc-header-toolbar {
+        position: sticky;
+        top: 58px;
+        z-index: 2;
+        background: #fff;
+    }
+</style>
+
+<div class="container-fluid">
+    <div class="page-wrapper bg-white">
+
+        <div class="page-body">
+            <div style="padding:5px;">
+                <span>Doctor Name</span>
+                <select style="width: 250px; padding: 5px; border: 1px solid #ccc; border-radius: 5px;" id="ddlDoctor"></select>
+                <button id="btnRefreshCalender" class="btn btn-first">Search</button>
+
+
+            </div>
+            <div id='calendar-container'>
+
+                <div id='calendar'></div>
+            </div>
+
+
+        </div>
+    </div>
+</div>
+
+<div class="modal fade" id="ScheduleClass" tabindex="-1" role="large" aria-hidden="true" style="display: none;">
+    <div class="modal-dialog modal-lg">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal">
+                    &times;
+                </button>
+                <h4 class="modal-title">
+                    Schedule appointment
+                </h4>
+            </div>
+            <div class="modal-body">
+                <div class="row">
+
+                    <div class="col-xs-12 col-sm-12 col-md-4 col-lg-4">
+                        <div class="form-group">
+                            <label>
+                                Date<span style="color: Red;">*</span>
+                            </label>
+                            <input type="date" autocomplete="off" id="txtStartDate" class="form-control" />
+                        </div>
+                    </div>
+                    <div class="col-xs-12 col-sm-12 col-md-3 col-lg-3">
+                        <div class="form-group">
+                            <label>
+                                From Time<span style="color: Red;">*</span>
+                            </label>
+                            <input type="time" id="txtStartTime" class="form-control" data-samask="00:00" />
+                        </div>
+                    </div>
+                    <div class="col-xs-12 col-sm-12 col-md-4 col-lg-4" style="display:none">
+                        <div class="form-group">
+                            <label>
+                                End date <span style="color: Red;">*</span>
+                            </label>
+                            <input type="date" id="txtEndDate" class="form-control" />
+                        </div>
+                    </div>
+                    <div class="col-xs-12 col-sm-12 col-md-3 col-lg-3">
+                        <div class="form-group">
+                            <label>
+                                To Time<span style="color: Red;">*</span>
+                            </label>
+                            <input type="time" id="txtEndTime" class="form-control" data-samask="00:00" />
+                        </div>
+                    </div>
+                    <div class="col-xs-12 col-sm-12 col-md-6 col-lg-6 ">
+                        <div class="form-group">
+                            <label>
+                                Doctor name<span style="color: Red;">*</span>
+                            </label>
+                            <select class="form-control" id="ddlDoctor1"></select>
+                        </div>
+                    </div>
+
+
+                    <div class="col-xs-12 col-sm-12 col-md-6 col-lg-6 ">
+                        <div class="form-group">
+                            <label>
+                                <span data-lang="span">Patient Name</span><span style="color: Red;">*</span>
+                            </label>
+                            <input type="text" id="txtPatientName" autocomplete="off" class="form-control" />
+                        </div>
+                    </div>
+                    <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
+                        <div class="form-group">
+                            <label>
+                                <span data-lang="span">Appointment For</span>
+                            </label>
+                            <input type="text" id="txtAppointmentFor" autocomplete="off" class="form-control" />
+                        </div>
+                    </div>
+
+
+
+
+
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button id="btnSchedlePeriod" class="btnRights btn btn-first" data-rname="Submit Meeting">Submit</button>
+                <button id="btnDeleteClass" style="display:none;" class="btnRights btn btn-first" data-rname="Delete Meeting">Delete</button>
+
+            </div>
+        </div>
+    </div>
+</div>
+
+<script type="text/javascript" src="JS/Controllers/AppointmentSchedular.js?v=1"></script>

@@ -1,0 +1,831 @@
+﻿<style type="text/css">
+    .ClinicInformation .spnDoctorName .DoctorDetails #spnDoctorName2 {
+        font-weight: 700;
+        font-size: 1.4rem;
+        font-style: italic;
+        color: #007093;
+    }
+</style>
+<div class="container-fluid">
+    <!--@*<div class="page-header">
+        <h1>Dashboard</h1>
+        <ol class="breadcrumb">
+            <li class="breadcrumb-item"><a href="#">Home</a></li>
+            <li class="breadcrumb-item active">Dashboard</li>
+        </ol>
+    </div>*@-->
+    <div class="page-wrapper">
+        <div class="row mb-4 clsClinicPart">
+
+            <div class="col-lg-6">
+                <div class="page-wrapper bg-white height100">
+                    <!--<div class="page-header">
+                <h2>Clinic Information</h2>
+            </div>-->
+                    <div class="page-body">
+                        <div class="content ClinicInformation">
+                            <div class="username"></div>
+                            <div class="DoctorsName">
+                                <div class="spnDoctorName">
+                                    <div class="DoctorPhoto">
+                                        <img id="imgPhoto1" src="images/photo.jpg" alt="" />
+                                    </div>
+                                    <div class="DoctorDetails">
+                                        <span id="spnDoctorName"></span>
+                                        <span id="spanqual1"></span>
+                                        <span id="regno1"></span>
+                                    </div>
+                                </div>
+                                <div class="spnDoctorName">
+                                    <div class="DoctorPhoto">
+                                        <img id="imgPhoto2" src="images/photo.jpg" alt="" />
+                                    </div>
+                                    <div class="DoctorDetails">
+                                        <span id="spnDoctorName2"></span>
+                                        <span id="spanqual2"></span>
+                                        <span id="regno3"></span>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="fulladdress">
+                                <div class="address"><span id="spnClinicAddress"></span></div>
+                                <div class="phone"><span id="spnclinicContact"></span> </div>
+                                <div class="email"><span id="spnClinicEmail"></span> </div>
+                                <div class="web"><span id="spnClinicWebsite"></span> </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="col-lg-6 mb-4 mb-lg-0">
+                <div id="ClinicOwlCarousel" class="owl-carousel">
+
+
+                </div>
+            </div>
+        </div>
+
+        <div class="row clsClinicPart">
+            <div class="col-sm-6 col-md-6 col-lg-6">
+                <div class="row">
+                    <div class="col-sm-6 col-md-6 col-lg-12">
+                        <div class="data-box box bg-primary">
+                            <i class="fa fa-users"></i>
+                            <div class="data-box-content">
+                                <p>Total Reg. Patients</p>
+                                <strong><span id="spnTotalRegPatient">0</span></strong>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-sm-6 col-md-6 col-lg-12">
+                        <div class="data-box box bg-danger">
+                            <i class="fa fa-male"></i>
+                            <div class="data-box-content">
+                                <p>Male Patients</p>
+                                <strong><span id="spnTotalMaleRegPatient">0</span></strong>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-sm-6 col-md-6 col-lg-12">
+                        <div class="data-box box bg-info">
+                            <i class="fa fa-female"></i>
+                            <div class="data-box-content">
+                                <p>Female Patients</p>
+                                <strong><span id="spnTotalFemaleRegPatient">0</span></strong>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-sm-6 col-md-6 col-lg-12">
+                        <div class="data-box box bg-warning">
+                            <i class="fa fa-users"></i>
+                            <div class="data-box-content">
+                                <p>Age 0-20 Patients</p>
+                                <strong><span id="spnTotalAgePatient">0</span></strong>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+                <div class="col-sm-6 col-md-6 col-lg-6">
+                    <div class="row">
+                        <div class="col-sm-6 col-md-6 col-lg-6">
+                            <div class="details-box">
+                                <div class="icon">
+                                    <i class="fa fa-users"></i>
+                                </div>
+                                <div class="title">
+                                    <h4>Newly Registered Patients</h4>
+                                </div>
+                                <div class="content">
+                                    <div><strong>Today :</strong>	<span id="spnPatient_Today">0</span>  </div>
+                                    <div><strong>This Month :</strong><span id="spnPatient_ThisMonth">0</span></div>
+                                    <div><strong>Last Month :</strong><span id="spnPatient_LastMonth">0</span></div>
+                                    <div><strong>This Year :</strong><span id="spnPatient_ThisYear">0</span> </div>
+                                    <div><strong>Last Year :</strong><span id="spnPatient_LastYear">0</span> </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-sm-6 col-md-6 col-lg-6">
+                            <div class="details-box">
+                                <div class="icon">
+                                    <i class="fa fa-calendar"></i>
+                                </div>
+                                <div class="title">
+                                    <h4>No of Appointments</h4>
+                                </div>
+                                <div class="content">
+                                    <div><strong>Today :</strong>	<span id="spnApt_Today">0</span>  </div>
+                                    <div><strong>This Month :</strong><span id="spnApt_ThisMonth">0</span></div>
+                                    <div><strong>Last Month :</strong><span id="spnApt_LastMonth">0</span></div>
+                                    <div><strong>This Year :</strong><span id="spnApt_ThisYear">0</span> </div>
+                                    <div><strong>Last Year :</strong><span id="spnApt_LastYear">0</span> </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-sm-6 col-md-6 col-lg-6">
+                            <div class="details-box">
+                                <div class="icon">
+                                    <i class="fa fa-users"></i>
+                                </div>
+                                <div class="title">
+                                    <h4>No of Visited Patients</h4>
+                                </div>
+                                <div class="content">
+                                    <div><strong>Today :</strong>	<span id="spnCIApt_Today">0</span>  </div>
+                                    <div><strong>This Month :</strong><span id="spnCIApt_ThisMonth">0</span></div>
+                                    <div><strong>Last Month :</strong><span id="spnCIApt_LastMonth">0</span></div>
+                                    <div><strong>This Year :</strong><span id="spnCIApt_ThisYear">0</span> </div>
+                                    <div><strong>Last Year :</strong><span id="spnCIApt_LastYear">0</span> </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-sm-6 col-md-6 col-lg-6">
+                            <div class="details-box">
+                                <div class="icon">
+                                    <i class="fa fa-thumbs-up"></i>
+                                </div>
+                                <div class="title">
+                                    <h4>Total Treatements Done</h4>
+                                </div>
+                                <div class="content">
+                                    <div><strong>Today :</strong>	<span id="spnTreatDone_Today">0</span>  </div>
+                                    <div><strong>This Month :</strong><span id="spnTreatDone_ThisMonth">0</span></div>
+                                    <div><strong>Last Month :</strong><span id="spnTreatDone_LastMonth">0</span></div>
+                                    <div><strong>This Year :</strong><span id="spnTreatDone_ThisYear">0</span> </div>
+                                    <div><strong>Last Year :</strong><span id="spnTreatDone_LastYear">0</span> </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <!--@*<div class="col-sm-6 col-md-4 col-lg-3">
+        <div class="details-box">
+            <div class="icon">
+                <i class="fa fa-calendar"></i>
+            </div>
+            <div class="title">
+                <h4>RCT without crown</h4>
+            </div>
+            <div class="content">
+                <div><strong>Today :</strong>	<span>0</span>  </div>
+                <div><strong>This Month :</strong><span>0</span></div>
+                <div><strong>Last Month :</strong><span>0</span></div>
+                <div><strong>This Year :</strong><span>0</span> </div>
+                <div><strong>Last Year :</strong><span>0</span> </div>
+            </div>
+        </div>
+    </div>*@-->
+            </div>
+
+
+            <div class="row clsAdminPart" style="display:none">
+                <div class="col-sm-6 col-md-6 col-lg-3">
+                    <div class="data-box box bg-primary">
+                        <i class="fa fa-users"></i>
+                        <div class="data-box-content">
+                            <p>Total Installed Clinics</p>
+                            <strong><span id="spnTotalClinics">0</span></strong>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-sm-6 col-md-6 col-lg-3">
+                    <div class="data-box box bg-danger">
+                        <i class="fa fa-male"></i>
+                        <div class="data-box-content">
+                            <p>Trail Version Installed</p>
+                            <strong><span id="spnTrialVer">0</span></strong>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-sm-6 col-md-6 col-lg-3">
+                    <div class="data-box box bg-info">
+                        <i class="fa fa-female"></i>
+                        <div class="data-box-content">
+                            <p>Expired Clinics</p>
+                            <strong><span id="spnExpiredClinics">0</span></strong>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-sm-6 col-md-6 col-lg-3">
+                    <div class="data-box box bg-warning">
+                        <i class="fa fa-users"></i>
+                        <div class="data-box-content">
+                            <p>Active Clinics</p>
+                            <strong><span id="spnActiveClinics">0</span></strong>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="col-sm-6 col-md-6 col-lg-3">
+                    <div class="data-box box bg-primary">
+                        <i class="fa fa-users"></i>
+                        <div class="data-box-content">
+                            <p>Total SMS</p>
+                            <strong><span id="spnTotalSMS">0</span></strong>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-sm-6 col-md-6 col-lg-3">
+                    <div class="data-box box bg-danger">
+                        <i class="fa fa-male"></i>
+                        <div class="data-box-content">
+                            <p>SMS Allocated</p>
+                            <strong><span id="spnSMSBalAllocated">0</span></strong>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-sm-6 col-md-6 col-lg-3">
+                    <div class="data-box box bg-info">
+                        <i class="fa fa-female"></i>
+                        <div class="data-box-content">
+                            <p>Total SMS Send</p>
+                            <strong><span id="spnSMSSend">0</span></strong>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-sm-6 col-md-6 col-lg-3">
+                    <div class="data-box box bg-warning">
+                        <i class="fa fa-users"></i>
+                        <div class="data-box-content">
+                            <p>SMS Balance</p>
+                            <strong><span id="spnSMSBalance">0</span></strong>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+
+
+            <div class="row clsClinicPart">
+                <div class="col-lg-8">
+                    <div class="box">
+                        <div class="box-title">
+                            <h1>All Patients</h1>
+                            <div class="box-tools">
+                                <button type="button" data-target="#AllPatients" class="box-hideshow">
+                                    <i class="fa fa-minus"></i>
+                                </button>
+                                <button type="button">
+                                    <i class="fa fa-times"></i>
+                                </button>
+                            </div>
+                        </div>
+                        <div id="AllPatients" class="box-content">
+                            <div class="table-responsive">
+                                <table class="table table-striped tablebordered-nolr">
+                                    <thead class="no-bg">
+                                        <tr>
+                                            <th></th>
+                                            <th class="text-center">Today</th>
+                                            <th class="text-center">This Month</th>
+                                            <th class="text-center">Last Month</th>
+                                            <th class="text-center">This Year</th>
+                                            <th class="text-center">Last Year</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody id="tblPatTreatCounts">
+                                        <tr>
+                                            <td>
+                                                RCT without crown.
+                                            </td>
+                                            <td class="text-center">0</td>
+                                            <td class="text-center">0</td>
+                                            <td class="text-center">0</td>
+                                            <td class="text-center">0</td>
+                                            <td class="text-center">0</td>
+                                        </tr>
+                                        <tr>
+                                            <td>RPD</td>
+                                            <td class="text-center">0</td>
+                                            <td class="text-center">0</td>
+                                            <td class="text-center">0</td>
+                                            <td class="text-center">0</td>
+                                            <td class="text-center">0</td>
+                                        </tr>
+                                        <tr>
+                                            <td>Scaling</td>
+                                            <td class="text-center">0</td>
+                                            <td class="text-center">0</td>
+                                            <td class="text-center">0</td>
+                                            <td class="text-center">0</td>
+                                            <td class="text-center">0</td>
+                                        </tr>
+                                        <tr>
+                                            <td>Bridge</td>
+                                            <td class="text-center">0</td>
+                                            <td class="text-center">0</td>
+                                            <td class="text-center">0</td>
+                                            <td class="text-center">0</td>
+                                            <td class="text-center">0</td>
+                                        </tr>
+                                        <tr>
+                                            <td>CD</td>
+                                            <td class="text-center">0</td>
+                                            <td class="text-center">0</td>
+                                            <td class="text-center">0</td>
+                                            <td class="text-center">0</td>
+                                            <td class="text-center">0</td>
+                                        </tr>
+                                        <tr>
+                                            <td>Crown</td>
+                                            <td class="text-center">0</td>
+                                            <td class="text-center">0</td>
+                                            <td class="text-center">0</td>
+                                            <td class="text-center">0</td>
+                                            <td class="text-center">0</td>
+                                        </tr>
+                                        <tr>
+                                            <td>Disimpaction</td>
+                                            <td class="text-center">0</td>
+                                            <td class="text-center">0</td>
+                                            <td class="text-center">0</td>
+                                            <td class="text-center">0</td>
+                                            <td class="text-center">0</td>
+                                        </tr>
+                                        <tr>
+                                            <td>Emergency RCO</td>
+                                            <td class="text-center">0</td>
+                                            <td class="text-center">0</td>
+                                            <td class="text-center">0</td>
+                                            <td class="text-center">0</td>
+                                            <td class="text-center">0</td>
+                                        </tr>
+                                        <tr>
+                                            <td>Extraction</td>
+                                            <td class="text-center">0</td>
+                                            <td class="text-center">0</td>
+                                            <td class="text-center">0</td>
+                                            <td class="text-center">0</td>
+                                            <td class="text-center">0</td>
+                                        </tr>
+                                        <tr>
+                                            <td>Filling Cement</td>
+                                            <td class="text-center">0</td>
+                                            <td class="text-center">0</td>
+                                            <td class="text-center">0</td>
+                                            <td class="text-center">0</td>
+                                            <td class="text-center">0</td>
+                                        </tr>
+                                        <tr>
+                                            <td>Filling Composite</td>
+                                            <td class="text-center">0</td>
+                                            <td class="text-center">0</td>
+                                            <td class="text-center">0</td>
+                                            <td class="text-center">0</td>
+                                            <td class="text-center">0</td>
+                                        </tr>
+                                        <tr>
+                                            <td>Filling Silver</td>
+                                            <td class="text-center">0</td>
+                                            <td class="text-center">0</td>
+                                            <td class="text-center">0</td>
+                                            <td class="text-center">0</td>
+                                            <td class="text-center">0</td>
+                                        </tr>
+                                        <tr>
+                                            <td>Flap surgery and Bone grafting</td>
+                                            <td class="text-center">0</td>
+                                            <td class="text-center">0</td>
+                                            <td class="text-center">0</td>
+                                            <td class="text-center">0</td>
+                                            <td class="text-center">0</td>
+                                        </tr>
+                                        <tr>
+                                            <td>Implant</td>
+                                            <td class="text-center">0</td>
+                                            <td class="text-center">0</td>
+                                            <td class="text-center">0</td>
+                                            <td class="text-center">0</td>
+                                            <td class="text-center">0</td>
+                                        </tr>
+                                        <tr>
+                                            <td>Minor oral Sugeries</td>
+                                            <td class="text-center">0</td>
+                                            <td class="text-center">0</td>
+                                            <td class="text-center">0</td>
+                                            <td class="text-center">0</td>
+                                            <td class="text-center">0</td>
+                                        </tr>
+                                        <tr>
+                                            <td>OPD</td>
+                                            <td class="text-center">0</td>
+                                            <td class="text-center">0</td>
+                                            <td class="text-center">0</td>
+                                            <td class="text-center">0</td>
+                                            <td class="text-center">0</td>
+                                        </tr>
+                                        <tr>
+                                            <td>Orthodontic Treatment.</td>
+                                            <td class="text-center">0</td>
+                                            <td class="text-center">0</td>
+                                            <td class="text-center">0</td>
+                                            <td class="text-center">0</td>
+                                            <td class="text-center">0</td>
+                                        </tr>
+                                        <tr>
+                                            <td>RCT</td>
+                                            <td class="text-center">0</td>
+                                            <td class="text-center">0</td>
+                                            <td class="text-center">0</td>
+                                            <td class="text-center">0</td>
+                                            <td class="text-center">0</td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <!--@*<div class="row">
+        <div class="col-sm-6 col-md-4 col-lg-3">
+            <div class="data-box box">
+                <i class="fa fa-cog bg-info"></i>
+                <div class="data-box-content">
+                    <p>CPU Traffic</p>
+                    <strong class="black">10 %</strong>
+                </div>
+            </div>
+        </div>
+        <div class="col-sm-6 col-md-4 col-lg-3">
+            <div class="data-box box">
+                <i class="fa fa-thumbs-up bg-danger"></i>
+                <div class="data-box-content">
+                    <p>Likes</p>
+                    <strong class="black">41,410</strong>
+                </div>
+            </div>
+        </div>
+        <div class="col-sm-6 col-md-4 col-lg-3">
+            <div class="data-box box">
+                <i class="fa fa-shopping-cart bg-success"></i>
+                <div class="data-box-content">
+                    <p>Sales</p>
+                    <strong class="black">786</strong>
+                </div>
+            </div>
+        </div>
+        <div class="col-sm-6 col-md-4 col-lg-3">
+            <div class="data-box box">
+                <i class="fa fa-users bg-warning"></i>
+                <div class="data-box-content">
+                    <p>New Members</p>
+                    <strong class="black">2,000</strong>
+                </div>
+            </div>
+        </div>
+        <div class="col-12">
+            <div class="box">
+                <div class="box-title">
+                    <h1>Monthly Recap Report</h1>
+                    <div class="box-tools">
+                        <button type="button" data-target="#MonthlyRecapReport" class="box-hideshow">
+                            <i class="fa fa-minus"></i>
+                        </button>
+                        <div class="dropdown">
+                            <button type="button" class="dropdown-toggle" data-toggle="dropdown">
+                                <i class="fa fa-wrench"></i>
+                            </button>
+                            <div class="dropdown-menu dropdown-menu-right">
+                                <a href="#" class="dropdown-item">Action</a>
+                                <a href="#" class="dropdown-item">Another action</a>
+                                <a href="#" class="dropdown-item">Something else here</a>
+                                <a class="dropdown-divider"></a>
+                                <a href="#" class="dropdown-item">Separated link</a>
+                            </div>
+                        </div>
+                        <button type="button">
+                            <i class="fa fa-times"></i>
+                        </button>
+                    </div>
+                </div>
+                <div id="MonthlyRecapReport" class="box-content p-3">
+                    <p>Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum.</p>
+                    <p>Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum.</p>
+                </div>
+            </div>
+        </div>
+        <div class="col-lg-8">
+            <div class="box">
+                <div class="box-title">
+                    <h1>US-Visitors Report </h1>
+                    <div class="box-tools">
+                        <button type="button" data-target="#USVisitorsReport" class="box-hideshow">
+                            <i class="fa fa-minus"></i>
+                        </button>
+                        <button type="button">
+                            <i class="fa fa-times"></i>
+                        </button>
+                    </div>
+                </div>
+                <div id="USVisitorsReport" class="box-content p-3">
+                    <p>Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum.</p>
+                    <p>Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum.</p>
+                </div>
+            </div>
+        </div>
+        <div class="col-lg-4">
+            <div class="data-box box bg-warning">
+                <i class="fa fa-tag"></i>
+                <div class="data-box-content">
+                    <p>Inventory</p>
+                    <strong>786</strong>
+                </div>
+            </div>
+            <div class="data-box box bg-success">
+                <i class="fa fa-heart-o"></i>
+                <div class="data-box-content">
+                    <p>Mentions</p>
+                    <strong>786</strong>
+                </div>
+            </div>
+            <div class="data-box box bg-danger">
+                <i class="fa fa-cloud-download"></i>
+                <div class="data-box-content">
+                    <p>Downloads</p>
+                    <strong>786</strong>
+                </div>
+            </div>
+            <div class="data-box box bg-info">
+                <i class="fa fa-comment-o"></i>
+                <div class="data-box-content">
+                    <p>Direct Messages</p>
+                    <strong>786</strong>
+                </div>
+            </div>
+        </div>
+        <div class="col-lg-8">
+            <div class="box">
+                <div class="box-title">
+                    <h1>Latest Orders</h1>
+                    <div class="box-tools">
+                        <button type="button" data-target="#LatestOrders" class="box-hideshow">
+                            <i class="fa fa-minus"></i>
+                        </button>
+                        <button type="button">
+                            <i class="fa fa-times"></i>
+                        </button>
+                    </div>
+                </div>
+                <div id="LatestOrders" class="box-content">
+                    <div class="table-responsive">
+                        <table class="table">
+                            <thead>
+                                <tr>
+                                    <th>Order ID</th>
+                                    <th>Item</th>
+                                    <th>Status</th>
+                                    <th>Popularity</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td><a href="">OR9842</a></td>
+                                    <td>Call of Duty IV</td>
+                                    <td><span class="badge badge-success">Shipped</span></td>
+                                    <td>
+                                        <div class="sparkbar" data-color="#00a65a" data-height="20">90,80,90,-70,61,-83,63</div>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td><a href="">OR1848</a></td>
+                                    <td>Samsung Smart TV</td>
+                                    <td><span class="badge badge-warning">Pending</span></td>
+                                    <td>
+                                        <div class="sparkbar" data-color="#f39c12" data-height="20">90,80,-90,70,61,-83,68</div>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td><a href="">OR7429</a></td>
+                                    <td>iPhone 6 Plus</td>
+                                    <td><span class="badge badge-danger">Delivered</span></td>
+                                    <td>
+                                        <div class="sparkbar" data-color="#f56954" data-height="20">90,-80,90,70,-61,83,63</div>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td><a href="">OR7429</a></td>
+                                    <td>Samsung Smart TV</td>
+                                    <td><span class="badge badge-info">Processing</span></td>
+                                    <td>
+                                        <div class="sparkbar" data-color="#00c0ef" data-height="20">90,80,-90,70,-61,83,63</div>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td><a href="">OR1848</a></td>
+                                    <td>Samsung Smart TV</td>
+                                    <td><span class="badge badge-warning">Pending</span></td>
+                                    <td>
+                                        <div class="sparkbar" data-color="#f39c12" data-height="20">90,80,-90,70,61,-83,68</div>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td><a href="">OR7429</a></td>
+                                    <td>iPhone 6 Plus</td>
+                                    <td><span class="badge badge-danger">Delivered</span></td>
+                                    <td>
+                                        <div class="sparkbar" data-color="#f56954" data-height="20">90,-80,90,70,-61,83,63</div>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td><a href="">OR9842</a></td>
+                                    <td>Call of Duty IV</td>
+                                    <td><span class="badge badge-success">Shipped</span></td>
+                                    <td>
+                                        <div class="sparkbar" data-color="#00a65a" data-height="20">90,80,90,-70,61,-83,63</div>
+                                    </td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>*@-->
+        </div>
+</div>
+
+<script type="text/javascript">
+
+    $(document).ready(function () {
+        if ($qc.Cookie('usercategory') == 'admin') {
+            $(".clsAdminPart").show();
+            $(".clsClinicPart").hide();
+            GetDataFromDatabase(47, "GetAdminDashBoard", "AdminDashboard|" + $qc.Cookie("locationid") + '', "DentalParams");
+        } else {
+            $(".clsAdminPart").hide();
+            $(".clsClinicPart").show();
+            GetDataFromDatabase(47, "GetDashBoard", "ClinicDashboard|" + $qc.Cookie("locationid") + '', "DentalParams");
+        }
+    });
+
+    function onGetDataSuccess(data, context) {
+        if (context == 'GetDashBoard') {
+
+
+            if (data == '') { return false; }
+            eval("var objDash=" + data);
+            if (objDash) {
+                /*Clinic Info*/
+                $(".username").html(objDash[0]["clinicName"]);
+                $("#spnDoctorName").html(objDash[0]["doctorname"]);
+                $("#spnDoctorName2").html(objDash[0]["doctorname2"]);
+
+                if (objDash[0]["doctorname2"] == '') {
+                    $("#spnDoctorName2").parent().parent().hide();
+                } else {
+                    $("#spnDoctorName2").parent().parent().show();
+                }
+
+                $("#spanqual1").html(objDash[0]["qual1"]);
+                $("#spanqual2").html(objDash[0]["qual2"]);
+
+                $("#regno1").html(objDash[0]["regno1"]);
+                $("#regno3").html(objDash[0]["regno2"]);
+
+                if (objDash[0]["photo1"] != '') {
+                    $("#imgPhoto1").attr('src', RootFolderPath(objDash[0]["photo1"]));
+                }
+
+                if (objDash[0]["photo2"] != '') {
+                    $("#imgPhoto2").attr('src', RootFolderPath(objDash[0]["photo2"]));
+                }
+
+                $("#ClinicOwlCarousel").html('');
+                if (objDash[0]["img1"] != '') {
+                    var a1 = '<div class="item active"><img src="' + RootFolderPath(objDash[0]["img1"]) + '" class="img-fluid" /></div>';
+                    $("#ClinicOwlCarousel").append(a1);
+                }
+                if (objDash[0]["img2"] != '') {
+                    $("#ClinicOwlCarousel").append('<div class="item active"><img src="' + RootFolderPath(objDash[0]["img2"]) + '" class="img-fluid" /></div>');
+                }
+                if (objDash[0]["img3"] != '') {
+                    $("#ClinicOwlCarousel").append('<div class="item active"><img src="' + RootFolderPath(objDash[0]["img3"]) + '" class="img-fluid" /></div>');
+                }
+
+                $('#ClinicOwlCarousel').owlCarousel({
+                    loop: true,
+                    margin: 0,
+                    navSpeed: 1000,
+                    items: 1,
+                    smartSpeed: 1400,
+                    autoplay: true,
+                    autoplayTimeout: 3000,
+                    autoplayHoverPause: true,
+                    lazyLoad: true,
+                    responsiveClass: false,
+                    responsive: {
+                        0: {
+                            nav: false
+                        },
+                        480: {},
+                        640: {},
+                        768: {},
+                        1000: {
+                            dots: true,
+                            nav: true,
+                            navText: ["<i class='fa fa-long-arrow-left'></i>", "<i class='fa fa-long-arrow-right'></i>"]
+                        }
+                    },
+                    dots: false
+                });
+
+                $("#spnClinicAddress").html(objDash[0]["ClinicAddress"]);
+                $("#spnclinicContact").html(objDash[0]["Contactno1"]);
+                $("#spnClinicEmail").html(objDash[0]["emailid"]);
+                $("#spnClinicWebsite").html(objDash[0]["Website"]);
+
+                /*patient count*/
+                $("#spnTotalRegPatient").html(objDash[0]["TotalRegPatient"]);
+                $("#spnTotalMaleRegPatient").html(objDash[0]["MalePatient"]);
+                $("#spnTotalFemaleRegPatient").html(objDash[0]["FemalePatient"]);
+                $("#spnTotalAgePatient").html(objDash[0]["AgeBetween"]);
+
+                /*Newly Registered Patients*/
+                $("#spnPatient_Today").html(objDash[0]["TodayPatient"]);
+                $("#spnPatient_ThisMonth").html(objDash[0]["ThisMonthPatient"]);
+                $("#spnPatient_LastMonth").html(objDash[0]["LastMonthPatient"]);
+                $("#spnPatient_ThisYear").html(objDash[0]["ThisYearPatient"]);
+                $("#spnPatient_LastYear").html(objDash[0]["LastYearPatient"]);
+
+                /*No of Appointments*/
+                $("#spnApt_Today").html(objDash[0]["TodayApt"]);
+                $("#spnApt_ThisMonth").html(objDash[0]["ThisMonthApt"]);
+                $("#spnApt_LastMonth").html(objDash[0]["LastMonthApt"]);
+                $("#spnApt_ThisYear").html(objDash[0]["ThisYearApt"]);
+                $("#spnApt_LastYear").html(objDash[0]["LastYearApt"]);
+
+                /*No of Visited Patients*/
+                $("#spnCIApt_Today").html(objDash[0]["TodayAptCI"]);
+                $("#spnCIApt_ThisMonth").html(objDash[0]["ThisMonthAptCI"]);
+                $("#spnCIApt_LastMonth").html(objDash[0]["LastMonthAptCI"]);
+                $("#spnCIApt_ThisYear").html(objDash[0]["ThisYearAptCI"]);
+                $("#spnCIApt_LastYear").html(objDash[0]["LastYearAptCI"]);
+
+                /*Total Treatements Done*/
+                $("#spnTreatDone_Today").html(objDash[0]["TodayTreat"]);
+                $("#spnTreatDone_ThisMonth").html(objDash[0]["ThisMonthTreat"]);
+                $("#spnTreatDone_LastMonth").html(objDash[0]["LastMonthTreat"]);
+                $("#spnTreatDone_ThisYear").html(objDash[0]["ThisYearTreat"]);
+                $("#spnTreatDone_LastYear").html(objDash[0]["LastYearTreat"]);
+
+                if (objDash[0]["PatTreat"] != '') {
+                    var s = '';
+                    for (var i = 0; i < objDash[0]["PatTreat"].length; i++) {
+                        s += '<tr>';
+                        s += '<td>' + objDash[0]["PatTreat"][i]["TreatmentName"] + '</td>';
+                        s += '<td class="text-center">' + objDash[0]["PatTreat"][i]["TodayPatTreat"] + '</td>';
+                        s += '<td class="text-center">' + objDash[0]["PatTreat"][i]["ThisMonthPATTreat"] + '</td>';
+                        s += '<td class="text-center">' + objDash[0]["PatTreat"][i]["LastMonthPATTreat"] + '</td>';
+                        s += '<td class="text-center">' + objDash[0]["PatTreat"][i]["ThisYearTreat"] + '</td>';
+                        s += '<td class="text-center">' + objDash[0]["PatTreat"][i]["LastYearTreat"] + '</td>';
+                        s += '</tr>';
+                    }
+                    $("#tblPatTreatCounts").html(s);
+                }
+                else {
+                    $("#tblPatTreatCounts").html('');
+                }
+            }
+        }
+        else if (context == 'GetAdminDashBoard') {
+            if (data == '') { return false; }
+            eval("var objDash=" + data);
+
+            $("#spnTotalClinics").html(objDash[0]["LVCount"]);
+            $("#spnTrialVer").html(objDash[0]["TVCount"]);
+            $("#spnExpiredClinics").html(objDash[0]["ExpiryCust"]);
+            $("#spnActiveClinics").html(objDash[0]["ActiveCust"]);
+
+            $("#spnTotalSMS").html(0);
+            $("#spnSMSBalAllocated").html(0);
+            $("#spnSMSSend").html(0);
+            $("#spnSMSBalance").html(0);
+            
+        }
+    }
+
+
+
+
+</script>

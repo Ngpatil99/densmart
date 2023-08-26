@@ -1,0 +1,948 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Densoft</title>
+    <base href="/" />
+    <link type="text/css" href="CSS/bootstrap.min.css" rel="stylesheet" />
+    <link type="text/css" href="CSS/font-awesome.min.css" rel="stylesheet" />
+    <link type="text/css" rel="stylesheet" href="css/ArvCalendar.css" />
+    <link type="text/css" rel="stylesheet" href="css/ArvCalender.print.css" media='print' />
+    <link type="text/css" href="CSS/summernote.min.css" rel="stylesheet" />
+    <link type="text/css" href="CSS/Arv_Grid.css?v=1" rel="stylesheet" />
+    <link type="text/css" href="CSS/jquery-ui.css" rel="stylesheet" />
+    <link type="text/css" href="CSS/jquery.fancybox.3.4.1.min.css" rel="stylesheet" />
+    <link type="text/css" href="CSS/owl.carousel.min.css" rel="stylesheet" />
+    <link type="text/css" href="CSS/admin.min.css?v=1" rel="stylesheet" />
+    <link type="text/css" href="CSS/common.css?v=1" rel="stylesheet" />
+    <link href="MultipleSelectCombo/multiple-select.css" rel="stylesheet" />
+
+    <style>
+        .ms-drop label {
+            justify-content: left !important;
+            padding: 5px;
+        }
+    </style>
+
+</head>
+<body class="VerticalMenu" ng-app="myDentist">
+    <div id="PreLoader">
+        <div class="PreLoader">
+            <div class="circle"></div>
+            <h1>Your page in loading</h1>
+        </div>
+    </div>
+    <div id="body-wrapper">
+        <div id="VerticalMenuOverlay">
+            <a class="waves-effect">&times;</a>
+        </div>
+        <nav class="navbar">
+            <a href="#" class="logo">
+                <img src="images/logo.png" alt="" class="img-fluid" />
+            </a>
+            <ul id="navbar" class="FirstLevel mini-scrollbar">
+                <li class="FirstMenu" data-mid="0">
+                    <a href="../DentalSoft/Dashboard" class="active">
+                        <i class="fa fa-home"></i>
+                        <span class="title">Home</span>
+                    </a>
+                </li>
+                <li class="FirstMenu clsAdminRights " data-mid="1">
+                    <a href="./DentalSoft/ClinicRecords">
+                        <i class="fa fa-hospital-o"></i>
+                        <span class="title">Clinic Records</span>
+                    </a>
+                </li>
+                <li class="FirstMenu clsAdminRights " data-mid="1">
+                    <a href="./DentalSoft/MessageTemplates">
+                        <i class="fa fa-comments"></i>
+                        <span class="title">Message Templates</span>
+                    </a>
+                </li>
+                <li class="FirstMenu clsAdminRights " data-mid="1">
+                    <a href="./DentalSoft/WhatsAppTemplates">
+                        <i class="fa fa-comments"></i>
+                        <span class="title">Whats App Templates</span>
+                    </a>
+                </li>
+                <li class="FirstMenu clsClinicRights" data-mid="2">
+                    <a href="javascript:undefined;" onclick="openpatlist(this);">
+                        <i class="fa fa-user"></i>
+                        <span class="title">Patient Records</span>
+                    </a>
+                </li>
+                <li class="FirstMenu clsClinicRights" data-mid="3">
+                    <a href="./DentalSoft/Appointments">
+                        <i class="fa fa-clock-o"></i>
+                        <span class="title">Appointments</span>
+                    </a>
+                </li>
+                <li class="FirstMenu clsClinicRights" data-mid="4">
+                    <a href="./DentalSoft/ClinicalRecords">
+                        <i class="fa fa-file-text-o"></i>
+                        <span class="title">Clinical Records</span>
+                    </a>
+                </li>
+                <li class="FirstMenu clsClinicRights" data-mid="5">
+                    <a href="./DentalSoft/Finance">
+                        <i class="fa fa-inr"></i>
+                        <span class="title">Finance</span>
+                    </a>
+                </li>
+                <li class="FirstMenu clsClinicRights" data-mid="6">
+                    <a href="./DentalSoft/CommunicationReports">
+                        <i class="fa fa-comments-o"></i>
+                        <span class="title">Communication</span>
+                    </a>
+                </li>
+                <li class="FirstMenu clsClinicRights" data-mid="7">
+                    <a>
+                        <i class="fa fa-cog"></i>
+                        <span class="title">Settings</span>
+                    </a>
+                    <ul class="SecondLevel">
+                        <li class="SecondMenu" data-mid="71" data-tab="1">
+                            <a href="./DentalSoft/Registration"><span class="title">Registration</span></a>
+                        </li>
+                        <li class="SecondMenu" data-mid="72" data-tab="2">
+                            <a data-toggle="modal" href="#mdlchangepassword"><span class="title">Password</span></a>
+                        </li>
+                        <li class="SecondMenu" data-mid="73" data-tab="3">
+                            <a href="./DentalSoft/ClinicalSettings"><span class="title">Clinical Settings</span></a>
+                        </li>
+                        <li class="SecondMenu" data-mid="74" data-tab="4">
+                            <a href="./DentalSoft/AppSettings"><span class="title">App Settings</span></a>
+                        </li>
+                        <li class="SecondMenu" data-mid="75" data-tab="5">
+                            <a href="./DentalSoft/UserSettings"><span class="title">User Settings</span></a>
+                        </li>
+                        <li class="SecondMenu clsClinicRights">
+                            <a href="./DentalSoft/Purchase">
+
+                                <span class="title">Purchase</span>
+                            </a>
+                        </li>
+                        <li class="SecondMenu clsClinicRights">
+                            <a href="./DentalSoft/UploadPatients">
+
+                                <span class="title">Upload Patients</span>
+                            </a>
+                        </li>
+                    </ul>
+                </li>
+                <li class="FirstMenu clsAdminRights" data-mid="7">
+                    <a>
+                        <i class="fa fa-cog"></i>
+                        <span class="title">Settings</span>
+                    </a>
+                    <ul class="SecondLevel">
+
+                        <li class="SecondMenu">
+                            <a href="./DentalSoft/ClinicalSettings"><span class="title">Clinical Settings</span></a>
+                        </li>
+
+                    </ul>
+                </li>
+                <li class="FirstMenu clsAdminRights">
+                    <a href="./DentalSoft/Purchase">
+                        <i class="fa fa-inr"></i>
+                        <span class="title">Purchase</span>
+                    </a>
+                </li>
+               
+                <li class="FirstMenu clsAdminRights">
+                    <a href="./DentalSoft/CommunicationReports">
+                        <i class="fa fa-inr"></i>
+                        <span class="title">Communication Reports</span>
+                    </a>
+                </li>
+
+                <!--<li class="FirstMenu clsClinicRights" data-id="8">
+        <a href="./DentalSoft/CommunicationReports">
+            <i class="fa fa-inr"></i>
+            <span class="title">Communication Reports</span>
+        </a>
+    </li>-->
+                <!--@*
+    <li class="FirstMenu">
+        <a>
+            <i class="fa fa-home"></i>
+            <span class="title">Home</span>
+        </a>
+        <ul class="SecondLevel">
+            <li class="SecondMenu">
+                <a><span class="title">child 1</span></a>
+                <ul class="ThirdLevel">
+                    <li class="ThirdMenu">
+                        <a><span class="title">child 2</span></a>
+                        <ul class="FourthLevel">
+                            <li class="FourthMenu">
+                                <a href=""><span class="title">child 3</span></a>
+                            </li>
+                        </ul>
+                    </li>
+                </ul>
+            </li>
+        </ul>
+    </li>*@-->
+            </ul>
+        </nav>
+        <div class="body-content">
+            <header id="header">
+                <ul class="header-navbar">
+                    <li>
+                        <a id="ToggleSidebar" class="waves-effect"><span class="bar1"></span><span class="bar2"></span><span class="bar3"></span></a>
+                    </li>
+                    <li class="logo d-none">
+                        <a href="./DentalSoft/Dashboard">
+                            <img src="images/logo.png" alt="" class="img-fluid" />
+                        </a>
+                    </li>
+
+                    <!--<li class="d-none d-sm-inline-block">
+                        <a href="">Home</a>
+                    </li>
+                    <li class="d-none d-sm-inline-block">
+                        <a href="">Contact</a>
+                    </li>
+                    <li class="d-none d-sm-inline-block">
+                        <a href="">Patient Records</a>
+                    </li>
+                    <li class="d-none d-sm-inline-block">
+                        <a href="">Appointments</a>
+                    </li>
+                    <li class="d-none d-sm-inline-block">
+                        <a href="">Clinical Records</a>
+                    </li>
+                    <li class="d-none d-sm-inline-block">
+                        <a href="">Finance</a>
+                    </li>
+                    <li class="d-none d-sm-inline-block">
+                        <a href="">Communication</a>
+                    </li>
+                    <li class="d-none d-sm-inline-block">
+                        <a href="">Settings</a>
+                    </li>-->
+                </ul>
+                <!--<form class="header-search form-inline">
+
+                    <div class="input-group">
+                        <input class="form-control" id="txtPatSearch" type="search" placeholder="Search" />
+                        <div class="input-group-append">
+                            <button class="btn btn-navbar" type="submit">
+                                <i class="fa fa-search"></i>
+                            </button>
+                        </div>
+                    </div>
+                </form>-->
+                <ul class="header-navbar ml-auto">
+                    <li class="dropdown">
+                        <a class="dropdown-toggle" data-toggle="dropdown" tooltip title="Location">
+                            <i class="fa fa-map-marker"></i>
+                        </a>
+                        <ul id="ulCliniclocations" class="dropdown-menu dropdown-menu-right location">
+                        </ul>
+                    </li>
+                    <li>
+                        <a data-toggle="modal" data-mid="8" class="clsClinicRights" href="javascript:undefined;" data-ctrl="AddNewPatient" onclick="home_GridActionButton(this);" tooltip title="Add Patient"><i class="fa fa-user-plus"></i></a>
+                    </li>
+
+                    <!--<li class="dropdown">
+                        <a class="dropdown-toggle" data-toggle="dropdown">
+                            <i class="fa fa-comments-o"></i>
+                            <label class="label label-warning">5</label>
+                        </a>
+                        <div class="dropdown-menu dropdown-menu-right">
+                            <a class="dropdown-item" href="#">Link 1</a>
+                            <a class="dropdown-item" href="#">Link 2</a>
+                            <a class="dropdown-item" href="#">Link 3</a>
+                        </div>
+                    </li>-->
+                    <li class="dropdown">
+                        <a class="dropdown-toggle" data-toggle="dropdown">
+                            <i class="fa fa-bell-o"></i>
+                            <label class="label label-danger">0</label>
+                        </a>
+                        <ul id="ulNotifications" class="dropdown-menu dropdown-menu-right notification">
+                        </ul>
+                    </li>
+                    <li class="d-none d-lg-inline-block">
+                        <a class="fullscreen" tooltip title="Fullscreen"><i class="fa fa-arrows-alt"></i></a>
+                    </li>
+                    <!--@*
+                    <li>
+                        <a href=""><i class="fa fa-th-large"></i></a>
+                    </li>*@-->
+                    <li class="dropdown user-profile">
+                        <a class="dropdown-toggle" data-toggle="dropdown">
+                            <!--@*<div class="user-name-initial">AC</div>*@-->
+                            <div class="user-photo">
+                                <img id="userphoto" src="images/photo.jpg" alt="" />
+                            </div>
+                            <div class="user-name">
+                                <strong class="username">
+
+                                </strong>
+                                <small class="usercategory">Administrator</small>
+                            </div>
+                        </a>
+                        <div class="dropdown-menu dropdown-menu-right">
+                            <a href="./DentalSoft/Registration" class="dropdown-item">
+                                <i class="fa fa-user"></i><span>Profile</span>
+                            </a>
+                            <a data-toggle="modal" href="#mdlchangepassword" class="dropdown-item">
+                                <i class="fa fa-lock"></i><span>Change Password</span>
+                            </a>
+                            <!--@*<a href="" class="dropdown-item">
+                                <i class="fa fa-cog"></i><span>Setting</span>
+                            </a>*@-->
+                            <a href="#" onclick="LogOut()" class="dropdown-item">
+                                <i class="fa fa-power-off text-danger"></i><span>Log Out</span>
+                            </a>
+                        </div>
+                    </li>
+                </ul>
+            </header>
+            <nav class="TopNavBar"></nav>
+            <div ng-view data-ng-controller="uiCtrl"></div>
+            <footer id="footer">
+                Copyright &copy; 2022 <strong><a href="">Densmart</a>.</strong> All rights reserved.
+            </footer>
+        </div>
+    </div>
+
+    <div class="SettingPatch">
+        <a href="" class="fa fa-cog fa-spin"></a>
+        <div class="Settingbox">
+            <div class="SettingHeader">
+                <h3>
+                    Theme Customize
+                </h3>
+                <a class="CloseSetting">
+                    &times;
+                </a>
+            </div>
+            <div class="SettingBody">
+                <div class="CustomizeBox">
+                    <label class="label">Menu Layout</label>
+                    <label class="radiobutton mr-3">
+                        <input type="radio" id="rdoVerticalMenu" name="VerticalHorizontalMenu" value="VerticalMenu" checked="checked"><i></i><span>Vertical</span>
+                    </label>
+                    <label class="radiobutton">
+                        <input type="radio" id="rdoHorizontalMenu" name="VerticalHorizontalMenu" value="HorizontalMenu"><i></i><span>Horizontal</span>
+                    </label>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!--@*Add Patient Modal*@-->
+    <div class="modal fade" data-backdrop="static" id="mdlAddPatientModal">
+        <div class="modal-dialog modal-lg">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h4 class="modal-title">Add Patient</h4>
+                    <button type="button" class="close" data-dismiss="modal">&times;</button>
+                </div>
+                <div class="modal-body">
+                    <div class="row">
+                        <div class="col-12 form-group clsPatPotoUpload" style="display:none;">
+                            <fieldset class="m-0">
+                                <legend style="font-size:1rem;">Photo</legend>
+                                <div class="row">
+                                    <div class="col-2">
+                                        <div class="PatientPhoto">
+                                            <img class="imgPatientPhoto" src="images/photo.jpg" alt="" />
+                                        </div>
+                                    </div>
+                                    <div class="col-10">
+                                        <div class="d-flex flex-wrap align-content-center">
+                                            <label class="btn-file btn btn-first  waves-effect m-2">
+                                                <input type="file" class="uplUploadPatientPhoto" />
+                                                <i class="fa fa-cloud-upload"></i><span>Upload Photo</span>
+                                            </label>
+                                            <button class="btnCapturePhoto btn btn-first waves-effect m-2" onclick="$('#mdlAddPatientModal').modal('hide')">
+                                                <i class="fa fa-camera"></i><span>Capture Photo</span>
+                                            </button>
+                                            <button data-toggle="modal" href="javascript:undefined;" onclick="fn_AddUserThumb()" class="btn btn-outline-first waves-effect m-2">
+                                                <i class="fa fa-camera"></i><span>Add/Remove Thumb Impression</span>
+                                            </button>
+                                            <button onclick="opencosnsetform(this);" class="btn btn-outline-first waves-effect m-2">
+                                                <i class="fa fa-camera"></i><span>Add Consent Form</span>
+                                            </button>
+                                        </div>
+                                    </div>
+                                </div>
+                            </fieldset>
+                        </div>
+                        <div class="col-12 form-group clsClinicRights" data-mid="81">
+                            <label><span style="color:red;">*</span> Patient Name</label>
+                            <div class="row">
+                                <div class="col-sm-4 mb-2">
+                                    <input id="txtPatientFName" type="text" class="form-control form-control-design UpperCase" placeholder="First Name" />
+                                </div>
+                                <div class="col-sm-4 mb-2">
+                                    <input id="txtPatientMName" type="text" class="form-control form-control-design UpperCase" placeholder="Middle Name" />
+                                </div>
+                                <div class="col-sm-4">
+                                    <input id="txtPatientLName" type="text" class="form-control form-control-design UpperCase" placeholder="Last Name" />
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-sm-4 form-group clsClinicRights" data-mid="82">
+                            <label>Gender </label>
+                            <select id="ddlPatientGender" class="form-control form-control-design">
+                                <option selected value="">Select</option>
+                                <option value="Male">Male</option>
+                                <option value="Female">Female</option>
+                                <option value="Other">Other</option>
+                            </select>
+                        </div>
+                        <div class="col-sm-4 form-group clsClinicRights" data-mid="83">
+                            <label>DOB </label>
+                            <input id="txtPatientDOB" type="date" class="form-control form-control-design" />
+                        </div>
+                        <div class="col-sm-4 form-group clsClinicRights" data-mid="84">
+                            <label>Age</label>
+                            <input id="txtPatientAge" onchange="Calculateyearagainstage(this);" type="number" class="form-control form-control-design" />
+                        </div>
+                        <div class="col-12 form-group clsClinicRights" data-mid="85">
+                            <label>Primary Address</label>
+                            <input id="txtPatientPrimaryAddress" class="form-control form-control-design" />
+                        </div>
+                        <div class="col-12 form-group clsClinicRights" data-mid="86">
+                            <label>Secondary Address</label>
+                            <input id="txtPatientSecondaryAddress" class="form-control form-control-design" />
+                        </div>
+                        <div class="col-sm-6 form-group clsClinicRights" data-mid="87">
+                            <label><span style="color:red;">*</span>Mobile No. (Whatsapp)</label>
+                            <div class="input-group">
+                                <div class="input-group-prepend">
+                                    <span class="input-group-text">+91</span>
+                                </div>
+                                <input id="txtPatientMobileNo1" type="number" pattern="/^-?\d+\.?\d*$/" onKeyPress="if(this.value.length==10) return false;" class="form-control form-control-design" />
+                            </div>
+                        </div>
+                        <div class="col-sm-6 form-group clsClinicRights" data-mid="88">
+                            <label>Mobile No. 2</label>
+                            <div class="input-group">
+                                <div class="input-group-prepend">
+                                    <span class="input-group-text">+91</span>
+                                </div>
+                                <input id="txtPatientMobileNo2" type="number" pattern="/^-?\d+\.?\d*$/" onKeyPress="if(this.value.length==10) return false;" class="form-control form-control-design" />
+                            </div>
+                        </div>
+                        <div class="col-sm-6 form-group clsClinicRights" data-mid="89">
+                            <label>E-Mail</label>
+                            <input id="txtPatientEmail" type="text" class="form-control form-control-design" />
+                        </div>
+                        <div class="col-sm-6 form-group clsClinicRights" data-mid="890">
+                            <label>Patient Refered by </label>
+                            <div class="input-group">
+                                <select id="ddlPatientRefferedBy" class="form-control form-control-design">
+                                    <option value="0">Select</option>
+                                    <option value="1">Patient Refered by</option>
+                                </select>
+                                <div class="input-group-append">
+                                    <button id="btnPatientRefferedBy" class="btn btn-first" data-toggle="tooltip" title="Add Patient Refered by"><i class="fa fa-plus"></i></button>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-sm-6 form-group clsClinicRights" data-mid="891">
+                            <label>Smart Card ID </label>
+                            <input id="txtSmartCardID" type="text" class="form-control form-control-design" />
+                        </div>
+                        <div class="col-sm-6 form-group clsClinicRights" data-mid="892">
+                            <label>Custome ID </label>
+                            <input id="txtCustomID" type="text" class="form-control form-control-design" />
+                        </div>
+                        <div class="col-12 clsClinicRights" data-mid="893">
+                            <label>Medical History</label>
+                            <textarea id="txtPatientMedicalHistory" class="form-control form-control-design" rows="3"></textarea>
+                        </div>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button id="btnUpdatePatInfo" class="btn btn-success waves-effect" style="display:none">Update</button>
+                    <button id="btnGeneratePatientId" data-toggle="modal" type="button" class="btn btn-success waves-effect">Generate PID</button>
+                    <button id="btnResetPatientForm" type="button" class="btn btn-success waves-effect">Reset</button>
+                    <button id="btnClosePatientForm" type="button" class="btn btn-danger waves-effect" data-dismiss="modal">Close</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!--@*Change Password Modal*@-->
+    <div class="modal fade" data-backdrop="static" id="mdlchangepassword">
+        <div class="modal-dialog modal-sm">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal">
+                        &times;
+                    </button>
+                    <h4 class="modal-title">
+                        Change Password
+                    </h4>
+                </div>
+                <div class="modal-body">
+                    <div class="form-group">
+                        <label>
+                            Current Password
+                        </label>
+                        <input id="txtUserOldPwd" type="password" class="form-control form-control-design" />
+                    </div>
+                    <div class="form-group">
+                        <label>
+                            New Password
+                        </label>
+                        <input id="txtUserNewPwd" type="password" class="form-control form-control-design" />
+                    </div>
+                    <div class="form-group">
+                        <label>
+                            Confirm Password
+                        </label>
+                        <input id="txtUserConfirmPwd" type="password" class="form-control form-control-design" />
+                    </div>
+                    <div class="text-center">
+                        <button id="btnUserUpdatePwd" type="submit" class="btn btn-first btn-block waves-effect">
+                            Update Password
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="modal fade" data-backdrop="static" id="mdlRefDoctorsModal">
+        <div class="modal-dialog modal-middle">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h4 class="modal-title">Referred By Doctors</h4>
+                    <button type="button" class="close" data-dismiss="modal">&times;</button>
+                </div>
+                <div class="modal-body">
+                    <div class="row">
+                        <div class="form-group col-sm-6">
+                            <label>Doctor Name<span style="color:red;">*</span></label>
+                            <input id="txtReferredBy_DoctorName" type="text" class="form-control form-control-design" />
+                        </div>
+                        <div class="form-group col-sm-6">
+                            <label>Mobile Number<span style="color:red;">*</span></label>
+                            <input id="txtReferredBy_MobileNo" type="number" pattern="/^-?\d+\.?\d*$/" onKeyPress="if(this.value.length==10) return false;" class="form-control form-control-design" />
+                        </div>
+                        <div id="txtReferredBy_MobileNo" class="form-group form-control-design col-sm-6">
+                            <label>Incentive(%)</label>
+                            <input id="txtReferredBy_Incentive" placeholder="Enter Amount in percentage" type="text" class="form-control form-control-design" />
+                        </div>
+
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button onclick="fn_InsertUpdateRefDoctorRecord()" type="button" class="btn btn-success waves-effect">Save</button>
+                    <button type="button" class="btn btn-danger waves-effect" data-dismiss="modal">Cancel</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="modal fade" data-backdrop="static" id="mdlWebCamCpture">
+        <div class="modal-dialog modal-lg">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal" onclick="$('#RegistrationSuccessfulModal').modal('show')">
+                        &times;
+                    </button>
+                    <h4 class="modal-title">
+                        Capture Photo
+                    </h4>
+                </div>
+                <div class="modal-body">
+                    <div class="contentarea row">
+                        <div class="col-12 col-md-6 col-lg-6">
+                            <canvas id="canvas"></canvas>
+
+                        </div>
+                        <div class="col-12 col-md-6 col-lg-6">
+                            <div class="output">
+                                <img id="photo" src="images/photo.jpg" alt="The screen capture will appear in this box.">
+                            </div>
+
+                        </div>
+                        <div class="col-12" style="text-align:center">
+                            <button id="startbutton" class="btn btn-first">Take photo</button>
+                            <button id="btnUploadPatientPhoto" class="btn btn-first">Upload photo</button>
+                            <div class="camera">
+                                <video id="video">Video stream not available.</video>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </div>
+
+    <div class="modal fade" data-backdrop="static" id="RegistrationSuccessfulModal">
+        <div class="modal-dialog modal-lg">
+            <div class="modal-content ThumbImpression">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal">
+                        &times;
+                    </button>
+                    <h4 class="modal-title ">
+                        Welcome To, <span class="username"></span>
+                    </h4>
+                </div>
+                <div class="modal-body">
+                    <div class="text-center mb-4">
+                        <div id="RegStatus" class="mb-3" style="color:red; font-weight:600; font-size:1.3rem;"></div>
+                        <!--<div>Welcome To, <span class="username"></span></div>-->
+                        <div style="color:#000; font-weight:600; font-size:1.1rem;">
+                            <div>Patient Name : <span id="PatName"></span></div>
+                            <div>Patient ID : <span id="PatId">0</span></div>
+                        </div>
+                    </div>
+                    <fieldset class="m-0">
+                        <legend style="font-size:1rem;">Photo</legend>
+                        <div class="row">
+                            <div class="col-2">
+                                <div class="PatientPhoto">
+                                    <img id="imgPatientPhoto" src="images/photo.jpg" alt="" />
+                                </div>
+                            </div>
+                            <div class="col-10">
+                                <div class="d-flex flex-wrap align-content-center">
+                                    <label class="btn-file btn btn-first  waves-effect m-2">
+                                        <input type="file" class="uplUploadPatientPhoto" />
+                                        <i class="fa fa-cloud-upload"></i><span>Upload Photo</span>
+                                    </label>
+                                    <button class="btnCapturePhoto btn btn-first waves-effect m-2" onclick="$('#RegistrationSuccessfulModal').modal('hide')">
+                                        <i class="fa fa-camera"></i><span>Capture Photo</span>
+                                    </button>
+                                    <button data-toggle="modal" href="#AddThumbImpressionModal" onclick="$('#mdlAddPatientModal').modal('hide')" class="btn btn-outline-first waves-effect m-2">
+                                        <i class="fa fa-camera"></i><span>Add/Remove Thumb Impression</span>
+                                    </button>
+                                    <button onclick="opencosnsetform(this);" class="btn btn-outline-first waves-effect m-2">
+                                        <i class="fa fa-camera"></i><span>Add Consent Form</span>
+                                    </button>
+                                </div>
+                            </div>
+                        </div>
+                    </fieldset>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="modal fade" data-backdrop="static" id="AddThumbImpressionModal">
+        <div class="modal-dialog modal-lg">
+            <div class="modal-content ThumbImpression">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal" >  <!--onclick="$('#mdlAddPatientModal').modal('show')"-->
+                        &times;
+                    </button>
+                    <h4 class="modal-title">
+                        Add Thumb Impression
+                    </h4>
+                </div>
+                <div class="modal-body">
+                    <div class="ThumbImg">
+                        <div class="LeftHand">
+                            <button onclick="$('.ThumbImpression').hide();$('.CaptureFingerThumb').show();fn_FingerType(this);" data-name="Left Pink Thumb" id="LeftPinkyFinger" class="btn btn-outline-first clsThumbBall"><i class="fa fa-plus-circle"></i></button>
+                            <button onclick="$('.ThumbImpression').hide();$('.CaptureFingerThumb').show();fn_FingerType(this);" data-name="Left Ring Thumb" id="LeftRingFinger" class="btn btn-outline-first clsThumbBall"><i class="fa fa-plus-circle"></i></button>
+                            <button onclick="$('.ThumbImpression').hide();$('.CaptureFingerThumb').show();fn_FingerType(this);" data-name="Left Middle Thumb" id="LeftMiddleFinger" class="btn btn-outline-first clsThumbBall"><i class="fa fa-plus-circle"></i></button>
+                            <button onclick="$('.ThumbImpression').hide();$('.CaptureFingerThumb').show();fn_FingerType(this);" data-name="Left Index Thumb" id="LeftIndexFinger" class="btn btn-outline-first clsThumbBall"><i class="fa fa-plus-circle"></i></button>
+                            <button onclick="$('.ThumbImpression').hide();$('.CaptureFingerThumb').show();fn_FingerType(this);" data-name="Left Thumb" id="LeftThumb" class="btn btn-outline-first clsThumbBall"><i class="fa fa-plus-circle"></i></button>
+                        </div>
+                        <div class="RightHand">
+                            <button onclick="$('.ThumbImpression').hide();$('.CaptureFingerThumb').show();fn_FingerType(this);" data-name="Right Thumb" id="RightThumb" class="btn btn-outline-first clsThumbBall"><i class="fa fa-plus-circle"></i></button>
+                            <button onclick="$('.ThumbImpression').hide();$('.CaptureFingerThumb').show();fn_FingerType(this);" data-name="Right Index Thumb" id="RightIndexFinger" class="btn btn-outline-first clsThumbBall"><i class="fa fa-plus-circle"></i></button>
+                            <button onclick="$('.ThumbImpression').hide();$('.CaptureFingerThumb').show();fn_FingerType(this);" data-name="Right Middel Thumb" id="RightMiddleFinger" class="btn btn-outline-first clsThumbBall"><i class="fa fa-plus-circle"></i></button>
+                            <button onclick="$('.ThumbImpression').hide();$('.CaptureFingerThumb').show();fn_FingerType(this);" data-name="Right Right Thumb" id="RightRingFinger" class="btn btn-outline-first clsThumbBall"><i class="fa fa-plus-circle"></i></button>
+                            <button onclick="$('.ThumbImpression').hide();$('.CaptureFingerThumb').show();fn_FingerType(this);" data-name="Right Pinky Thumb" id="RightPinkyFinger" class="btn btn-outline-first clsThumbBall"><i class="fa fa-plus-circle"></i></button>
+                        </div>
+                        <img src="images/palm.png" alt="" />
+                    </div>
+                </div>
+            </div>
+            <div class="modal-content CaptureFingerThumb" style="display:none;">
+                <div class="modal-header">
+                    <button type="button" class="close" onclick="$('.CaptureFingerThumb').hide();$('.ThumbImpression').show();">
+                        &times;
+                    </button>
+                    <h4 class="modal-title">
+                        <span id="spnFingerName">Finger Capture</span>
+                        <span id="imgThumbStatus"></span>
+                    </h4>
+                </div>
+                <div class="modal-body">
+                    <div class=" row">
+                        <div class="col-4">
+                            <div class="Sample">
+                                <strong>Sample 1</strong>
+                                <img id="imgCapture1" src="images/blankthumb.jpg" />
+                                <button class="btn btn-outline-first" onclick="javascript:fn_CaptureThumb(1)">Capture</button>
+                            </div>
+                        </div>
+                        <div class="col-4">
+                            <div class="Sample">
+                                <strong>Sample 2</strong>
+                                <img id="imgCapture2" src="images/blankthumb.jpg" />
+                                <button class="btn btn-outline-first" onclick="javascript:fn_CaptureThumb(2)">Capture</button>
+                            </div>
+                        </div>
+                        <div class="col-4">
+                            <div class="Sample">
+                                <strong>Sample 3</strong>
+                                <img id="imgCapture3" src="images/blankthumb.jpg" />
+                                <button class="btn btn-outline-first" onclick="javascript:fn_CaptureThumb(3)">Capture</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button onclick="CaptureUserThumb()" class="btn btn-danger">Capture & Save</button>
+                    <button id="btnDeleteThumb" style="display:none;" onclick="fn_DeleteThumb()" class="btn btn-danger">Delete all Samples</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script type="text/javascript" src="JS/jquery-1.11.2.min.js"></script>
+    <script type="text/javascript" src="JS/OnlyeNumeric.js"></script>
+    <script type="text/javascript" src="JS/CommonPgVariables.js"></script>
+    <script type="text/javascript" src="JS/getQueryStringParam.js"></script>
+    <script type="text/javascript" src="JS/jquery.cookie.js"></script>
+    <script type="text/javascript" src="JS/CrossPagePosting.js"></script>
+    <script type="text/javascript" src="JS/getJSHandler.js"></script>
+    <script type="text/javascript" src="JS/jquery-ui.custom.js"></script>
+    <script type="text/javascript" src="JS/ajaxLoading.js"></script>
+
+    <!--<script type="text/javascript" src="JS/materialize.js"></script>-->
+    <script type="text/javascript" src="JS/moment.js"></script>
+    <script type="text/javascript" src="JS/popper.min.js"></script>
+    <script type="text/javascript" src="JS/bootstrap.min.js"></script>
+    <script type="text/javascript" src="JS/angular.js"></script>
+    <script type="text/javascript" src="JS/angular-route.js"></script>
+    <script type="text/javascript" src="JS/angular-resource.min.js"></script>
+    <script type="text/javascript" src="JS/AdminRoutings.js"></script>
+    <script type="text/javascript" src="JS/summernote.min.js"></script>
+    <script type="text/javascript" src="JS/Arv_JsonGrid.js"></script>
+    <script type="text/javascript" src="JS/moment.min.js"></script>
+    <script type="text/javascript" src="JS/arvcalendar.js"></script>
+    <script type="text/javascript" src="JS/Controllers/CommonScripts.js?v=1"></script>
+    <script type="text/javascript" defer="defer" src="JS/Compressor.js"></script>
+    <script type="text/javascript" defer="defer" src="JS/Controllers/WebCamCapture.js"></script>
+    <!--<script src="https://code.jquery.com/ui/1.13.1/jquery-ui.js"></script>-->
+    <script type="text/javascript" defer="defer" src="JS/jquery.fancybox.3.4.1.min.js"></script>
+    <script type="text/javascript" src="MultipleSelectCombo/jquery.multiple.select.js"></script>
+    <script type="text/javascript" defer="defer" src="JS/owl.carousel.min.js"></script>
+    <script type="text/javascript" defer="defer" src="JS/Nitgen.js"></script>
+    <script type="text/javascript" defer="defer" src="JS/Controllers/ThumbImpression.js"></script>
+
+    <script type="text/javascript">
+        setInterval(function () {
+            if (typeof $qc.Cookie("locationid") == 'undefined' || $qc.Cookie("locationid") == '' || $qc.Cookie("locationid") == null) {
+                $qc.ClearSession();
+                window.open('index.html', '_top');
+            }
+
+        }, 1000);
+       
+        if (typeof localStorage.getItem('menutheme') == 'undefined' && localStorage.getItem('menutheme') == 'VerticalMenu') {
+            $("#rdoVerticalMenu").attr('checked', 'checked');
+            $(".TopNavBar > h1").appendTo(".navbar");
+            $(".TopNavBar > ul").appendTo(".navbar");
+            $(".TopNavBar").hide();
+            $(".navbar, #ToggleSidebar").show();
+            $("body").addClass("VerticalMenu");
+            $("body").removeClass("HorizontalMenu");
+        } else {
+            $("#rdoHorizontalMenu").attr('checked', 'checked');
+            $(".navbar > h1").appendTo(".TopNavBar");
+            $(".navbar > ul").appendTo(".TopNavBar");
+            $(".navbar, #ToggleSidebar").hide();
+            $(".TopNavBar").show();
+            $("body").addClass("HorizontalMenu");
+            $("body").removeClass("VerticalMenu");
+            var icoinn = $('<i class="fa fa-angle-right"></i>');
+            $('.TopNavBar li ul li:has(ul) > a').append(icoinn);
+            $('.TopNavBar li ul li:has(ul) > a').addClass("icoinn");
+        }
+
+
+        if ($qc.Cookie("usercategory") == 'admin') {
+            $(".clsClinicRights").remove();
+        } else {
+            $(".clsAdminRights").remove();
+        }
+
+        function home_GridActionButton(_o) {
+            if ($(_o).attr('data-ctrl') == 'AddNewPatient') {
+                fn_ClearPatientModal();
+                $("#mdlAddPatientModal").modal('show');
+            }
+        }
+
+
+        function openpatlist() {
+            fn_AngularRouting('./DentalSoft/PatientList?v=' + Math.random());
+        }
+
+        $(document).ready(function () {
+            $(window).load(function () {
+                $('#PreLoader').delay(350).fadeOut('slow');
+
+            });
+            // PreLoader end
+
+            // Tooltip
+            setTimeout(function () {
+                $('[data-toggle="tooltip"], [tooltip]').tooltip();
+            }, 5000);
+
+
+            $(".username").html($qc.cookie("username"));
+            $(".usercategory").html($qc.cookie("usercategory"));
+
+            fn_CheckUserRoles();
+
+            if ($qc.cookie("imgurl") != '') {
+                if ($qc.cookie("usercategory").toLowerCase() == 'patient') {
+                    $("#userphoto").attr('src', RootFolderPath("PatientLogo/" + $qc.cookie("imgurl")));
+                } else if ($qc.cookie("usercategory").toLowerCase() == 'clinic') {
+                    $("#userphoto").attr('src', RootFolderPath("" + $qc.cookie("imgurl")));
+                }
+            }
+
+            //setTimeout(function () {
+            $('#navbar li:has(ul) a').on('click', function () {
+                var element = $(this).parent('li');
+                element.toggleClass("open");
+                element.children('ul').animate({ height: "toggle", opacity: "toggle" }, "fast").toggleClass("NextedUl");
+                element.children('ul').find('ul').slideUp().removeClass("NextedUl");
+                element.siblings('li').children('ul').slideUp().removeClass("NextedUl");
+                element.siblings('li').find('ul').slideUp().removeClass("NextedUl");
+                element.siblings('li').removeClass("open");
+                element.siblings('li').find('li').removeClass("open");
+            });
+            $('#navbar li:has(ul) > a').addClass('Nexted');
+
+            //var icoinn = $('<i class="fa fa-angle-right"></i>');//// TopNavBar
+            //$('.TopNavBar li ul li:has(ul) > a').append(icoinn);//// TopNavBar
+            //$('.TopNavBar li ul li:has(ul) > a').addClass("icoinn");//// TopNavBar
+            //}, 10);
+
+            if (window.matchMedia('(min-width: 992px)').matches) {
+                $(".navbar").hover(
+                    function () {
+                        $("body:not(.navbarPin)").addClass("navbarShow");
+                    },
+                    function () {
+                        $("body:not(.navbarPin)").removeClass("navbarShow");
+                    }
+                );
+                $("#ToggleSidebar").click(function () {
+                    $("body").toggleClass("navbarPin");
+                    //$('html').toggleClass('open-navbar');
+                    $('#ToggleSidebar').toggleClass("change");
+                    return false;
+                });
+            } else {
+                $("#ToggleSidebar").click(function () {
+                    $("body").addClass("navbarmobileOpen");
+                    $('html').addClass('open-navbar');
+                    $('#ToggleSidebar').addClass("change");
+                    return false;
+                });
+                $('div#VerticalMenuOverlay, #navbar a[href]').on('click', function () {
+                    $('body').removeClass('navbarmobileOpen');
+                    $('html').removeClass('open-navbar');
+                    $('#ToggleSidebar').removeClass("change");
+                });
+            }
+
+            $('input:radio[name=VerticalHorizontalMenu]').change(function () {
+                if (this.value == 'VerticalMenu') {
+                    localStorage.setItem('menutheme', 'VerticalMenu');
+                    $(".TopNavBar > h1").appendTo(".navbar");
+                    $(".TopNavBar > ul").appendTo(".navbar");
+                    $(".TopNavBar").hide();
+                    $(".navbar, #ToggleSidebar").show();
+                    $("body").addClass("VerticalMenu");
+                    $("body").removeClass("HorizontalMenu");
+                }
+                else if (this.value == 'HorizontalMenu') {
+                    localStorage.setItem('menutheme', 'HorizontalMenu');
+                    $(".navbar > h1").appendTo(".TopNavBar");
+                    $(".navbar > ul").appendTo(".TopNavBar");
+                    $(".navbar, #ToggleSidebar").hide();
+                    $(".TopNavBar").show();
+                    $("body").addClass("HorizontalMenu");
+                    $("body").removeClass("VerticalMenu");
+                    var icoinn = $('<i class="fa fa-angle-right"></i>');
+                    $('.TopNavBar li ul li:has(ul) > a').append(icoinn);
+                    $('.TopNavBar li ul li:has(ul) > a').addClass("icoinn");
+                }
+            });
+            //Menu end
+
+            $(".SettingPatch > a, .CloseSetting").click(function () {
+                $(".Settingbox").toggleClass("active");
+                //$(this).toggleClass("fa-cog fa-spin").toggleClass("fa-times");
+                return false;
+            });
+
+
+            $('.fullscreen').on('click', function () {
+                $(".fullscreen i").toggleClass('fa fa-arrows-alt').toggleClass('fa fa-compress');
+                if (document.fullscreenElement || document.webkitFullscreenElement || document.mozFullScreenElement || document.msFullscreenElement) { //in fullscreen, so exit it
+                    //alert('exit fullscreen');
+                    if (document.exitFullscreen) {
+                        document.exitFullscreen();
+                    } else if (document.msExitFullscreen) {
+                        document.msExitFullscreen();
+                    } else if (document.mozCancelFullScreen) {
+                        document.mozCancelFullScreen();
+                    } else if (document.webkitExitFullscreen) {
+                        document.webkitExitFullscreen();
+                    }
+                } else { //not fullscreen, so enter it
+                    //alert('enter fullscreen');
+                    if (document.documentElement.requestFullscreen) {
+                        document.documentElement.requestFullscreen();
+                    } else if (document.documentElement.webkitRequestFullscreen) {
+                        document.documentElement.webkitRequestFullscreen();
+                    } else if (document.documentElement.mozRequestFullScreen) {
+                        document.documentElement.mozRequestFullScreen();
+                    } else if (document.documentElement.msRequestFullscreen) {
+                        document.documentElement.msRequestFullscreen();
+                    }
+                }
+            });
+            // Fullscreen
+
+            $(".box-hideshow").click(function () {
+                var myelement = $(this).attr("data-target")
+                $(myelement).animate({ height: "toggle", opacity: "toggle" }, 300);
+                //$(this).toggleClass("selected");
+                $(this).closest(".box-title").toggleClass("box-hide");
+            });
+            //box hide show end
+
+
+
+        });
+
+        function LogOut() {
+            $qc.ClearSession();
+            widow.open('index.html', '_parent');
+        }
+
+
+    </script>
+
+
+</body>
+</html>

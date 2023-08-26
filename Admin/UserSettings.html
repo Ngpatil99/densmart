@@ -1,0 +1,317 @@
+﻿<div class="container-fluid">
+    <div class="page-wrapper bg-white">
+        <div class="page-header">
+            <h2>User Settings</h2>
+        </div>
+        <div class="page-body">
+            <div class="nav-tabs-left">
+                <ul class="nav nav-tabs">
+                    <li id="liUserName" class="nav-item">
+                        <a class="nav-link waves-effect active" data-toggle="tab" href="#Users" target="_self">Users</a>
+                    </li>
+                    <li id="liUserRole" class="nav-item">
+                        <a class="nav-link waves-effect" data-toggle="tab" href="#UserRoles" target="_self">User Roles</a>
+                    </li>
+                </ul>
+                <div class="nav-tabs-left-container">
+                    <div class="tab-content">
+                        <div class="tab-pane fade show active" id="Users">
+                            <div class="table-responsive">
+                                <div id="GridResult1"></div>
+
+                            </div>
+                        </div>
+                        <div class="tab-pane fade" id="UserRoles">
+                            <div class="row row-small-space">
+                                <div class="col-lg-6 mb-3 mb-lg-0">
+                                    <div class="card">
+                                        <div class="card-header alert-default border-0">
+                                            <h6 class="card-title">Add Role</h6>
+                                            <!--<div>
+                                                <a href="#AddRoleModal" data-toggle="modal" class="btn btn-first"  target="_self">Add New</a>
+                                            </div>-->
+                                        </div>
+                                        <div class="card-body p-0">
+                                            <div id="GridResult"></div>
+                                            <!--<div class="table-responsive">
+                                                <table class="table table-bordered tablebordered-nolr">
+                                                    <thead class="no-bg">
+                                                        <tr>
+                                                            <th class="text-center">SrNo</th>
+                                                            <th class="text-center">Role</th>
+                                                            <th class="text-center">
+
+                                                            </th>
+                                                        </tr>
+                                                    </thead>
+                                                    <tbody>
+                                                        <tr>
+                                                            <td class="text-center">
+                                                                1
+                                                            </td>
+                                                            <td class="text-center">
+                                                                admin
+                                                            </td>
+                                                            <td class="text-center">
+                                                                <div class="dropdown d-inline-block">
+                                                                    <button type="button" class="btn icon-round-btn dropdown-toggle no-arrow waves-effect" data-toggle="dropdown">
+                                                                        <i class="fa fa-ellipsis-h"></i>
+                                                                    </button>
+                                                                    <div class="dropdown-menu dropdown-menu-right">
+                                                                        <a class="dropdown-item" href="#AddRoleModal" data-toggle="modal"><i class="fa fa-pencil"></i><span>Edit</span></a>
+                                                                        <a class="dropdown-item" href="#"><i class="fa fa-trash-o"></i><span>Delete</span></a>
+                                                                    </div>
+                                                                </div>
+                                                            </td>
+                                                        </tr>
+                                                        <tr>
+                                                            <td class="text-center">
+                                                                2
+                                                            </td>
+                                                            <td class="text-center">
+                                                                Doctor
+                                                            </td>
+                                                            <td class="text-center">
+                                                                <div class="dropdown d-inline-block">
+                                                                    <button type="button" class="btn icon-round-btn dropdown-toggle no-arrow waves-effect" data-toggle="dropdown">
+                                                                        <i class="fa fa-ellipsis-h"></i>
+                                                                    </button>
+                                                                    <div class="dropdown-menu dropdown-menu-right">
+                                                                        <a class="dropdown-item" href="#AddRoleModal" data-toggle="modal"><i class="fa fa-pencil"></i><span>Edit</span></a>
+                                                                        <a class="dropdown-item" href="#"><i class="fa fa-trash-o"></i><span>Delete</span></a>
+                                                                    </div>
+                                                                </div>
+                                                            </td>
+                                                        </tr>
+                                                        <tr>
+                                                            <td class="text-center">
+                                                                3
+                                                            </td>
+                                                            <td class="text-center">
+                                                                Assistant
+                                                            </td>
+                                                            <td class="text-center">
+                                                                <div class="dropdown d-inline-block">
+                                                                    <button type="button" class="btn icon-round-btn dropdown-toggle no-arrow waves-effect" data-toggle="dropdown">
+                                                                        <i class="fa fa-ellipsis-h"></i>
+                                                                    </button>
+                                                                    <div class="dropdown-menu dropdown-menu-right">
+                                                                        <a class="dropdown-item" href="#AddRoleModal" data-toggle="modal"><i class="fa fa-pencil"></i><span>Edit</span></a>
+                                                                        <a class="dropdown-item" href="#"><i class="fa fa-trash-o"></i><span>Delete</span></a>
+                                                                    </div>
+                                                                </div>
+                                                            </td>
+                                                        </tr>
+                                                    </tbody>
+                                                </table>
+                                            </div>-->
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-lg-6">
+                                    <div class="card">
+                                        <div class="card-header alert-default border-0 form-inline">
+                                            <h6 class="card-title">
+                                                Edit Role
+                                            </h6>
+                                            <div class="input-group">
+                                                <select id="ddlRoleMaster" class="form-control">
+                                                </select>
+                                                <div class="input-group-append">
+                                                    <button id="btnSubmitRoleRights" class="btn btn-first">Submit</button>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="card-body">
+                                            <ul class="EditRole">
+                                                <li><label class="checkbox"><input class="clsRoleRights" data-attr="0" type="checkbox" /><i></i><span>Home</span></label></li>
+                                                <li>
+                                                    <label class="checkbox"><input class="clsRoleRights" data-attr="2" type="checkbox" /><i></i><span>Patient Records    </span></label>
+                                                    <ul>
+                                                        <li>
+                                                            <label class="checkbox"><input class="clsRoleRights" data-attr="8" type="checkbox" /><i></i><span>Add Patient</span></label>
+                                                            <ul>
+                                                                <li><label class="checkbox"><input class="clsRoleRights" data-attr="81" type="checkbox" /><i></i><span>Patient Name</span></label></li>
+                                                                <li><label class="checkbox"><input class="clsRoleRights" data-attr="82" type="checkbox" /><i></i><span>Gender</span></label></li>
+                                                                <li><label class="checkbox"><input class="clsRoleRights" data-attr="83" type="checkbox" /><i></i><span>DOB</span></label></li>
+                                                                <li><label class="checkbox"><input class="clsRoleRights" data-attr="84" type="checkbox" /><i></i><span>Age</span></label></li>
+                                                                <li><label class="checkbox"><input class="clsRoleRights" data-attr="85" type="checkbox" /><i></i><span>Primary Address</span></label></li>
+                                                                <li><label class="checkbox"><input class="clsRoleRights" data-attr="86" type="checkbox" /><i></i><span>Secondary Address</span></label></li>
+                                                                <li><label class="checkbox"><input class="clsRoleRights" data-attr="87" type="checkbox" /><i></i><span>Mobile 1</span></label></li>
+                                                                <li><label class="checkbox"><input class="clsRoleRights" data-attr="88" type="checkbox" /><i></i><span>Mobile 2</span></label></li>
+                                                                <li><label class="checkbox"><input class="clsRoleRights" data-attr="89" type="checkbox" /><i></i><span>Email ID</span></label></li>
+                                                                <li><label class="checkbox"><input class="clsRoleRights" data-attr="890" type="checkbox" /><i></i><span>Patient Ref. By</span></label></li>
+                                                                <li><label class="checkbox"><input class="clsRoleRights" data-attr="891" type="checkbox" /><i></i><span>Smart Card ID</span></label></li>
+                                                                <li><label class="checkbox"><input class="clsRoleRights" data-attr="892" type="checkbox" /><i></i><span>Custom ID</span></label></li>
+                                                                <li><label class="checkbox"><input class="clsRoleRights" data-attr="893" type="checkbox" /><i></i><span>Medical History</span></label></li>
+
+                                                            </ul>
+                                                        </li>
+                                                        <li>
+                                                            <label class="checkbox"><input class="clsRoleRights" data-attr="9" type="checkbox" /><i></i><span>Patient List</span></label>
+                                                            <ul>
+                                                                <li><label class="checkbox"><input class="clsRoleRights" data-attr="91" type="checkbox" /><i></i><span>Pre Records</span></label></li>
+                                                                <li>
+                                                                    <label class="checkbox"><input class="clsRoleRights" data-attr="92" type="checkbox" /><i></i><span>Treatments</span></label>
+                                                                    <ul>
+                                                                        <li><label class="checkbox"><input class="clsRoleRights" data-attr="921" type="checkbox" /><i></i><span>Treatment Name </span></label></li>
+                                                                        <li><label class="checkbox"><input class="clsRoleRights" data-attr="922" type="checkbox" /><i></i><span>Tooth No   </span></label></li>
+                                                                        <li><label class="checkbox"><input class="clsRoleRights" data-attr="923" type="checkbox" /><i></i><span>Doctor</span></label></li>
+                                                                        <li><label class="checkbox"><input class="clsRoleRights" data-attr="924" type="checkbox" /><i></i><span>Piece</span></label></li>
+                                                                        <li><label class="checkbox"><input class="clsRoleRights" data-attr="925" type="checkbox" /><i></i><span>Date</span></label></li>
+                                                                        <li><label class="checkbox"><input class="clsRoleRights" data-attr="926" type="checkbox" /><i></i><span>O/E, Rx Adv, Workdone</span></label></li>
+                                                                        <li><label class="checkbox"><input class="clsRoleRights" data-attr="927" type="checkbox" /><i></i><span>Treatment Fees</span></label></li>
+                                                                        <li><label class="checkbox"><input class="clsRoleRights" data-attr="928" type="checkbox" /><i></i><span>Discount</span></label></li>
+                                                                        <li><label class="checkbox"><input class="clsRoleRights" data-attr="929" type="checkbox" /><i></i><span>Total Fees</span></label></li>
+                                                                        <li><label class="checkbox"><input class="clsRoleRights" data-attr="930" type="checkbox" /><i></i><span>Paid Fees</span></label></li>
+                                                                        <li><label class="checkbox"><input class="clsRoleRights" data-attr="931" type="checkbox" /><i></i><span>Balance Fees</span></label></li>
+                                                                        <li><label class="checkbox"><input class="clsRoleRights" data-attr="932" type="checkbox" /><i></i><span>Advance Fees</span></label></li>
+                                                                        <li><label class="checkbox"><input class="clsRoleRights" data-attr="933" type="checkbox" /><i></i><span>Payment Mode</span></label></li>
+                                                                    </ul>
+
+                                                                </li>
+
+                                                                <li><label class="checkbox"><input class="clsRoleRights" data-attr="93" type="checkbox" /><i></i><span>Essentials</span></label></li>
+                                                                <li><label class="checkbox"><input class="clsRoleRights" data-attr="94" type="checkbox" /><i></i><span>Dropdown Doctor</span></label></li>
+                                                                <li><label class="checkbox"><input class="clsRoleRights" data-attr="95" type="checkbox" /><i></i><span>Dropdown Treatment</span></label></li>
+                                                                <li><label class="checkbox"><input class="clsRoleRights" data-attr="96" type="checkbox" /><i></i><span>Dropdown ToothNo</span></label></li>
+                                                                <li><label class="checkbox"><input class="clsRoleRights" data-attr="97" type="checkbox" /><i></i><span>Tooth No Column Name</span></label></li>
+                                                            </ul>
+
+                                                        </li>
+                                                        <li><label class="checkbox"><input class="clsRoleRights" data-attr="10" data-tab="3" type="checkbox" /><i></i><span>Visit Book</span></label></li>
+
+                                                    </ul>
+                                                </li>
+                                                <li><label class="checkbox"><input class="clsRoleRights" data-attr="3" type="checkbox" /><i></i><span>Appointments</span></label></li>
+                                                <li>
+                                                    <label class="checkbox"><input class="clsRoleRights" data-attr="4" type="checkbox" /><i></i><span>Clinical Records   </span></label>
+                                                    <ul>
+                                                        <li><label class="checkbox"><input class="clsRoleRights" data-attr="41" type="checkbox" /><i></i><span>Lab Records </span></label></li>
+                                                        <li><label class="checkbox"><input class="clsRoleRights" data-attr="42" type="checkbox" /><i></i><span>Material Records   </span></label></li>
+                                                        <li><label class="checkbox"><input class="clsRoleRights" data-attr="43" type="checkbox" /><i></i><span>Maintenance Records</span></label></li>
+                                                        <li><label class="checkbox"><input class="clsRoleRights" data-attr="44" type="checkbox" /><i></i><span>Salary Records     </span></label></li>
+                                                        <li><label class="checkbox"><input class="clsRoleRights" data-attr="45" type="checkbox" /><i></i><span>Consume Material</span></label></li>
+                                                        <li><label class="checkbox"><input class="clsRoleRights" data-attr="46" type="checkbox" /><i></i><span>Stock History</span></label></li>
+                                                        <li><label class="checkbox"><input class="clsRoleRights" data-attr="47" type="checkbox" /><i></i><span>Consulting Fee</span></label></li>
+                                                    </ul>
+                                                </li>
+                                                <li>
+                                                    <label class="checkbox"><input class="clsRoleRights" data-attr="5" type="checkbox" /><i></i><span>Finance</span></label>
+                                                    <ul>
+                                                        <li><label class="checkbox"><input class="clsRoleRights" data-attr="51" type="checkbox" /><i></i><span>Current Day Finance</span></label></li>
+                                                        <li><label class="checkbox"><input class="clsRoleRights" data-attr="52" type="checkbox" /><i></i><span>All Day Finance    </span></label></li>
+                                                        <li><label class="checkbox"><input class="clsRoleRights" data-attr="53" type="checkbox" /><i></i><span>Doctor Dropdown</span></label></li>
+                                                        <li><label class="checkbox"><input class="clsRoleRights" data-attr="54" type="checkbox" /><i></i><span>Treatment Dropdown</span></label></li>
+                                                        <li><label class="checkbox"><input class="clsRoleRights" data-attr="55" type="checkbox" /><i></i><span>Patient Ref By Dropdown</span></label></li>
+                                                        <li><label class="checkbox"><input class="clsRoleRights" data-attr="56" type="checkbox" /><i></i><span>Mode Of Payment</span></label></li>
+                                                    </ul>
+                                                </li>
+                                                <li>
+                                                    <label class="checkbox"><input class="clsRoleRights" data-attr="6" type="checkbox" /><i></i><span>Communication</span></label>
+                                                    <ul>
+                                                        <li><label class="checkbox"><input class="clsRoleRights" data-attr="61" type="checkbox" /><i></i><span>SMS </span></label></li>
+                                                        <li><label class="checkbox"><input class="clsRoleRights" data-attr="62" type="checkbox" /><i></i><span>SMS History</span></label></li>
+                                                        <li><label class="checkbox"><input class="clsRoleRights" data-attr="63" type="checkbox" /><i></i><span>Whats App History</span></label></li>
+                                                    </ul>
+                                                </li>
+                                                <li>
+                                                    <label class="checkbox"><input class="clsRoleRights" data-attr="7" type="checkbox" /><i></i><span>Settings           </span></label>
+                                                    <ul>
+                                                        <li><label class="checkbox"><input class="clsRoleRights" data-attr="71" type="checkbox" /><i></i><span>Registration       </span></label></li>
+                                                        <li><label class="checkbox"><input class="clsRoleRights" data-attr="72" type="checkbox" /><i></i><span>Password Change    </span></label></li>
+                                                        <li><label class="checkbox"><input class="clsRoleRights" data-attr="73" type="checkbox" /><i></i><span>Clinical Settings  </span></label></li>
+                                                        <li><label class="checkbox"><input class="clsRoleRights" data-attr="74" type="checkbox" /><i></i><span>App Settings       </span></label></li>
+                                                        <li><label class="checkbox"><input class="clsRoleRights" data-attr="75" type="checkbox" /><i></i><span>User Settings      </span></label></li>
+                                                        <!--<li><label class="checkbox"><input type="checkbox" /><i></i><span>Backups            </span></label></li>-->
+                                                    </ul>
+                                                </li>
+                                            </ul>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+<div class="modal fade" data-backdrop="static" id="mdlUserMaster">
+    <div class="modal-dialog modal-middle">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h4 class="modal-title">User Master</h4>
+                <button type="button" class="close" data-dismiss="modal">&times;</button>
+            </div>
+            <div class="modal-body">
+                <div class="row">
+                    <div class="form-group col-sm-6">
+                        <label>User Name<span style="color:red;">*</span></label>
+                        <input id="txtUserName" type="text" class="form-control" />
+                    </div>
+                    <div class="form-group col-sm-6">
+                        <label>Mobile No<span style="color:red;">*</span></label>
+                        <input id="txtUserMobileNo" type="text" class="form-control" />
+                    </div>
+                    <div class="form-group col-sm-6">
+                        <label>EmailId</label>
+                        <input id="txtUserEmailId" type="text" class="form-control" />
+                    </div>
+                    <div class="form-group col-sm-6">
+                        <label>Password<span style="color:red;">*</span></label>
+                        <input id="txtUserPwd" type="password" class="form-control" />
+                    </div>
+                    <div class="form-group col-sm-6">
+                        <label>Role<span style="color:red;">*</span></label>
+                        <select id="ddlUserRole" class="form-control">
+                        </select>
+                    </div>
+                    <div class="form-group col-sm-6">
+                        <label>Biomatrics</label>
+                        <select id="ddlBioStatus" class="form-control">
+                            <option value="1">Enabled</option>
+                            <option value="0">Disabled</option>
+                        </select>
+                    </div>
+                    <div class="form-group col-sm-6">
+                        <label>Is Consulting Doctor</label>
+                        <select id="ddlISConsultingDr" class="form-control">
+                            <option selected value="0">No</option>
+                            <option value="1">Yes</option>
+                        </select>
+                    </div>
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button type="button" id="btnSubmitUserMaster" class="btn btn-success waves-effect">Submit</button>
+                <button type="button" class="btn btn-danger waves-effect" data-dismiss="modal">Close</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="modal fade" data-backdrop="static" id="mdlUserRoleMaster">
+    <div class="modal-dialog modal-small">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h4 class="modal-title">Add Role</h4>
+                <button type="button" class="close" data-dismiss="modal">&times;</button>
+            </div>
+            <div class="modal-body">
+                <div>
+                    <label>Role</label>
+                    <input id="txtUserRoleName" type="text" class="form-control" />
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button type="button" id="btnSubmitRoleMaster" class="btn btn-success waves-effect">Submit</button>
+                <button type="button" class="btn btn-danger waves-effect" data-dismiss="modal">Close</button>
+            </div>
+        </div>
+    </div>
+</div>
+<script type="text/javascript" src="JS/Controllers/UserRoles.js?v=1"></script>

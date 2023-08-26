@@ -1,0 +1,934 @@
+﻿<div class="container-fluid">
+    <div class="page-wrapper bg-white mb-3">
+
+        <div class="page-body">
+            <div class="PatientDetailsTreatment">
+                <div class="row">
+                    <div class="left col-md-4">
+                        <a href="../images/photo.jpg" data-fancybox="Photogallery" class="Photo" target="_self">
+                            <img class="imgPatientPhoto" src="../images/photo.jpg" alt="" />
+                        </a>
+                        <div class="content">
+                            <strong>Patient :</strong><span id="spnPatientName"></span> <a onclick="javascript:editpatient();" data-toggle="modal" tooltip title="Edit Patient" href="#" target="_self"><i class="fa fa-pencil"></i></a><br />
+                            <strong>Med History :</strong> <span id="spnMH"></span><br />
+                            <strong>Age :</strong> <span id="spnPatientAge">0</span> Yrs<br />
+                            <strong>Contact :</strong> <span id="spnPatContacts"></span>
+                        </div>
+                    </div>
+                    <div class="center col-md-4">
+                        <div class="alert alert-danger m-0">
+                            <strong>Note : </strong><textarea class="form-control" onchange="changeseriousissue(this);" id="txtSeriousIssue"></textarea>
+                        </div>
+                    </div>
+                    <div class="right col-md-4">
+                        <div class="form-inline mb-1">
+                            Waiting (<span id="spnWaitingcount">0</span>) :&nbsp;
+                            <div class="input-group input-group-sm">
+                                <select id="ddlwaitingpatient" class="form-control">
+                                </select>
+                                <div class="input-group-append">
+                                    <button id="btnwaitingpatient" class="btn btn-first" data-toggle="tooltip" title="Show"><i class="fa fa-eye"></i></button>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="form-inline">
+                            CheckIn (<span id="spncheckincount">0</span>) :&nbsp;
+                            <div class="input-group input-group-sm">
+                                <select id="ddlcheckinpatinet" class="form-control">
+                                </select>
+                                <div class="input-group-append">
+                                    <button id="btncheckinpatine" class="btn btn-first" data-toggle="tooltip" title="Show"><i class="fa fa-eye"></i></button>
+                                </div>
+                            </div>
+                        </div>
+                        <a href="javascript:undefined;" onclick="fn_RefreshTreatCard();" data-toggle="tooltip" title="Refresh" class="refresh"><i class="fa fa-refresh"></i></a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="page-wrapper bg-white">
+
+        <div class="page-body">
+            <ul class="line nav nav-tabs">
+                <li id="liPreRecords" data-mid="91" class="nav-item clsClinicRights">
+                    <a class="nav-link waves-effect" data-mid="91" data-toggle="tab" href="#Pre-Records" target="_self">Pre-Records</a>
+                </li>
+                <li id="liTreatCards" data-mid="92" class="nav-item clsClinicRights">
+                    <a class="nav-link waves-effect active" data-mid="92" data-toggle="tab" href="#Treatments" target="_self">Treatments</a>
+                </li>
+                <li id="liEssentials" data-mid="93" class="nav-item clsClinicRights">
+                    <a class="nav-link waves-effect" data-toggle="tab" data-mid="93" href="#Essentials" target="_self">Essentials</a>
+                </li>
+            </ul>
+            <div class="tab-content">
+                <div class="tab-pane fade p-3" id="Pre-Records">
+                    <div id="GridResult" class="table-responsive">
+                    </div>
+                </div>
+                <div class="tab-pane fade show active" id="Treatments">
+                    <div class="form-inline p-2">
+                        <select id="ddlDoctor" data-mid="94" onchange="fn_FillTreatCard();" class="form-control mr-2 clsClinicRights">
+                        </select>
+                        <select id="ddlTreatments" data-mid="95" onchange="fn_FillTreatCard();" class="form-control mr-2 clsClinicRights">
+                        </select>
+                        <select id="ddlToothNo" data-mid="96" onchange="fn_FillTreatCard();" class="form-control mr-2 clsClinicRights">
+                        </select>
+                        <!--<select id="ddlColumnList" class="form-control mr-2">
+                            <option value="2">Treatment Name</option>
+                            <option value="3">Tooth No</option>
+                            <option value="4">Date</option>
+                            <option value="5">Doctor Name</option>
+                            <option value="6">Piece</option>
+                            <option value="7">O/E, RX-ADV, Workdone</option>
+                            <option value="8">Prescription</option>
+                            <option value="9">Total. Fees</option>
+                            <option value="10">Cons. Fees</option>
+                            <option value="11">Paid Fees</option>
+                            <option value="12">Bal Fees</option>
+
+                        </select><button id="btnHideShowCol" class="btn btn-primary">Hide/Show column</button>-->
+                        <span id="spnPayStatus" class="blink_text ml-3 strong"></span>
+
+                        <span id="spnAdvPayStatus" class="blink_text ml-3 strong" style="color:green;"></span>
+                    </div>
+                    <div class="table-responsive">
+                        <table class="table table-bordered m-0">
+                            <thead>
+
+                                <tr>
+                                    <th class="text-center"> <a class="btn btn-light" onclick="AddNewTreatCard();" href="javascript:undefined;"><span>Add&nbsp;New</span></a></th>
+                                    <th class="text-center">Treatment Name</th>
+                                    <th class="text-center" style="width:60px;">Tooth No</th>
+                                    <th class="text-center" style="width:90px;">Date</th>
+                                    <td class="text-center">Doctor Name</td>
+                                    <td class="text-center isOwnerDr">Piece</td>
+
+                                    <th class="text-center">O/E, RX-ADV, Workdone </th>
+                                    <th class="text-center " style="width: 60px;">Presc.</th>
+                                    <!--<th class="text-center">Tret. Fees         </th>
+                                    <th class="text-center">Disc</th>-->
+                                    <th class="text-center isOwnerDr" style="width:60px;">Treat. Fees</th>
+                                    <th class="text-center isOwnerDr" style="width:60px;">Cons. Fees</th>
+                                    <th class="text-center isOwnerDr" style="width:60px;">Total Fees</th>
+                                    <th class="text-center isOwnerDr" style="width:60px;">Paid Fees</th>
+                                    <!--<th class="text-center" style="width:60px;">Adv. Adj.</th>-->
+                                    <th class="text-center isOwnerDr" style="width:60px;">Bal Fees</th>
+                                    <!--<th class="text-center">Adv. Fees</th>-->
+                                    <th class="text-center" style="width: 50px;">Controls</th>
+                                </tr>
+                            </thead>
+                            <tbody id="tblTreatmentCard">
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+                <div class="tab-pane fade" id="Essentials">
+                    <div class="nav-tabs-left">
+                        <ul class="nav nav-tabs">
+                            <li id="liConsentForm" class="nav-item">
+                                <a class="nav-link active waves-effect" data-toggle="tab" href="#ConsentFormsTab" target="_self">Consent Forms (<span id="spnConsentForm">0</span>)</a>
+                            </li>
+                            <li id="liReferralForm" class="nav-item">
+                                <a class="nav-link waves-effect" data-toggle="tab" href="#ReferralFormsTab" target="_self">Referral Forms (<span id="spnReferralForm">0</span>)</a>
+                            </li>
+                            <li id="liQuotationForm" class="nav-item">
+                                <a class="nav-link waves-effect" data-toggle="tab" href="#QuotationsTab" target="_self">Quotations (<span id="spnQuotationForm">0</span>)</a>
+                            </li>
+                            <li id="liReceiptForm" class="nav-item">
+                                <a class="nav-link waves-effect" data-toggle="tab" href="#ReceiptsTab" target="_self">Receipts (<span id="spnReceiptsForm">0</span>)</a>
+                            </li>
+                            <li id="liImagesForm" class="nav-item">
+                                <a class="nav-link waves-effect" data-toggle="tab" href="#ImagesTab" target="_self">Images (<span id="spnImagesForm">0</span>)</a>
+                            </li>
+                            <li id="liFilesForm" class="nav-item">
+                                <a class="nav-link waves-effect" data-toggle="tab" href="#FilesTab" target="_self">Files (<span id="spnFilesForm">0</span>)</a>
+                            </li>
+                        </ul>
+                        <div class="nav-tabs-left-container">
+                            <div class="tab-content">
+                                <div class="tab-pane active" id="ConsentFormsTab">
+                                    <div id="GridResult2"></div>
+                                </div>
+                                <div class="tab-pane fade" id="ReferralFormsTab">
+                                    <div id="GridResult3"></div>
+                                </div>
+                                <div class="tab-pane fade" id="QuotationsTab">
+                                    <div id="GridResult4"></div>
+                                </div>
+                                <div class="tab-pane fade" id="ReceiptsTab">
+                                    <div id="GridResult5"></div>
+                                </div>
+                                <div class="tab-pane fade" id="ImagesTab">
+                                    <div>
+                                        <label class="btn-file btn mr-1">
+                                            <span>Image Title</span>
+                                            <input type="text" id="txtImageUpload" />
+
+                                        </label>
+                                       
+                                        <label class="btn-file btn btn-first mr-1">
+                                            <input type="file" id="uplImageUpload" accept="Image/*" />
+                                            <i class="fa fa-check"></i><span id="spnImageLabel">Choose Image</span>
+                                        </label>
+                                        <button onclick="javascript:fn_UploadImages();" class="btn btn-first">
+                                            <i class="fa fa-cloud-upload"></i><span>Upload Image</span>
+                                        </button>
+                                    </div>
+                                    <div id="GridResult6"></div>
+                                </div>
+                                <div class="tab-pane fade" id="FilesTab">
+                                    <div>
+                                        <label class="btn-file btn mr-1">
+                                            <span>File Title</span>
+                                            <input type="text" id="txtFileUpload" accept="application/pdf" />
+
+                                        </label>
+                                        <label class="btn-file btn btn-first mr-1">
+                                            <input type="file" id="uplFileUpload" accept="application/*" />
+                                            <i class="fa fa-check"></i><span id="spnFileLabel">Choose File</span>
+                                        </label>
+                                        <button onclick="javascript:fn_UploadFiles();" class="btn btn-first">
+                                            <i class="fa fa-cloud-upload"></i><span>Upload File</span>
+                                        </button>
+                                    </div>
+                                    <div id="GridResult7"></div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+<div class="modal fade" data-backdrop="static" id="mdlPreTreatRecords">
+    <div class="modal-dialog modal-middle">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h4 class="modal-title">Add New Pre-Records</h4>
+                <button type="button" class="close" data-dismiss="modal">&times;</button>
+            </div>
+            <div class="modal-body pb-0">
+                <div class="row">
+                    <div class="form-group col-sm-6">
+                        <label>Date</label>
+                        <input id="txtPR_Date" type="date" class="form-control" />
+                    </div>
+                    <div class="form-group col-sm-6">
+                        <label>C/O</label>
+                        <input id="txtPR_CO" type="text" class="form-control" />
+                    </div>
+                    <div class="form-group col-sm-6">
+                        <label>HOPI</label>
+                        <input id="txtPR_HOPI" type="text" class="form-control" />
+                    </div>
+                    <div class="form-group col-sm-6">
+                        <label>OE</label>
+                        <input id="txtPR_OE" type="text" class="form-control" />
+                    </div>
+                    <div class="form-group col-sm-6">
+                        <label>Tooth No</label>
+                        <input id="txtPR_ToothNo" type="text" class="form-control" />
+                    </div>
+                    <div class="form-group col-sm-6">
+                        <label>Investigation</label>
+                        <input id="txtPR_Investigation" type="text" class="form-control" />
+                    </div>
+                    <div class="form-group col-sm-6">
+                        <label>Treatement Advice</label>
+                        <input id="txtPR_TreatAdvice" type="text" class="form-control" />
+                    </div>
+                    <div class="form-group col-sm-6">
+                        <label>Charges</label>
+                        <input id="txtPR_Charges" value="0" type="number" class="form-control" />
+                    </div>
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button id="btnSubmit_PR" type="button" class="btn btn-success waves-effect">Submit</button>
+                <button type="button" class="btn btn-danger waves-effect" data-dismiss="modal">Cancel</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="modal fade" data-backdrop="static" id="mdlAddNewTreatment">
+    <div class="modal-dialog modal-lg">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h4 class="modal-title">Add New Treatment</h4>
+                <button type="button" class="close" data-dismiss="modal">&times;</button>
+            </div>
+            <div class="modal-body">
+                <div class="row">
+                    <div class="form-group col-sm-6 col-md-4 clsClinicRights" data-mid="921">
+                        <label>Treatment Name </label>
+                        <select id="ddlTreatments1" tabindex="1" class="form-control">
+                        </select>
+                    </div>
+                    <div class="form-group col-sm-6 col-md-4 clsClinicRights" data-mid="922">
+                        <label>Tooth No</label>
+                        <input id="txtTreat_ToothNo" tabindex="2" type="text" class="form-control" />
+                    </div>
+                    <div class="form-group col-sm-6 col-md-4 clsClinicRights" data-mid="923">
+                        <label>Doctor</label>
+                        <select id="ddlDoctors1"  tabindex="3" class="form-control">
+                        </select>
+                    </div>
+                    <div class="form-group col-sm-6 col-md-4 clsClinicRights" data-mid="924">
+                        <label>Piece</label>
+                        <div class="input-group">
+                            <select id="ddlPieceValue1" class="form-control col-5">
+                                <option value="">Select</option>
+                                <option value="%">%</option>
+                                <option value="Rs">Rs</option>
+                            </select>
+                            <input id="txtTreat_Piece" type="text" class="form-control" />
+                        </div>
+                    </div>
+                    <div class="form-group col-sm-6 col-md-4 clsClinicRights" data-mid="925">
+                        <label>Date</label>
+                        <input id="txtTreat_Date"  tabindex="4" type="date" class="form-control" />
+                    </div>
+
+                    <div class="form-group col-12 clsClinicRights" data-mid="926">
+                        <label>O/E, RX-ADV, Workdone</label>
+                        <!--<input id="txtTreat_WorkDone" type="text" class="form-control" />-->
+                        <textarea rows="3"  tabindex="5" id="txtTreat_WorkDone" class="form-control"></textarea>
+                    </div>
+
+                    <div class="form-group col-sm-6 col-md-4 clsClinicRights" data-mid="927">
+                        <label>Treatment Fees</label>
+                        <input id="txtTreat_TreatFees"  tabindex="6" onchange="fn_TreatFeeCalculation();" type="number" class="form-control" />
+                    </div>
+                    <div class="form-group col-sm-6 col-md-4 "  style="display:none">
+                        <label>Advance Amount</label>
+                        <input id="txtTreat_AdvFees" onchange="fn_TreatFeeCalculation();" disabled value="0" type="number" class="form-control" />
+                    </div>
+                    <div class="form-group col-sm-6 col-md-4 clsClinicRights" data-mid="928">
+                        <label>Discount(Rs.)</label>
+                        <input id="txtTreat_Disc"  tabindex="7" onchange="fn_TreatFeeCalculation();" type="number" class="form-control" />
+                    </div> 
+                    <div class="form-group col-sm-6 col-md-4 clsClinicRights" data-mid="929">
+                        <label>Total Fees</label>
+                        <input id="txtTreat_TotalFee" readonly type="text" class="form-control" />
+                    </div>
+                    <!--<div class="form-group col-sm-6 col-md-4">
+                        <label>Consultation Fee</label>
+                        <input id="txtTreat_ConFees" onchange="fn_TreatFeeCalculation();" type="number" class="form-control" />
+                    </div>-->
+                    <div class="form-group col-sm-6 col-md-3 clsClinicRights" data-mid="930">
+                        <label>Paid Fees</label>
+                        <input id="txtTreat_PaidFees"  tabindex="8" onchange="fn_TreatBalFeeCalculation();" type="number" class="form-control" />
+                    </div>
+                    <div class="form-group col-sm-6 col-md-3 clsClinicRights" data-mid="931">
+                        <label>Balance Fees</label>
+                        <input id="txtTreat_BalFees" readonly type="number" class="form-control" />
+                    </div>
+                    <div class="form-group col-sm-6 col-md-3 clsClinicRights" data-mid="932">
+                        <label>Advance Fees</label>
+                        <input id="txtTreat_AdvAdjFees" readonly type="number" class="form-control" />
+                    </div>
+                    <div class="form-group col-sm-6 col-md-3 clsClinicRights" data-mid="933">
+                        <label>Payment Mode</label>
+                        <!--<input id="txtTreat_PayMode" type="text" class="form-control" />-->
+                        <select id="txtTreat_PayMode"  tabindex="9" class="form-control"></select>
+                    </div>
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button id="btnSubmitTreamentCard" tabindex="10" type="button" class="btn btn-success waves-effect">Submit</button>
+                <!--<button id="btnAddTreatmentPrese" onclick="javascript:addprescription(this);" type="button" class="btn btn-success waves-effect" style="display:none;">Add Prescription</button>-->
+                <button type="button" class="btn btn-danger waves-effect" data-dismiss="modal">Cancel</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="modal fade" data-backdrop="static" id="mdlTreatmentProcedure">
+    <div class="modal-dialog modal-lg">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h4 class="modal-title">Add New Procedure</h4>
+                <button type="button" class="close" data-dismiss="modal">&times;</button>
+            </div>
+            <div class="modal-body">
+                <div class="row">
+
+                    <div class="form-group col-sm-6 col-md-4">
+                        <label>Doctor</label>
+                        <select id="ddlDoctors2" tabindex="1" class="form-control">
+                        </select>
+                    </div>
+                    <div class="form-group col-sm-6 col-md-4">
+                        <label>Piece</label>
+                        <div class="input-group">
+                            <select id="ddlPieceValue"  tabindex="12" class="form-control col-5">
+                                <option value="">Select</option>
+                                <option value="%">%</option>
+                                <option value="Rs">Rs</option>
+                            </select>
+                            <input id="txtTreatProcPiece" type="text" class="form-control" />
+                        </div>
+                    </div>
+                    <div class="form-group col-sm-6 col-md-4">
+                        <label>Date</label>
+                        <input id="txtTreatProcDate"  tabindex="2" type="date" class="form-control" />
+                    </div>
+
+
+                    <div class="form-group col-12">
+                        <label>O/E, RX-ADV, Workdone</label>
+                        <!--<input id="txtTreatProcWorkdone" type="text" class="form-control" />-->
+                        <textarea rows="3" id="txtTreatProcWorkdone"  tabindex="3" class="form-control"></textarea>
+                    </div>
+
+
+                    <div class="form-group col-sm-6 col-md-3">
+                        <label>Prev. Remaining Fees</label>
+                        <input id="txtTreatProcPrevFee" readonly type="number" class="form-control" />
+                    </div>
+                    <div class="form-group col-sm-6 col-md-3" style="display:none">
+                        <label>Advance Amount</label>
+                        <input id="txtTreatProcAdvFee" disabled value="0" type="number" class="form-control" />
+                    </div>
+                    <div class="form-group col-sm-6 col-md-3">
+                        <label>Appointment Fee</label>
+                        <input id="txtTreatProcConFee"  tabindex="4" onchange="fn_TreatProcBalFeeCalculation();" value="0" type="number" class="form-control" />
+                    </div>
+                    <div class="form-group col-sm-6 col-md-3">
+                        <label>Discount(Rs.)</label>
+                        <input id="txtTreatProcDiscount"  tabindex="5" onchange="fn_TreatProcBalFeeCalculation();" value="0" type="number" class="form-control" />
+                    </div>
+                    <div class="form-group col-sm-6 col-md-3">
+                        <label>Total Fees</label>
+                        <input id="txtTreatProcTotalFee" readonly type="number" class="form-control" />
+                    </div>
+                    <div class="form-group col-sm-6 col-md-3">
+                        <label>Paid Fees</label>
+                        <input id="txtTreatProcPaidFee"  tabindex="6" value="0" onchange="fn_TreatProcBalFeeCalculation();" type="number" class="form-control" />
+                    </div>
+                    <div class="form-group col-sm-6 col-md-3">
+                        <label>Bal Fees</label>
+                        <input id="txtTreatProcBalFee" value="0" readonly type="text" class="form-control" />
+                    </div>
+                    <div class="form-group col-sm-6 col-md-3">
+                        <label>Adv Fees</label>
+                        <input id="txtTreatProcAdvAdjFee" value="0" readonly type="text" class="form-control" />
+                    </div>
+                    <div class="form-group col-sm-6 col-md-3">
+                        <label>Payment Mode</label>
+                        <select id="txtTreatProcPayMode"  tabindex="7" class="form-control"></select>
+                    </div>
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button id="btnSubmitTreatProcedure" tabindex="8" type="button" class="btn btn-success waves-effect">Submit</button>
+                <!--<button id="btnAddTreatmentStepPrese" onclick="javascript:addprescription(this);" type="button" class="btn btn-success waves-effect">Add Prescription</button>-->
+                <button type="button" class="btn btn-danger waves-effect" data-dismiss="modal">Cancel</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="modal fade" data-backdrop="static" id="mdlConsentForms">
+    <div class="modal-dialog modal-middle">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h4 class="modal-title">Consent Forms</h4>
+                <button type="button" class="close" data-dismiss="modal">&times;</button>
+            </div>
+            <div class="modal-body">
+                <div class="row">
+                    <div class="form-group col-sm-6">
+                        <label>Date</label>
+                        <input id="txtConsentForm_Date" type="date" class="form-control" />
+                    </div>
+                    <div class="form-group col-sm-6">
+                        <label>Treatment Name </label>
+                        <select id="ddlConsentForm_Treatment" class="form-control">
+                        </select>
+                    </div>
+                    <div class="form-group col-sm-6">
+                        <label>Tooth No</label>
+                        <input id="txtConsentForm_ToothNo" type="text" class="form-control" />
+                    </div>
+                    <div class="form-group col-sm-6">
+                        <label>Form Type</label>
+                        <select id="ddlConsentForm_FormType" class="form-control">
+                        </select>
+                    </div>
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button onclick="javascript:fn_InsertConsectForm();" type="button" class="btn btn-success waves-effect">Submit</button>
+                <button type="button" class="btn btn-danger waves-effect" data-dismiss="modal">Close</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="modal fade" data-backdrop="static" id="mdlReferralForms">
+    <div class="modal-dialog modal-middle">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h4 class="modal-title">Referral Forms</h4>
+                <button type="button" class="close" data-dismiss="modal">&times;</button>
+            </div>
+            <div class="modal-body">
+                <div class="row">
+                    <div class="form-group col-sm-6">
+                        <label>Date</label>
+                        <input id="txtRefForm_date" type="date" class="form-control" />
+                    </div>
+                    <div class="form-group col-sm-6">
+                        <label>Treatment Name </label>
+                        <select id="ddlRefForm_Treatment" class="form-control">
+                        </select>
+                    </div>
+                    <div class="form-group col-sm-6">
+                        <label>Referral Form Type</label>
+                        <select id="ddlRefForm_FormType" class="form-control">
+                        </select>
+                    </div>
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button onclick="javascript:fn_InsertRefferalForm();" type="button" class="btn btn-success waves-effect">Submit</button>
+                <button type="button" class="btn btn-danger waves-effect" data-dismiss="modal">Close</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="modal fade" data-backdrop="static" id="mdlQuatationForm">
+    <div class="modal-dialog modal-middle">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h4 class="modal-title">Quotation</h4>
+                <button type="button" class="close" data-dismiss="modal">&times;</button>
+            </div>
+            <div class="modal-body">
+                <div class="row">
+                    <div class="form-group col-sm-6">
+                        <label>Date</label>
+                        <input id="txtQuatation_Date" type="date" class="form-control" />
+                    </div>
+                    <div class="form-group col-sm-6">
+                        <label>Quatation Type</label>
+                        <select id="ddlQuatation_FormType" class="form-control">
+                        </select>
+                    </div>
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-success waves-effect" onclick="javascript: fn_InsertQuatation();">Submit</button>
+                <button type="button" class="btn btn-danger waves-effect" data-dismiss="modal">Close</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="modal fade" data-backdrop="static" id="mdlReceiptForm">
+    <div class="modal-dialog modal-middle">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h4 class="modal-title">Receipts</h4>
+                <button type="button" class="close" data-dismiss="modal">&times;</button>
+            </div>
+            <div class="modal-body">
+                <div class="row">
+                    <div class="form-group col-sm-6">
+                        <label>Date</label>
+                        <input id="txtReceiptForm_date" type="date" class="form-control" />
+                    </div>
+                    <div class="form-group col-sm-6">
+                        <label>Treatement Name	</label>
+                        <select id="ddlReceiptForm_Treatment" class="form-control">
+                        </select>
+                    </div>
+                    <div class="form-group col-sm-6" style="display:none">
+                        <label>Receipt Type</label>
+                        <select id="ddlReceiptForm_FromType" class="form-control">
+                        </select>
+                    </div>
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button type="button"  class="btn btn-success waves-effect" onclick="fn_InsertReceiptsForm();">Submit</button>
+                <button type="button" class="btn btn-danger waves-effect" data-dismiss="modal">Close</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="modal fade" data-backdrop="static" id="mdlCustomeReceiptForm">
+    <div class="modal-dialog modal-middle">
+        <div class="modal-content modal-lg">
+            <div class="modal-header">
+                <h4 class="modal-title">Custome - Receipt</h4>
+                <button type="button" class="close" data-dismiss="modal">&times;</button>
+            </div>
+            <div class="modal-body">
+                <div class="row">
+                    <div class="col-12">
+
+                        <table class="tblResult noAssDes" style=" width: 100%;">
+                            <thead>
+                                <tr style="background-color: #ccc;">
+                                    <th>Treatment Date</th>
+                                    <th>Treatment Name</th>
+                                    <th>Tooth No</th>
+                                    <th>Charges</th>
+                                    <th>Controls</th>
+                                </tr>
+                            </thead>
+                            <tbody id="tblPatReceipt"></tbody>
+                        </table>
+
+
+                    </div>
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button id="btnGenerateReceiptView" type="button" class="btn btn-success waves-effect">Generate Receipt</button>
+                <button type="button" class="btn btn-danger waves-effect" data-dismiss="modal">Close</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="modal fade" data-backdrop="static" id="mdlPrescription">
+    <div class="modal-dialog modal-xl">
+        <div class="modal-content modelTab">
+            <div class="modal-header">
+                <h4 class="modal-title">Add Prescription</h4>
+                <button type="button" class="close" data-dismiss="modal">&times;</button>
+                <ul class="line nav nav-tabs">
+                    <li id="liPrescRecords" class="nav-item">
+                        <a class="nav-link waves-effect active" data-toggle="tab" href="#PresTemplate" target="_self">Ready Prescription</a>
+                    </li>
+                    <li id="liCustPresc" class="nav-item">
+                        <a class="nav-link waves-effect " data-toggle="tab" href="#CustPrescrption" target="_self">Custom Prescription</a>
+                    </li>
+                </ul>
+            </div>
+            <div class="modal-body">
+                <div class="tab-content">
+                    <div class="tab-pane fade active show" id="PresTemplate">
+                        <div class="row">
+                            <div class="col-5">
+                                <div class="table-responsive">
+                                    <table class="table table-bordered m-0">
+                                        <thead>
+                                            <tr>
+                                                <th class="text-center" style="width:50px;">SrNo</th>
+                                                <th>Template Name</th>
+                                                <th class="text-center" style="width: 75px;">Controls</th>
+                                            </tr>
+                                        </thead>
+                                        <tbody id="tblPresTemplate"></tbody>
+                                    </table>
+                                </div>
+                            </div>
+                            <div class="col-7">
+                                <div class="clsReadyPres">
+                                    <!--<div style="color: #ff0000; padding: 6px 14px;">List Of Selected Prescriptions</div>
+                                    <div style="margin:6px;">
+                                        <input type="checkbox" id="chkSaveAsTemplate" />
+                                        <span for="chkSaveAsTemplate">Save as template</span>
+                                        <input type="text" style="margin-left:25px;" id="txtPresTemplateName" placeholder="Enter Template Name" />
+                                    </div>-->
+                                    <div class="table-responsive">
+                                        <table class="table table-bordered m-0">
+                                            <thead>
+                                                <tr>
+                                                    <th class="text-center">SrNo</th>
+                                                    <th>Medicine Name</th>
+                                                    <th class="text-center">Qty</th>
+                                                    <th>Instruction</th>
+                                                    <th>Days</th>
+                                                    <th class="text-center">Controls</th>
+                                                </tr>
+                                            </thead>
+                                            <tbody class="tblSelectedPresc"></tbody>
+                                        </table>
+                                    </div>
+                                </div>
+
+                            </div>
+                        </div>
+                    </div>
+                    <div class="tab-pane fade" id="CustPrescrption">
+                        <div class="row">
+                            <div class="col-5">
+                                <div class="row">
+                                    <div class="form-group col-12">
+                                        <label>Medicine Name</label>
+                                        <select id="ddlPresMedicine" class="form-control">
+                                        </select>
+                                    </div>
+                                    <div class="form-group col-6">
+                                        <label>Quantity </label>
+                                        <input type="text" id="txtPresQty" class="form-control" />
+                                    </div>
+                                    <div class="form-group col-6">
+                                        <label>Days</label>
+                                        <input type="text" id="txtPrescDays" class="form-control" />
+
+                                    </div>
+                                    <div class="form-group col-12">
+                                        <label>Instruction</label>
+                                        <select id="ddlPresInstruction" class="form-control">
+                                        </select>
+                                    </div>
+
+                                    <div class="form-group col-12">
+
+                                        <button onclick="javascript:addprescriptiondetails();" class="btn btn-success">Add</button>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-7">
+                                <div class="clsCustomPres">
+                                    <!--<div style="color: #ff0000; padding: 6px 14px;">List Of Selected Prescriptions</div>-->
+                                    <div style="margin:6px;">
+                                        <input type="checkbox" id="chkSaveAsTemplate" />
+                                        <span for="chkSaveAsTemplate">Save as template</span>
+                                        <input type="text" style="margin-left:25px;" id="txtPresTemplateName" placeholder="Enter Template Name" />
+                                    </div>
+                                    <div class="table-responsive">
+                                        <table class="table table-bordered m-0">
+                                            <thead>
+                                                <tr>
+                                                    <th class="text-center">SrNo</th>
+                                                    <th>Medicine Name</th>
+                                                    <th class="text-center">Qty</th>
+                                                    <th>Instruction</th>
+                                                    <th>Days</th>
+                                                    <th class="text-center">Controls</th>
+                                                </tr>
+                                            </thead>
+                                            <tbody class="tblCustomePresc"></tbody>
+                                        </table>
+                                    </div>
+                                </div>
+
+                            </div>
+
+                        </div>
+
+
+                    </div>
+
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button type="button" onclick="javascript:SubmitPrescription();" class="btn btn-success waves-effect">Submit</button>
+                <button type="button" onclick="javascript:ClosePrescription();" class="btn btn-danger waves-effect" data-dismiss="modal">Close</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="modal fade" data-backdrop="static" id="mdlShowPrescription">
+    <div class="modal-dialog modal-lg">
+        <div class="modal-content modelTab">
+            <div class="modal-header">
+                <h4 class="modal-title">Prescription Details</h4>
+                <button type="button" class="close" data-dismiss="modal">&times;</button>
+
+            </div>
+            <div class="modal-body">
+                <div class="tab-content">
+
+
+                    <div class="">
+
+                        <div class="table-responsive">
+                            <table class="table table-bordered m-0">
+                                <thead>
+                                    <tr>
+                                        <th class="text-center">SrNo</th>
+                                        <th>Medicine Name</th>
+                                        <th class="text-center">Qty</th>
+                                        <th>Instruction</th>
+                                        <th>Days</th>
+                                    </tr>
+                                </thead>
+                                <tbody id="tblSelectedPresc_1"></tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+    </div>
+</div>
+
+
+<div class="modal fade" data-backdrop="static" id="mdlMedicine">
+    <div class="modal-dialog ">
+        <div class="modal-content modelTab">
+            <div class="modal-header">
+                <h4 class="modal-title">Add Medicine</h4>
+
+            </div>
+            <div class="modal-body">
+                <div class="row">
+
+                    <div class="col-12">
+                        <div class="form-group">
+                            <label>
+                                Medicine Name<span style="color: Red;">*</span>
+                            </label>
+                            <input type="text" id="txtMedicineName" class="form-control" />
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button type="button" onclick="javascript:SubmitMedcine();" class="btn btn-success waves-effect">Submit</button>
+                <button type="button" class="btn btn-danger waves-effect" data-dismiss="modal">Close</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="modal fade" data-backdrop="static" id="mdlQuotationTreatment">
+    <div class="modal-dialog modal-lg">
+        <div class="modal-content">
+
+            <div class="modal-body">
+                <div class="row">
+
+                    <div class="col-12">
+                        <div class="table-responsive">
+                            <select id="ddlQGroup"><option value="1">Group 1</option><option value="2">Group 2</option><option value="3">Group 3</option><option value="4">Group 4</option><option value="5">Group 5</option></select>  <!--<input id="rdoANDQuo" type="radio" name="rdoAndOr" checked style=" margin: 0 6px;" />And<input id="rdoORQuo" type="radio" name="rdoAndOr"  style=" margin: 0 6px;" />OR-->
+                            <table class="table table-bordered m-0">
+                                <thead>
+                                    <tr>
+                                        <th style="width:20px;">SrNo</th>
+                                        <th>Treatment / Description</th>
+                                        <th style="width:100px;">Tooth No</th>
+                                        <th style="width:70px;">No of Units</th>
+                                        <th style="width:70px;">Per Unit Charges</th>
+                                        <th style="width:70px;">Sub Total</th>
+                                        <th style="width:30px;">Action</th>
+                                    </tr>
+                                </thead>
+                                <tbody id="tblQuotationTreatment">
+                                    <tr>
+                                        <td></td>
+                                        <td><input type="text" id="txtTreatmentDesc" class="form-control" /></td>
+                                        <td><input type="text" id="txtToothNoDesc" class="form-control" /></td>
+                                        <td><input type="number" id="txtNoOfnits" onchange="javascript: calSubTotal();" class="form-control" /></td>
+
+                                        <td><input type="number" id="txtPerUnitCharges" onchange="javascript: calSubTotal();" class="form-control" /></td>
+                                        <td><input type="text" id="txtSubtotal" class="form-control" readonly /></td>
+                                        <td style="white-space: nowrap;"><button id="btnAddTretmentdesc" class="btn btn-first">Add</button></td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+            <div class="modal-footer">
+                <!--<button type="button" onclick="javascript: SubmitQuotationTreatment();" class="btn btn-success waves-effect">Submit</button>-->
+                <button type="button" class="btn btn-danger waves-effect" data-dismiss="modal">Close</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="modal fade" id="mdlScheduleClass" tabindex="-1" role="large" aria-hidden="true" style="display: none;">
+    <div class="modal-dialog modal-lg">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal">
+                    &times;
+                </button>
+                <h4 class="modal-title">
+                    Next Appointment
+                </h4>
+            </div>
+            <div class="modal-body">
+                <div class="row">
+
+                    <div class="col-xs-12 col-sm-12 col-md-4 col-lg-4">
+                        <div class="form-group">
+                            <label>
+                                Start date<span style="color: Red;">*</span>
+                            </label>
+                            <input type="date" id="txtStartDate" class="form-control" />
+                        </div>
+                    </div>
+                    <div class="col-xs-12 col-sm-12 col-md-2 col-lg-2">
+                        <div class="form-group">
+                            <label>
+                                Time<span style="color: Red;">*</span>
+                            </label>
+                            <input type="time" id="txtStartTime" class="form-control" data-samask="00:00" />
+                        </div>
+                    </div>
+                    <div class="col-xs-12 col-sm-12 col-md-4 col-lg-4">
+                        <div class="form-group">
+                            <label>
+                                End date <span style="color: Red;">*</span>
+                            </label>
+                            <input type="date" id="txtEndDate" class="form-control" />
+                        </div>
+                    </div>
+                    <div class="col-xs-12 col-sm-12 col-md-2 col-lg-2">
+                        <div class="form-group">
+                            <label>
+                                Time<span style="color: Red;">*</span>
+                            </label>
+                            <input type="time" id="txtEndTime" class="form-control" data-samask="00:00" />
+                        </div>
+                    </div>
+                    <div class="col-xs-12 col-sm-12 col-md-6 col-lg-6 ">
+                        <div class="form-group">
+                            <label>
+                                Doctor name<span style="color: Red;">*</span>
+                            </label>
+                            <select class="form-control" id="ddlDoctor1"></select>
+                        </div>
+                    </div>
+
+
+                    <div class="col-xs-12 col-sm-12 col-md-6 col-lg-6 ">
+                        <div class="form-group">
+                            <label>
+                                <span data-lang="span">Patient Name</span><span style="color: Red;">*</span>
+                            </label>
+                            <input type="text" id="txtPatientName" autocomplete="off" class="form-control" />
+                        </div>
+                    </div>
+                    <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
+                        <div class="form-group">
+                            <label>
+                                <span data-lang="span">Appointment For</span>
+                            </label>
+                            <input type="text" id="txtAppointmentFor" autocomplete="off" class="form-control" />
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button id="btnSchedlePeriod" class="btnRights btn btn-first" data-rname="Submit Meeting">Submit</button>
+                <!--<button id="btnDeleteClass" style="display:none;" class="btnRights btn btn-first" data-rname="Delete Meeting">Delete</button>-->
+
+            </div>
+        </div>
+    </div>
+</div>
+
+<script type="text/javascript" src="JS/Controllers/TreatmentCard.js?v=1"></script>

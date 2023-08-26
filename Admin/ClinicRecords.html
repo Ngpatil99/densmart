@@ -1,0 +1,205 @@
+﻿<!--@{
+    ViewBag.Title = "Patient List";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}-->
+
+<div class="container-fluid">
+    <div class="page-wrapper bg-white">
+        <!--@*<div class="page-header">
+            <h2></h2>
+
+        </div>*@-->
+        <div class="page-body">
+            <!--<ul class="line nav nav-tabs">
+                <li class="nav-item">
+                    <a id="ancAddClinic" class="nav-link waves-effect" data-toggle="modal" href="#AddClinicModal" target="_self">Add Clinic</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link waves-effect active" data-toggle="tab" href="#PatientList" target="_self">Clinic List</a>
+                </li>
+
+            </ul>-->
+            <div class="tab-content">
+                <div class="tab-pane fade show active p-3" >
+                    <div class="row">
+
+                        <div class="col-4 form-group">
+                            <label>List of clinic </label>
+                            <select id="ddlClinicList"  class="form-control" ></select>
+                        </div>
+
+                        <div class="auto form-group">
+                            <label style="width:100%">&nbsp;</label>
+                            <button id="btnSearchClinic" class="btn btn-first">Search clinic</button>
+                            <button id="btnAddNewClinic" class="btn btn-first">Add new clinic</button>
+                        </div>
+                        <div class="col-12"><div id="GridResult" class="table-responsive"></div></div>
+
+                    </div>
+                    <!--<div class="table-responsive">
+                        <table class="table table-bordered m-0">
+                            <thead>
+                                <tr>
+                                    <th class="text-center">ClincID           </th>
+                                    <th class="text-center">Date of Reg   </th>
+                                    <th>Clinic Name          </th>
+                                    <th>Doctor Name          </th>
+                                    <th class="text-center">Mobile        </th>
+                                    <th>Email         </th>
+                                   
+                                    <th></th>
+                                </tr>
+                            </thead>
+                            <tbody>
+
+                                <tr>
+                                    <td class="text-center">1427</td>
+                                    <td class="text-center">17/06/2018</td>
+                                    <td>Dental Clinic</td>
+                                    <td>Rohit Sopan More</td>
+                                 
+                                 
+                                    <td class="text-center">9552517878</td>
+                                    <td>test@gmail.com</td>
+                                    
+                                    <td class="text-center">
+                                        <div class="dropdown d-inline-block">
+                                            <button type="button" class="btn icon-round-btn dropdown-toggle no-arrow waves-effect" data-toggle="dropdown">
+                                                <i class="fa fa-ellipsis-h"></i>
+                                            </button>
+                                            <div class="dropdown-menu dropdown-menu-right">
+
+                                                <a class="dropdown-item" href="#"><i class="fa fa-pencil"></i><span>Edit</span></a>
+                                                <a class="dropdown-item" href="#"><i class="fa fa-trash-o"></i><span>Delete</span></a>
+                                            </div>
+                                        </div>
+                                    </td>
+                                </tr>
+                              
+                            </tbody>
+                        </table>
+                    </div>-->
+                </div>
+
+            </div>
+        </div>
+    </div>
+</div>
+
+
+<!--@*Add Clinic Modal*@-->
+<div class="modal fade" data-backdrop="static" id="AddClinicModal">
+    <div class="modal-dialog modal-lg">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h4 class="modal-title">Add Clinic</h4>
+                <button type="button" class="close" data-dismiss="modal">&times;</button>
+            </div>
+            <div class="modal-body">
+                <div class="row">
+                    <div class="col-12 form-group d-flex align-items-center">
+                        <div class="PatientPhoto">
+                            <img id="imgClinicPhoto" src="images/cliniclogo.jpg" alt="" />
+                        </div>
+                        <div class="ml-3">
+                            <label class="btn-file btn btn-first  waves-effect mr-1">
+                                <input type="file" id="uplFileUpload" />
+                                <i class="fa fa-cloud-upload"></i><span>Clinic Logo</span>
+                            </label>
+
+                        </div>
+                    </div>
+                    <div class="col-sm-6 form-group">
+                        <label><span style="color:red">*</span>Clinic Name </label>
+                        <input id="txtClinicName" data-column="ClinicName" type="text" class="form-control" />
+                    </div>
+                    <div class="col-sm-6 form-group">
+                        <label>Doctor Reg No </label>
+                        <input id="txtDoctorRegNo" data-column="DoctorRegNo" type="text" class="form-control" />
+                    </div>
+
+
+                    <div class="col-12 form-group">
+                        <label>Doctor Name</label>
+                        <div class="row">
+                            <div class="col-sm-4 mb-2">
+                                <input id="txtFName" data-column="DoctorFName" type="text" class="form-control" placeholder="First Name" />
+                            </div>
+                            <div class="col-sm-4 mb-2">
+                                <input id="txtMName" data-column="DoctorMName" type="text" class="form-control" placeholder="Middle Name" />
+                            </div>
+                            <div class="col-sm-4">
+                                <input id="txtLName" data-column="DoctorLName" type="text" class="form-control" placeholder="Last Name" />
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-sm-6 form-group">
+                        <label>Qualification </label>
+                        <input id="txtQualification" data-column="Qaulification" type="text" class="form-control" />
+                    </div>
+                    <div class="col-sm-6 form-group">
+                        <label>Address </label>
+                        <input id="txtAddress" type="text" maxlength="500" data-column="ClinicAddress" class="form-control" />
+                    </div>
+
+
+                    <div class="col-sm-6 form-group">
+                        <label><span style="color:red">*</span>Contact No. 1</label>
+                        <input type="text" id="txtContact1" data-column="ContactNo1" class="form-control" />
+                    </div>
+                    <div class="col-sm-6 form-group">
+                        <label>Contact No. 2</label>
+                        <input type="text" id="txtContact2" data-column="ContactNo2" class="form-control" />
+                    </div>
+                    <div class="col-sm-6 form-group">
+                        <label>Website</label>
+                        <input type="text" id="txtWebsite" data-column="Website" class="form-control" />
+                    </div>
+                    <div class="col-sm-6 form-group">
+                        <label>E-Mail</label>
+                        <input type="text" id="txtEmail" data-column="EmailID" class="form-control" />
+                    </div>
+                    <div class="col-sm-6 form-group">
+                        <label>Weekly Off</label>
+                        <select class="form-control" id="ddlWeeklyOff" data-column="WeeklyOff">
+                            <option value="">Select</option>
+                            <option value="Sunday">Sunday</option>
+                            <option value="Monday">Monday</option>
+                            <option value="Tuesday">Tuesday</option>
+                            <option value="Wednesday">Wednesday</option>
+                            <option value="Thursday">Thursday</option>
+                            <option value="Friday">Friday</option>
+                            <option value="Saturday">Saturday</option>
+                        </select>
+                    </div>
+                    <div class="col-sm-6 form-group">
+                        <label>Admin Password</label>
+                        <input type="password" id="txtPassword" data-column="UserPwd" class="form-control" />
+                    </div>
+                    <div class="col-sm-6 form-group clsAdminPart" style="display:none">
+                        <label>From Date</label>
+                        <input type="date" id="txtExpiryFromDate" data-column="ExpiryDate" class="form-control" />
+                    </div>
+                    <div class="col-sm-6 form-group clsAdminPart" style="display:none">
+                        <label>To Date</label>
+                        <input type="date" id="txtExpiryToDate" data-column="ExpiryDate" class="form-control" />
+                    </div>
+                    <div class="col-sm-6 form-group clsAdminPart" style="display:none">
+                        <label>Software Type</label>
+                        <select id="ddlSoftType" class="form-control">
+                            <option value="TV">Trial Version Installed</option>
+                            <option value="LV">Live Version Installed</option>
+                        </select>
+                    </div>
+
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button id="btnSubmitClinicRecords" type="button" class="btn btn-success waves-effect">Submit</button>
+                <button type="button" class="btn btn-danger waves-effect" data-dismiss="modal">Cancel</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script type="text/javascript" src="JS/Controllers/ClinicRecords.js?1"></script>

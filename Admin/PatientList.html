@@ -1,0 +1,512 @@
+﻿
+<style type="text/css">
+    .actionbutton {
+        display: block;
+        width: 27px;
+        height: 29px;
+        border-radius: 15px;
+        padding: 4px;
+        border: 1px solid #ccc !important;
+        margin-right: 4px;
+        clear: both;
+        font-weight: 400;
+        color: #212529;
+        text-align: center;
+        white-space: nowrap;
+        background-color: transparent;
+    }
+
+    .fa-eye {
+        font-size: 20px;
+        /*color: #28a745;*/
+    }
+
+    #tblResult td:nth-child(10) {
+        text-align: center;
+    }
+    .captured {
+        background: #ffc107;
+    }
+</style>
+
+<div class="container-fluid">
+    <div class="page-wrapper bg-white">
+        <div class="page-body">
+            <ul class="line nav nav-tabs">
+                <li id="liPatientList" data-mid="9"  class="nav-item clsClinicRights">
+                    <a class="nav-link waves-effect active" data-toggle="tab" href="#PatientList" target="_self">Patient List</a>
+                </li>
+                <li id="liVisitBook" data-mid="10" class="nav-item clsClinicRights">
+                    <a id="ancVisitBook" class="nav-link waves-effect" data-toggle="tab" href="#VisitBook" target="_self">Visit Book</a>
+                </li>
+                <li>
+                    <div class=" d-flex" style="float:right; margin-top:6px;">
+                        <a data-toggle="modal" href="#ThumbScanningModal"><img src="../images/thumb.jpg" style="height:33px;" class="mr-2" /></a>
+                        <div class="input-group mr-3" style="width: 200px;">
+                            <input class="form-control" id="txtPatSearch" onchange="fn_FillGrid();" type="search" placeholder="PID / Name / Mobile No." />
+                            <div class="input-group-append">
+                                <button class="btn btn-first" onclick="fn_FillGrid();">
+                                    <i class="fa fa-search"></i>
+                                </button>
+                            </div>
+                        </div>
+                        <div class="dropdown" id="divMissingList" style="display:none;">
+                            <button type="button" class="btn btn-outline-first dropdown-toggle" data-toggle="dropdown">
+                                Missing List
+                            </button>
+                            <div class="dropdown-menu dropdown-menu-right">
+                                <a class="dropdown-item" data-backdrop="static" data-toggle="modal" data-target="#OPDMissingListModal">OPD Missing List</a>
+                                <a class="dropdown-item" data-backdrop="static" data-toggle="modal" data-target="#AppointmentMissingListModal">Appointment Missing List</a>
+                            </div>
+                        </div>
+                    </div>
+                </li>
+            </ul>
+            <div class="tab-content">
+                <div class="tab-pane fade show active p-3" id="PatientList">
+                    <div class="row">
+                        <div class="col-12 form-group form-inline clsClinicList" style="display:none;">
+                            <label>List of Clinics :&nbsp;</label>
+                            <div class="input-group">
+                                <select id="ddlClinicList" class="form-control"></select>
+                                <div class="input-group-append">
+                                    <button id="btnSearchPatients" class="btn btn-first"><i class="fa fa-search"></i></button>
+                                    <!--<button id="btnAddNewPatients" class="btn btn-first">Add new patient</button>-->
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-12">
+                            <div style="text-align: right; font-weight: 600; color: #17a2bc; font-size: 17px;">Total Count: <span id="spnRecordCount">0</span></div>
+                            <div id="GridResult" class="table-responsive"></div>
+                        </div>
+                    </div>
+
+                    <!--<div class="table-responsive">
+
+                        <table class="table table-bordered m-0">
+                            <thead>
+                                <tr>
+                                    <th class="text-center">PID           </th>
+                                    <th class="text-center">Date of Reg   </th>
+                                    <th>Name          </th>
+                                    <th class="text-center">Gender        </th>
+                                    <th class="text-center">Age           </th>
+                                    <th>Address       </th>
+                                    <th class="text-center">Mobile        </th>
+                                    <th>Email         </th>
+                                    <th>Medical History</th>
+                                    <th></th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td class="text-center">1427</td>
+                                    <td class="text-center">17/06/2018</td>
+                                    <td>Rohit Sopan More</td>
+                                    <td class="text-center">M</td>
+                                    <td class="text-center">15</td>
+                                    <td>Palsi</td>
+                                    <td class="text-center">9552517878</td>
+                                    <td>test@gmail.com</td>
+                                    <td>NA</td>
+                                    <td class="text-center">
+                                        <div class="dropdown d-inline-block">
+                                            <button type="button" class="btn icon-round-btn dropdown-toggle no-arrow waves-effect" data-toggle="dropdown">
+                                                <i class="fa fa-ellipsis-h"></i>
+                                            </button>
+                                            <div class="dropdown-menu dropdown-menu-right">
+                                                <a class="dropdown-item" href="/Home/Treatments"><i class="fa fa-eye"></i><span>View Treatment</span></a>
+                                                <a class="dropdown-item" href="#"><i class="fa fa-plus"></i><span>Add to WL</span></a>
+                                                <a class="dropdown-item" href="#"><i class="fa fa-pencil"></i><span>Edit</span></a>
+                                                <a class="dropdown-item" href="#"><i class="fa fa-trash-o"></i><span>Delete</span></a>
+                                            </div>
+                                        </div>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td class="text-center">1427</td>
+                                    <td class="text-center">17/06/2018</td>
+                                    <td>Rohit Sopan More</td>
+                                    <td class="text-center">M</td>
+                                    <td class="text-center">15</td>
+                                    <td>Palsi</td>
+                                    <td class="text-center">9552517878</td>
+                                    <td>test@gmail.com</td>
+                                    <td>NA</td>
+                                    <td class="text-center">
+                                        <div class="dropdown d-inline-block">
+                                            <button type="button" class="btn icon-round-btn dropdown-toggle no-arrow waves-effect" data-toggle="dropdown">
+                                                <i class="fa fa-ellipsis-h"></i>
+                                            </button>
+                                            <div class="dropdown-menu dropdown-menu-right">
+                                                <a class="dropdown-item" href="/Home/Treatments"><i class="fa fa-eye"></i><span>View Treatment</span></a>
+                                                <a class="dropdown-item" href="#"><i class="fa fa-plus"></i><span>Add to WL</span></a>
+                                                <a class="dropdown-item" href="#"><i class="fa fa-pencil"></i><span>Edit</span></a>
+                                                <a class="dropdown-item" href="#"><i class="fa fa-trash-o"></i><span>Delete</span></a>
+                                            </div>
+                                        </div>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td class="text-center">1427</td>
+                                    <td class="text-center">17/06/2018</td>
+                                    <td>Rohit Sopan More</td>
+                                    <td class="text-center">M</td>
+                                    <td class="text-center">15</td>
+                                    <td>Palsi</td>
+                                    <td class="text-center">9552517878</td>
+                                    <td>test@gmail.com</td>
+                                    <td>NA</td>
+                                    <td class="text-center">
+                                        <div class="dropdown d-inline-block">
+                                            <button type="button" class="btn icon-round-btn dropdown-toggle no-arrow waves-effect" data-toggle="dropdown">
+                                                <i class="fa fa-ellipsis-h"></i>
+                                            </button>
+                                            <div class="dropdown-menu dropdown-menu-right">
+                                                <a class="dropdown-item" href="/Home/Treatments"><i class="fa fa-eye"></i><span>View Treatment</span></a>
+                                                <a class="dropdown-item" href="#"><i class="fa fa-plus"></i><span>Add to WL</span></a>
+                                                <a class="dropdown-item" href="#"><i class="fa fa-pencil"></i><span>Edit</span></a>
+                                                <a class="dropdown-item" href="#"><i class="fa fa-trash-o"></i><span>Delete</span></a>
+                                            </div>
+                                        </div>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td class="text-center">1427</td>
+                                    <td class="text-center">17/06/2018</td>
+                                    <td>Rohit Sopan More</td>
+                                    <td class="text-center">M</td>
+                                    <td class="text-center">15</td>
+                                    <td>Palsi</td>
+                                    <td class="text-center">9552517878</td>
+                                    <td>test@gmail.com</td>
+                                    <td>NA</td>
+                                    <td class="text-center">
+                                        <div class="dropdown d-inline-block">
+                                            <button type="button" class="btn icon-round-btn dropdown-toggle no-arrow waves-effect" data-toggle="dropdown">
+                                                <i class="fa fa-ellipsis-h"></i>
+                                            </button>
+                                            <div class="dropdown-menu dropdown-menu-right">
+                                                <a class="dropdown-item" href="/Home/Treatments"><i class="fa fa-eye"></i><span>View Treatment</span></a>
+                                                <a class="dropdown-item" href="#"><i class="fa fa-plus"></i><span>Add to WL</span></a>
+                                                <a class="dropdown-item" href="#"><i class="fa fa-pencil"></i><span>Edit</span></a>
+                                                <a class="dropdown-item" href="#"><i class="fa fa-trash-o"></i><span>Delete</span></a>
+                                            </div>
+                                        </div>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td class="text-center">1427</td>
+                                    <td class="text-center">17/06/2018</td>
+                                    <td>Rohit Sopan More</td>
+                                    <td class="text-center">M</td>
+                                    <td class="text-center">15</td>
+                                    <td>Palsi</td>
+                                    <td class="text-center">9552517878</td>
+                                    <td>test@gmail.com</td>
+                                    <td>NA</td>
+                                    <td class="text-center">
+                                        <div class="dropdown d-inline-block">
+                                            <button type="button" class="btn icon-round-btn dropdown-toggle no-arrow waves-effect" data-toggle="dropdown">
+                                                <i class="fa fa-ellipsis-h"></i>
+                                            </button>
+                                            <div class="dropdown-menu dropdown-menu-right">
+                                                <a class="dropdown-item" href="/Home/Treatments"><i class="fa fa-eye"></i><span>View Treatment</span></a>
+                                                <a class="dropdown-item" href="#"><i class="fa fa-plus"></i><span>Add to WL</span></a>
+                                                <a class="dropdown-item" href="#"><i class="fa fa-pencil"></i><span>Edit</span></a>
+                                                <a class="dropdown-item" href="#"><i class="fa fa-trash-o"></i><span>Delete</span></a>
+                                            </div>
+                                        </div>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td class="text-center">1427</td>
+                                    <td class="text-center">17/06/2018</td>
+                                    <td>Rohit Sopan More</td>
+                                    <td class="text-center">M</td>
+                                    <td class="text-center">15</td>
+                                    <td>Palsi</td>
+                                    <td class="text-center">9552517878</td>
+                                    <td>test@gmail.com</td>
+                                    <td>NA</td>
+                                    <td class="text-center">
+                                        <div class="dropdown d-inline-block">
+                                            <button type="button" class="btn icon-round-btn dropdown-toggle no-arrow waves-effect" data-toggle="dropdown">
+                                                <i class="fa fa-ellipsis-h"></i>
+                                            </button>
+                                            <div class="dropdown-menu dropdown-menu-right">
+                                                <a class="dropdown-item" href="/Home/Treatments"><i class="fa fa-eye"></i><span>View Treatment</span></a>
+                                                <a class="dropdown-item" href="#"><i class="fa fa-plus"></i><span>Add to WL</span></a>
+                                                <a class="dropdown-item" href="#"><i class="fa fa-pencil"></i><span>Edit</span></a>
+                                                <a class="dropdown-item" href="#"><i class="fa fa-trash-o"></i><span>Delete</span></a>
+                                            </div>
+                                        </div>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td class="text-center">1427</td>
+                                    <td class="text-center">17/06/2018</td>
+                                    <td>Rohit Sopan More</td>
+                                    <td class="text-center">M</td>
+                                    <td class="text-center">15</td>
+                                    <td>Palsi</td>
+                                    <td class="text-center">9552517878</td>
+                                    <td>test@gmail.com</td>
+                                    <td>NA</td>
+                                    <td class="text-center">
+                                        <div class="dropdown d-inline-block">
+                                            <button type="button" class="btn icon-round-btn dropdown-toggle no-arrow waves-effect" data-toggle="dropdown">
+                                                <i class="fa fa-ellipsis-h"></i>
+                                            </button>
+                                            <div class="dropdown-menu dropdown-menu-right">
+                                                <a class="dropdown-item" href="/Home/Treatments"><i class="fa fa-eye"></i><span>View Treatment</span></a>
+                                                <a class="dropdown-item" href="#"><i class="fa fa-plus"></i><span>Add to WL</span></a>
+                                                <a class="dropdown-item" href="#"><i class="fa fa-pencil"></i><span>Edit</span></a>
+                                                <a class="dropdown-item" href="#"><i class="fa fa-trash-o"></i><span>Delete</span></a>
+                                            </div>
+                                        </div>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td class="text-center">1427</td>
+                                    <td class="text-center">17/06/2018</td>
+                                    <td>Rohit Sopan More</td>
+                                    <td class="text-center">M</td>
+                                    <td class="text-center">15</td>
+                                    <td>Palsi</td>
+                                    <td class="text-center">9552517878</td>
+                                    <td>test@gmail.com</td>
+                                    <td>NA</td>
+                                    <td class="text-center">
+                                        <div class="dropdown d-inline-block">
+                                            <button type="button" class="btn icon-round-btn dropdown-toggle no-arrow waves-effect" data-toggle="dropdown">
+                                                <i class="fa fa-ellipsis-h"></i>
+                                            </button>
+                                            <div class="dropdown-menu dropdown-menu-right">
+                                                <a class="dropdown-item" href="/Home/Treatments"><i class="fa fa-eye"></i><span>View Treatment</span></a>
+                                                <a class="dropdown-item" href="#"><i class="fa fa-plus"></i><span>Add to WL</span></a>
+                                                <a class="dropdown-item" href="#"><i class="fa fa-pencil"></i><span>Edit</span></a>
+                                                <a class="dropdown-item" href="#"><i class="fa fa-trash-o"></i><span>Delete</span></a>
+                                            </div>
+                                        </div>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td class="text-center">1427</td>
+                                    <td class="text-center">17/06/2018</td>
+                                    <td>Rohit Sopan More</td>
+                                    <td class="text-center">M</td>
+                                    <td class="text-center">15</td>
+                                    <td>Palsi</td>
+                                    <td class="text-center">9552517878</td>
+                                    <td>test@gmail.com</td>
+                                    <td>NA</td>
+                                    <td class="text-center">
+                                        <div class="dropdown d-inline-block">
+                                            <button type="button" class="btn icon-round-btn dropdown-toggle no-arrow waves-effect" data-toggle="dropdown">
+                                                <i class="fa fa-ellipsis-h"></i>
+                                            </button>
+                                            <div class="dropdown-menu dropdown-menu-right">
+                                                <a class="dropdown-item" href="/Home/Treatments"><i class="fa fa-eye"></i><span>View Treatment</span></a>
+                                                <a class="dropdown-item" href="#"><i class="fa fa-plus"></i><span>Add to WL</span></a>
+                                                <a class="dropdown-item" href="#"><i class="fa fa-pencil"></i><span>Edit</span></a>
+                                                <a class="dropdown-item" href="#"><i class="fa fa-trash-o"></i><span>Delete</span></a>
+                                            </div>
+                                        </div>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td class="text-center">1427</td>
+                                    <td class="text-center">17/06/2018</td>
+                                    <td>Rohit Sopan More</td>
+                                    <td class="text-center">M</td>
+                                    <td class="text-center">15</td>
+                                    <td>Palsi</td>
+                                    <td class="text-center">9552517878</td>
+                                    <td>test@gmail.com</td>
+                                    <td>NA</td>
+                                    <td class="text-center">
+                                        <div class="dropdown d-inline-block">
+                                            <button type="button" class="btn icon-round-btn dropdown-toggle no-arrow waves-effect" data-toggle="dropdown">
+                                                <i class="fa fa-ellipsis-h"></i>
+                                            </button>
+                                            <div class="dropdown-menu dropdown-menu-right">
+                                                <a class="dropdown-item" href="/Home/Treatments"><i class="fa fa-eye"></i><span>View Treatment</span></a>
+                                                <a class="dropdown-item" href="#"><i class="fa fa-plus"></i><span>Add to WL</span></a>
+                                                <a class="dropdown-item" href="#"><i class="fa fa-pencil"></i><span>Edit</span></a>
+                                                <a class="dropdown-item" href="#"><i class="fa fa-trash-o"></i><span>Delete</span></a>
+                                            </div>
+                                        </div>
+                                    </td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>-->
+                </div>
+                <div class="tab-pane fade p-3" id="VisitBook">
+                    <div class="row row-small-space">
+                        <div class="col-12 col-md-4 col-lg-4">
+                            <div class="card">
+                                <div class="card-header alert-primary">
+                                    <h6 class="card-title">Todays Appointments (<span id="spnAptCount">0</span>)</h6>
+                                    <div>
+                                        <a href="javascript:undefined;" onclick="PrintTodaysApt()" data-toggle="tooltip" title="Print" class="btn small icon-round-btn"><i class="fa fa-print"></i></a>
+                                    </div>
+                                </div>
+                                <div class="card-body p-0">
+                                    <div class="table-responsive">
+                                        <table id="tbltodaysApt" class="table table-bordered tablebordered-nolr">
+                                            <thead class="no-bg">
+                                                <tr>
+                                                    <th class="text-center">SrNo</th>
+                                                    <th class="text-center">Time</th>
+                                                    <th>Patient Name</th>
+                                                    <th>Appointment For</th>
+                                                    <th>Doctor Name</th>
+                                                    <th></th>
+                                                </tr>
+                                            </thead>
+                                            <tbody id="tblApts">
+                                            </tbody>
+                                        </table>
+                                    </div>
+                                </div>
+                            </div>
+
+                        </div>
+                        <div class="col-12 col-md-4 col-lg-4">
+                            <div class="card">
+                                <div class="card-header alert-danger">
+                                    <h6 class="card-title">OPD Patients (<span id="spnOPDCount">0</span>)</h6>
+                                </div>
+                                <div class="card-body p-0">
+                                    <div class="table-responsive">
+                                        <table class="table table-bordered tablebordered-nolr">
+                                            <thead class="no-bg">
+                                                <tr>
+                                                    <th class="text-center">SrNo</th>
+                                                    <th class="text-center">Time</th>
+                                                    <th>Patient Name</th>
+                                                    <th></th>
+                                                </tr>
+                                            </thead>
+                                            <tbody id="tblOPD">
+                                            </tbody>
+                                        </table>
+                                    </div>
+                                </div>
+                            </div>
+
+                        </div>
+                        <div class="col-12 col-md-4 col-lg-4">
+                            <div class="card">
+                                <div class="card-header alert-success">
+                                    <h6 class="card-title">Check-In List (<span id="spnCICount">0</span>)</h6>
+                                </div>
+                                <div class="card-body p-0">
+                                    <div class="table-responsive">
+                                        <table class="table table-bordered tablebordered-nolr">
+                                            <thead class="no-bg">
+                                                <tr>
+                                                    <th class="text-center">SrNo</th>
+                                                    <th class="text-center">Check-In</th>
+                                                    <th>Patient Name</th>
+                                                    <th></th>
+                                                </tr>
+                                            </thead>
+                                            <tbody id="tblCI">
+                                            </tbody>
+                                        </table>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+    </div>
+</div>
+
+<div class="modal fade" id="OPDMissingListModal">
+    <div class="modal-dialog modal-lg">
+        <div class="modal-content">
+            <div class="modal-header alert-warning">
+                <h4 class="modal-title card-title">OPD Missing List (<span id="spnOPDMICount">0</span>)</h4>
+                <button type="button" class="close" data-dismiss="modal">&times;</button>
+            </div>
+            <div class="modal-body p-0">
+                <div class="table-responsive">
+                    <table class="table table-bordered tablebordered-nolr">
+                        <thead class="no-bg">
+                            <tr>
+                                <th class="text-center">SrNo</th>
+                                <th class="text-center">IN-Time</th>
+                                <th>Patient Name</th>
+                                <th></th>
+                            </tr>
+                        </thead>
+                        <tbody id="tblOPDMissing"></tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="modal fade" id="AppointmentMissingListModal">
+    <div class="modal-dialog modal-lg">
+        <div class="modal-content">
+            <div class="modal-header alert-warning">
+                <h4 class="modal-title card-title">Appointment Missing List (<span id="spnAptMissingCount">0</span>)</h4>
+                <button type="button" class="close" data-dismiss="modal">&times;</button>
+            </div>
+            <div class="modal-body p-0">
+                <div class="table-responsive">
+                    <table class="table table-bordered tablebordered-nolr">
+                        <thead class="no-bg">
+                            <tr>
+                                <th class="text-center">SrNo</th>
+                                <th class="text-center">Time</th>
+                                <th>Patient Name</th>
+                                <th>Appointment For</th>
+                                <th>Doctor Name</th>
+                                <th></th>
+                            </tr>
+                        </thead>
+                        <tbody id="tblAptMissing"></tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+<div class="modal fade" id="ThumbScanningModal">
+    <div class="modal-dialog modal-sm">
+        <div class="modal-content">
+            <div class="modal-body p-0">
+                <div style="width: 130px; margin: 50px auto;">
+                    <img src="../images/bioscanning.jpg"  class="img-fluid" />
+                    <div><button id="btnMathchingThumb" onclick="matchthumb();" style="width:100%" class="btn btn-info">Put your thumb and press</button></div>
+                    <div style="text-align: center; color: #f00;" id="divThumbChecking"></div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+<script type="text/javascript" src="JS/Controllers/PatientRecords.js?1"></script>
+
+<style type="text/css">
+    .page-body > .line > li {
+        flex: 0 0 120px;
+    }
+
+        .page-body > .line > li:nth-child(3) {
+            flex: 0 0 calc(100% - 240px) !important;
+        }
+</style>

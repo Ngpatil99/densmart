@@ -1,0 +1,265 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8" />
+    <title>Quotation Print</title>
+
+    <style type="text/css">
+
+        @page {
+            size: A4 portrait;
+            padding: 15px;
+        }
+
+        @media print {
+            body * {
+                visibility: hidden;
+            }
+
+            .headerinside {
+                height: 150px !important;
+            }
+
+            .table > thead > tr > td, .table > thead > tr > th, .table > tbody > tr > th {
+                font-size: 1.5rem !important;
+            }
+
+            .PrintReceipts .tdpatch h3.tdheader {
+                font-size: 1.7rem !important;
+            }
+
+            .PrintReceipts, .PrintReceipts * {
+                visibility: visible;
+                font-size: 1.5rem;
+            }
+
+            .PrintReceipts {
+                position: absolute;
+                left: 0;
+                top: 0;
+            }
+
+            .tdpatch {
+                padding-top: 35px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="Prints">
+        <div class="btns">
+            <button class="btn btn-outline-first" onclick="history.go(-1);"><i class="fa fa-arrow-left"></i><span>Go Back</span></button>
+            <button class="btn btn-first" onclick="whatsup();"><i class="fa fa-whatsapp"></i><span>Whatsapp</span></button>
+            <button class="btn btn-first" onclick="window.print();"><i class="fa fa-print"></i><span>Print</span></button>
+            <label class="checkbox" style="padding-left: 5px; "><input checked="checked" type="checkbox" id="chkHideShow" /> <i></i><span>Show/Hide Header/Footer</span></label>
+
+        </div>
+        <div class="PrintReceipts">
+            <table>
+                <thead>
+                    <tr>
+                        <th class="headerheight">
+                            <div class="header">
+                                <div class="headerinside">
+                                    <div class="headerleft">
+                                        <div class="DrName DrName1 clsHeaderHide"></div>
+                                        <span id="q1" class="clsHeaderHide"></span>
+                                        <span id="r1" class="clsHeaderHide">Reg No. </span>
+                                        <span id="m1" class="clsHeaderHide"></span>
+                                    </div>
+                                    <div class="headercenter" style="display: block;">
+                                        <div class="ClinicLogo clsHeaderHide" style="display: block;"></div>
+                                        <div class="ClinicName clsHeaderHide"></div>
+                                        <div class="ClinicAddress clsHeaderHide"></div>
+                                    </div>
+                                    <div class="headerright">
+                                        <div class="DrName DrName2 clsHeaderHide"></div>
+                                        <span id="q2" class="clsHeaderHide"></span>
+                                        <span id="r2" class="clsHeaderHide">Reg No.</span>
+                                        <span id="m2" class="clsHeaderHide"></span>
+                                    </div>
+                                </div>
+                                <div class="twopart">
+                                    <div class="left">
+                                        Quotation No :  <span id="qno"></span>
+                                    </div>
+                                    <div class="right">
+                                        Date: <span id="cdate"></span>
+                                    </div>
+                                </div>
+                                <div class="twopart">
+                                    <div class="left">
+                                        Patient : <span id="patname"></span><span class="divider">|</span><span id="patgender"></span><span class="divider">|</span><span id="patage"></span>
+                                    </div>
+                                    <!--<div class="right">
+                                        Date: <span id="cdate"></span>
+                                    </div>-->
+                                </div>
+                            </div>
+                        </th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>
+                            <table class="table table-bordered">
+                                <thead>
+                                    <tr>
+                                        <th>Treatment / Description</th>
+                                        <th class="text-center">Tooth No</th>
+                                        <th class="text-center">No of Units</th>
+                                        <th class="text-center">Per Unit Charges</th>
+                                        <th class="text-center">Sub Total</th>
+                                    </tr>
+                                </thead>
+                                <tbody id="tblQuotation">
+                                    <tr>
+                                        <td>Root Canal</td>
+                                        <td class="text-center"></td>
+                                        <td class="text-center"></td>
+                                        <td class="text-center"></td>
+                                        <td class="text-center"></td>
+                                    </tr>
+
+                                </tbody>
+                            </table>
+                            <div style="width:200mm!important; margin:0;">
+                                <div class="Sign">
+                                    <img style="display:none" id="imgdoctorsign" src="../images/DemoSign.jpg" />
+                                    <strong id="doctorsignname"></strong>
+                                </div>
+                            </div>
+                        </td>
+                    </tr>
+                </tbody>
+                <tfoot>
+                    <tr>
+                        <td class="footerheight">
+                            <div class="footer">
+                                <div class="footerinside">
+                                    <div class="ClinicName clsHeaderHide"></div>
+                                    <div class="ClinicAddress clsHeaderHide"></div>
+                                </div>
+                            </div>
+                        </td>
+                    </tr>
+                </tfoot>
+            </table>
+
+            <!--<table>
+                <thead>
+                    <tr>
+                        <th class="headerheight">
+                            <div class="header">
+                                <div class="headerinside">
+                                    <div class="headerleft">
+                                        <div class="DrName">Dr. Pallavi Ugale</div>
+                                        <span>B.D.S</span>
+                                        <span>Reg No. A-17119</span>
+                                        <span><i class="fa fa-phone"></i> 9960110376</span>
+                                    </div>
+                                    <div class="headercenter">
+                                        <div class="ClinicName">ANVI CLINIC</div>
+                                        <div class="ClinicAddress">In front of VIT College, pune Bibwewadi</div>
+                                    </div>
+                                    <div class="headerright">
+                                        <div class="DrName">Dr. Pallavi Ugale</div>
+                                        <span>B.D.S</span>
+                                        <span>Reg No. A-17119</span>
+                                        <span><i class="fa fa-phone"></i> 9960110376</span>
+                                    </div>
+                                </div>
+                                <div class="twopart">
+                                    <div class="left">
+                                        Quotation No :  67
+                                    </div>
+                                    <div class="right">
+                                        Date: 07-04-2022
+                                    </div>
+                                </div>
+                                <div class="twopart">
+                                    <div class="left">
+                                        Patient : Onkar R Ugale<span class="divider">|</span>M<span class="divider">|</span>32
+                                    </div>
+                                </div>
+                            </div>
+                        </th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>
+                            <table class="table table-bordered">
+                                <thead>
+                                    <tr>
+                                        <th>Treatment / Description</th>
+                                        <th class="text-center">Tooth No</th>
+                                        <th class="text-center">No of Units</th>
+                                        <th class="text-center">Per Unit Charges</th>
+                                        <th class="text-center">Sub Total</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr>
+                                        <td>Root Canal</td>
+                                        <td class="text-center">12 14 15</td>
+                                        <td class="text-center">03</td>
+                                        <td class="text-center">5000</td>
+                                        <td class="text-center">15000</td>
+                                    </tr>
+                                    <tr>
+                                        <td>Ceramic cap</td>
+                                        <td class="text-center"></td>
+                                        <td class="text-center">02</td>
+                                        <td class="text-center">2000</td>
+                                        <td class="text-center">4000</td>
+                                    </tr>
+                                    <tr>
+                                        <td>Extraction</td>
+                                        <td class="text-center">23 24</td>
+                                        <td class="text-center">02</td>
+                                        <td class="text-center">600</td>
+                                        <td class="text-center">1200</td>
+                                    </tr>
+                                    <tr class="strong">
+                                        <td colspan="4">Total</td>
+                                        <td class="text-center">Rs. 20200</td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                            <div class="Sign">
+                                <img src="../images/DemoSign.jpg" />
+                                <strong>Dr. Pallavi Ugale</strong>
+                            </div>
+                        </td>
+                    </tr>
+                </tbody>
+                <tfoot>
+                    <tr>
+                        <td class="footerheight">
+                            <div class="footer">
+                                <div class="footerinside">
+                                    <div class="ClinicName">ANVI CLINIC</div>
+                                    <div class="ClinicAddress">In front of VIT College, pune Bibwewadi</div>
+                                </div>
+                            </div>
+                        </td>
+                    </tr>
+                </tfoot>
+            </table>-->
+        </div>
+    </div>
+
+    <script type="text/javascript">
+        setTimeout(function () {
+            var thead = $('.header').height();
+            var tfoot = $('.footer').height();
+            $('.headerheight').css("height", thead + 60);
+            $('.footerheight').css("height", tfoot + 20);
+        }, 100);
+    </script>
+    <script type="text/javascript" src="JS/Controllers/PrintQuotation.js?v=1">
+       
+    </script>
+</body>
+</html>

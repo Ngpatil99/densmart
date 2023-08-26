@@ -1,0 +1,152 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8" />
+    <title>Consent Form Print</title>
+
+
+    <style type="text/css">
+
+        @page {
+            size: A4 portrait;
+            padding: 15px;
+        }
+
+        @media print {
+            body * {
+                visibility: hidden;
+            }
+
+            .headerinside {
+                height: 150px !important;
+            }
+
+            .table > thead > tr > td, .table > thead > tr > th, .table > tbody > tr > th {
+                font-size: 1.5rem !important;
+            }
+
+            .PrintReceipts .tdpatch h3.tdheader {
+                font-size: 1.7rem !important;
+            }
+
+            .PrintReceipts, .PrintReceipts * {
+                visibility: visible;
+                font-size: 1.5rem;
+            }
+
+            .PrintReceipts {
+                position: absolute;
+                left: 0;
+                top: 0;
+            }
+
+            .tdpatch {
+                padding-top: 35px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="Prints">
+        <div class="btns">
+            <button class="btn btn-outline-first" onclick="history.go(-1);"><i class="fa fa-arrow-left"></i><span>Go Back</span></button>
+            <button class="btn btn-first" onclick="whatsup();"><i class="fa fa-whatsapp"></i><span>Whatsapp</span></button>
+            <button class="btn btn-first" onclick="window.print();"><i class="fa fa-print"></i><span>Print</span></button>
+            <label class="checkbox" style="padding-left: 5px; "><input checked="checked" type="checkbox" id="chkHideShow" /> <i></i><span>Show/Hide Header/Footer</span></label>
+
+        </div>
+        <div class="PrintReceipts">
+            <table>
+                <thead>
+                    <tr>
+                        <th class="headerheight">
+                            <div class="header">
+                                <div class="headerinside">
+                                    <div class="headerleft">
+                                        <div class="DrName DrName1 clsHeaderHide"></div>
+                                        <span id="q1" class="clsHeaderHide"></span>
+                                        <span id="r1" class="clsHeaderHide">Reg No. </span>
+                                        <span id="m1" class="clsHeaderHide"></span>
+                                    </div>
+                                    <div class="headercenter" style="display:block">
+                                        <div class="ClinicLogo clsHeaderHide" style="display: block;"></div>
+                                        <div class="ClinicName clsHeaderHide"></div>
+                                        <div class="ClinicAddress clsHeaderHide"></div>
+                                    </div>
+                                    <div class="headerright">
+                                        <div class="DrName DrName2 clsHeaderHide"></div>
+                                        <span id="q2" class="clsHeaderHide"></span>
+                                        <span id="r2" class="clsHeaderHide">Reg No.</span>
+                                        <span id="m2" class="clsHeaderHide"></span>
+                                    </div>
+                                </div>
+                                <div class="twopart">
+                                    <div class="left">
+                                        Patient : <span id="patname"></span><span class="divider">|</span><span id="patgender"></span><span class="divider">|</span><span id="patage"></span>
+                                    </div>
+                                    <div class="right">
+                                        Date: <span id="cdate"></span>
+                                    </div>
+                                </div>
+                            </div>
+                        </th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>
+                            <div style="width:200mm!important; margin:0;">
+                                <div id="divConsentForm" style="width: 94%; margin: 0px auto;"></div>
+                                <div class="Sign" style="width: 50%; float: left; padding-left: 60px;text-align:left ">
+                                    <img style="display:none" id="imgdoctorsign" src="../images/DemoSign.jpg" />
+                                    <strong id="doctorsignname"></strong>
+                                </div>
+                                <div class="Sign" style="width: 50%; float: right; padding-right: 60px; ">
+                                    <img id="thumbconcent" src="images/thumb.jpg" style="width: 70px; margin-right: 60px;" onclick="captureimage(this);" />
+                                    <strong id="lblStatus"></strong>
+
+                                </div>
+                            </div>
+
+
+
+
+
+                        </td>
+
+                    </tr>
+                </tbody>
+                <tfoot>
+                    <tr>
+                        <td class="footerheight">
+                            <div class="footer">
+                                <div class="footerinside">
+                                    <div class="ClinicName clsHeaderHide"></div>
+                                    <div class="ClinicAddress clsHeaderHide"></div>
+                                </div>
+                            </div>
+                        </td>
+                    </tr>
+                </tfoot>
+            </table>
+        </div>
+    </div>
+
+    <script type="text/javascript">
+        setTimeout(function () {
+            var thead = $('.header').height();
+            var tfoot = $('.footer').height();
+            $('.headerheight').css("height", thead + 60);
+            $('.footerheight').css("height", tfoot + 20);
+        }, 100);
+    </script>
+    <script type="text/javascript" src="JS/Controllers/LabRecord.js?v=1"></script>
+</body>
+</html>
+
+
+
+
+
+
+

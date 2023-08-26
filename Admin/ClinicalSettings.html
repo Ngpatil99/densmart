@@ -1,0 +1,568 @@
+﻿
+<div class="container-fluid">
+    <div class="page-wrapper bg-white">
+        <div class="page-header">
+            <h2>Common Settings</h2>
+
+        </div>
+        <div class="page-body">
+            <div class="nav-tabs-left">
+                <ul id="ulSettings" class="nav nav-tabs">
+                    <li id="TabDoctorMaster" class="nav-item clsAdminView">
+                        <a class="nav-link active waves-effect" data-toggle="tab" href="#DoctorsTab" target="_self">Doctors</a>
+                    </li>
+                    <li id="TabRefDoctorMaster" class="nav-item clsAdminView">
+                        <a class="nav-link waves-effect" data-toggle="tab" href="#ReferredByDoctorsTab" target="_self">Referred By Doctors</a>
+                    </li>
+                    <!--<li id="TabDoctorIncentive" class="nav-item">
+                        <a class="nav-link waves-effect" data-toggle="tab" href="#IncentivesTab" target="_self">Doctor Incentives</a>
+                    </li>-->
+                    <li id="TabTreatments" class="nav-item clsAdminView">
+                        <a class="nav-link waves-effect" data-toggle="tab" href="#TreatmentsTab" target="_self">Treatments</a>
+                    </li>
+                    <li id="TabMedicines" class="nav-item clsAdminView">
+                        <a class="nav-link waves-effect" data-toggle="tab" href="#MedicinesTab" target="_self">Medicines</a>
+                    </li>
+                    <li id="TabPayMode" class="nav-item">
+                        <a class="nav-link waves-effect" data-toggle="tab" href="#PayMode" target="_self">Payment Mode</a>
+                    </li>
+                    <li id="TabInstructions" class="nav-item clsAdminView">
+                        <a class="nav-link waves-effect" data-toggle="tab" href="#InstructionsTab" target="_self">Instructions</a>
+                    </li>
+                    <li id="TabLabs" class="nav-item clsAdminView">
+                        <a class="nav-link waves-effect" data-toggle="tab" href="#LabsTab" target="_self">Labs</a>
+                    </li>
+                    <li id="TabDealers" class="nav-item clsAdminView">
+                        <a class="nav-link waves-effect" data-toggle="tab" href="#DealersTab" target="_self">Dealers</a>
+                    </li>
+                    <!--<li id="TabRelations" class="nav-item clsAdminView" style="display:none">
+                        <a class="nav-link waves-effect" data-toggle="tab" href="#RelationsTab" target="_self">Relations</a>
+                    </li>-->
+                    <li id="TabTemplates" class="nav-item clsAdminView">
+                        <a class="nav-link waves-effect" data-toggle="tab" href="#TemplatesTab" target="_self">Templates</a>
+                    </li>
+                    <li id="TabDefaults" class="nav-item clsAdminView">
+                        <a class="nav-link waves-effect" data-toggle="tab" href="#DefaultsTab" target="_self">Defaults</a>
+                    </li>
+                </ul>
+
+                <div class="nav-tabs-left-container">
+                    <div class="tab-content">
+                        <div class="tab-pane active" id="DoctorsTab">
+                            <div class="pb-3 form-inline justify-content-center">
+                                <label class="radiobutton mr-3">
+                                    <input id="rdoActiveDoctors" type="radio" name="FilterDorctor">
+                                    <i></i><span>Active</span>
+                                </label>
+                                <label class="radiobutton">
+                                    <input id="rdoAllDoctors" type="radio" name="FilterDorctor">
+                                    <i></i><span>All</span>
+                                </label>
+
+                            </div>
+                            <div id="GridResult" class="table-responsive"></div>
+
+                        </div>
+                        <div class="tab-pane" id="ReferredByDoctorsTab">
+
+                            <div id="GridResult1" class="table-responsive"></div>
+                        </div>
+
+                        <div class="tab-pane" id="IncentivesTab">
+                            <div class="pb-3 form-inline justify-content-center">
+                                <div class="col-4 form-group">
+                                    <label>List of Doctor </label>
+                                    <select id="ddlDoctorList_Inc" class="form-control"></select>
+                                </div>
+
+                            </div>
+                            <div class="col-12">
+                                <div class="table-responsive">
+                                    <table class="table table-bordered table-width-max-content">
+                                        <thead>
+                                            <tr>
+                                                <td>Sr.No</td>
+                                                <td>Treatment Name</td>
+                                                <td>Incentives(%)</td>
+                                            </tr>
+                                        </thead>
+                                        <tbody id="tblTreatmentChart">
+                                        </tbody>
+
+                                    </table>
+                                </div>
+                            </div>
+
+                        </div>
+
+                        <div class="tab-pane fade" id="TreatmentsTab">
+                            <div id="GridResult2" class="table-responsive"></div>
+
+                        </div>
+                        <div class="tab-pane fade" id="MedicinesTab">
+                            <div id="GridResult3" class="table-responsive"></div>
+                        </div>
+                        <div class="tab-pane fade" id="PayMode">
+                            <div id="GridResult9" class="table-responsive"></div>
+                        </div>
+                        <div class="tab-pane fade" id="InstructionsTab">
+                            <div id="GridResult4" class="table-responsive"></div>
+                        </div>
+                        <div class="tab-pane fade" id="LabsTab">
+                            <div class="pb-3 form-inline justify-content-center">
+                                <label class="radiobutton mr-3">
+                                    <input id="rdoLabActive" type="radio" name="rdoLabname">
+                                    <i></i><span>Active</span>
+                                </label>
+                                <label class="radiobutton">
+                                    <input id="rdoLabAll" type="radio" name="rdoLabname">
+                                    <i></i><span>All</span>
+                                </label>
+                            </div>
+                            <div id="GridResult7" class="table-responsive"></div>
+                        </div>
+                        <div class="tab-pane fade" id="DealersTab">
+                            <div class="pb-3 form-inline justify-content-center">
+                                <label class="radiobutton mr-3">
+                                    <input id="rdoDealerActive" type="radio" name="rdoDealerName">
+                                    <i></i><span>Active</span>
+                                </label>
+                                <label class="radiobutton">
+                                    <input id="rdoDealerAll" type="radio" name="rdoDealerName">
+                                    <i></i><span>All</span>
+                                </label>
+                            </div>
+                            <div id="GridResult8" class="table-responsive"></div>
+                        </div>
+                        <div class="tab-pane fade" id="RelationsTab" style="display:none">
+                            <div id="GridResult5" class="table-responsive"></div>
+                            <!--<div class="table-responsive">
+                                <table class="table table-bordered table-width-max-content">
+                                    <thead>
+                                        <tr>
+                                            <th class="text-center">Sr.No.       </th>
+                                            <th class="text-center">Relation Type </th>
+                                            <th class="text-center">
+                                                <a href="#RelationsModal" data-toggle="modal" class="btn btn-light" target="_self">Add New</a>
+                                            </th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr>
+                                            <td class="text-center">1</td>
+                                            <td class="text-center">Distributors</td>
+                                            <td class="text-center">
+                                                <div class="dropdown d-inline-block">
+                                                    <button type="button" class="btn icon-round-btn dropdown-toggle no-arrow waves-effect" data-toggle="dropdown">
+                                                        <i class="fa fa-ellipsis-h"></i>
+                                                    </button>
+                                                    <div class="dropdown-menu dropdown-menu-right">
+                                                        <a class="dropdown-item" href="#RelationsModal" data-toggle="modal" target="_self"><i class="fa fa-pencil"></i><span>Edit</span></a>
+                                                        <a class="dropdown-item" href="#" target="_self"><i class="fa fa-trash-o"></i><span>Delete</span></a>
+                                                    </div>
+                                                </div>
+                                            </td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>-->
+                        </div>
+                        <div class="tab-pane fade" id="TemplatesTab">
+                            <div class="pb-3 form-inline justify-content-center">
+                                <label>Template Type :&nbsp;</label>
+                                <select id="ddlTemplateType" class="form-control">
+                                    <option selected="selected" value="Consent Form">Consent Form</option>
+                                    <option value="Referral Form">Referral Form</option>
+                                    <option value="Quotation">Quotation</option>
+                                    <option value="Receipt">Receipt</option>
+                                </select>
+                            </div>
+                            <div id="GridResult6" class="table-responsive"></div>
+                            <!--<div class="table-responsive">
+                                <table class="table table-bordered table-width-max-content">
+                                    <thead>
+                                        <tr>
+                                            <th class="text-center">Sr.No.       </th>
+                                            <th class="text-center">Template Type</th>
+                                            <th class="text-center">Name</th>
+                                            <th class="text-center">
+                                                <a href="#TemplatesModal" data-toggle="modal" class="btn btn-light" target="_self">Add New Template</a>
+                                            </th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr>
+                                            <td class="text-center">1</td>
+                                            <td class="text-center">Consent Form	</td>
+                                            <td class="text-center">OPD (Marathi)</td>
+                                            <td class="text-center">
+                                                <div class="dropdown d-inline-block">
+                                                    <button type="button" class="btn icon-round-btn dropdown-toggle no-arrow waves-effect" data-toggle="dropdown">
+                                                        <i class="fa fa-ellipsis-h"></i>
+                                                    </button>
+                                                    <div class="dropdown-menu dropdown-menu-right">
+                                                        <a class="dropdown-item" href="#TemplatesModal" data-toggle="modal" target="_self"><i class="fa fa-pencil"></i><span>Edit Template</span></a>
+                                                        <a class="dropdown-item" href="#TemplateFormModal" data-toggle="modal" target="_self"><i class="fa fa-pencil"></i><span>Create Template</span></a>
+                                                        <a class="dropdown-item" href="#" target="_self"><i class="fa fa-trash-o"></i><span>Delete</span></a>
+                                                    </div>
+                                                </div>
+                                            </td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>-->
+                        </div>
+                        <div class="tab-pane fade" id="DefaultsTab">
+                            <div class="table-responsive">
+                                <table class="table table-bordered table-width-max-content">
+                                    <thead>
+                                        <tr>
+                                            <th class="text-center">Place</th>
+                                            <th class="text-center">Clinic Prefix </th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr>
+                                            <td class="text-center">Pune</td>
+                                            <td class="text-center">UDC</td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+
+<div class="modal fade" data-backdrop="static" id="mdlDoctorsModal">
+    <div class="modal-dialog modal-middle">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h4 class="modal-title">Doctors</h4>
+                <button type="button" class="close" data-dismiss="modal">&times;</button>
+            </div>
+            <div class="modal-body">
+                <div class="row">
+                    <div class="form-group col-sm-6">
+                        <label>Doctor Name<span style="color:red;">*</span></label>
+                        <input id="txtDoctorName" type="text" class="form-control" />
+                    </div>
+                    <div class="form-group col-sm-6">
+                        <label>Mobile Number<span style="color:red;">*</span></label>
+                        <input id="txtDoctorMobileNo" maxlength="10" type="number" class="form-control" />
+                    </div>
+                    <div class="form-group col-sm-6">
+                        <label>Commission(%)</label>
+                        <input id="txtDoctorComm" value="0" type="number" class="form-control" />
+                    </div>
+                    <div class="form-group col-sm-6">
+                        <label>Status</label>
+                        <select id="ddlDoctorStatus" class="form-control">
+                            <option value="Active">Active</option>
+                            <option value="Deactive">Deactive</option>
+
+                        </select>
+                    </div>
+                    <div class="form-group col-sm-6">
+                        <label>Is Default</label>
+                        <select id="ddlDoctorIsDefault" class="form-control">
+                            <option value="Yes">Yes</option>
+                            <option value="No">No</option>
+
+                        </select>
+                    </div>
+                    <div class="form-group col-sm-6">
+                        <label>User Role</label>
+                        <select id="ddlDoctorIsOwner" class="form-control">
+                            <option value="Admin">Admin</option>
+                            <option value="Consultant">Consultant</option>
+                            <option value="Payroll">Payroll</option>
+
+                        </select>
+                    </div>
+                    <div class="form-group col-sm-6">
+                        <label>Color</label>
+                        <select id="ddlDoctorColor" class="form-control">
+                            <option style="color:#fff;background-color:red;" value="Red">Red</option>
+                            <option style="color:#fff;background-color: Green;" value="Green">Green</option>
+                            <option style="color:#fff;background-color: Blue;" value="Blue">Blue</option>
+                            <option style="color:#fff;background-color: Black;" value="Black">Black</option>
+                            <option style="color:#fff;background-color: Maroon;" value="Maroon">Maroon</option>
+                            <option style="color:#fff;background-color: Pink;" value="Pink">Pink</option>
+                            <option style="color:#fff;background-color: BlueViolet;" value="BlueViolet">BlueViolet</option>
+                            <option style="color:#fff;background-color: Brown;" value="Brown">Brown</option>
+                            <option style="color:#fff;background-color: Chocolate;" value="Chocolate">Chocolate</option>
+                            <option style="color:#fff;background-color: DarkCyan;" value="DarkCyan">DarkCyan</option>
+                            <option style="color:#fff;background-color: DarkOrange;" value="DarkOrange">DarkOrange</option>
+                            <option style="color:#fff;background-color: DarkTurquoise;" value="DarkTurquoise">DarkTurquoise</option>
+                            <option style="color:#fff;background-color: DarkViolet;" value="DarkViolet">DarkViolet</option>
+                            <option style="color:#fff;background-color: GreenYellow;" value="GreenYellow">GreenYellow</option>
+                            <option style="color:#fff;background-color: Khaki;" value="Khaki">Khaki</option>
+                            <option style="color:#fff;background-color: Indigo;" value="Indigo">Indigo</option>
+                            <option style="color:#fff;background-color: Lavender;" value="Lavender">Lavender</option>
+                            <option style="color:#fff;background-color: LightSeaGreen;" value="LightSeaGreen">LightSeaGreen</option>
+                            <option style="color:#fff;background-color: Magenta;" value="Magenta">Magenta</option>
+                            <option style="color:#fff;background-color: LightSeaGreen;" value="LightSeaGreen">LightSeaGreen</option>
+                            <option style="color:#fff;background-color: NavajoWhite;" value="NavajoWhite">NavajoWhite</option>
+                            <option style="color:#fff;background-color: OliveDrab;" value="OliveDrab">OliveDrab</option>
+                            <option style="color:#fff;background-color: Turquoise;" value="Turquoise">Turquoise</option>
+
+                        </select>
+                    </div>
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button onclick="fn_InsertUpdateDoctorRecord();" type="button" class="btn btn-success waves-effect">Save</button>
+                <button type="button" class="btn btn-danger waves-effect" data-dismiss="modal">Cancel</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="modal fade" data-backdrop="static" id="mdlTreatmentsModal">
+    <div class="modal-dialog modal-small">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h4 class="modal-title">Treatment</h4>
+                <button type="button" class="close" data-dismiss="modal">&times;</button>
+            </div>
+            <div class="modal-body">
+                <div class="">
+                    <label>Treatment Name<span style="color:red;">*</span></label>
+                    <input id="txtTreatmentName" type="text" class="form-control" />
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button onclick="fn_InsertUpdateTreatmentRecord();" type="button" class="btn btn-success waves-effect">Save</button>
+                <button type="button" class="btn btn-danger waves-effect" data-dismiss="modal">Cancel</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="modal fade" data-backdrop="static" id="mdlMedicineModal">
+    <div class="modal-dialog modal-small">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h4 class="modal-title">Medicines</h4>
+                <button type="button" class="close" data-dismiss="modal">&times;</button>
+            </div>
+            <div class="modal-body">
+                <div class="">
+                    <label>Medicine Name<span style="color:red;">*</span> </label>
+                    <input id="txtMedicineName" type="text" class="form-control" />
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button onclick="fn_InsertUpdateMedicineRecord();" type="button" class="btn btn-success waves-effect">Save</button>
+                <button type="button" class="btn btn-danger waves-effect" data-dismiss="modal">Cancel</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="modal fade" data-backdrop="static" id="mdlPayMode">
+    <div class="modal-dialog modal-small">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h4 class="modal-title">Payment Mode</h4>
+                <button type="button" class="close" data-dismiss="modal">&times;</button>
+            </div>
+            <div class="modal-body">
+                <div class="">
+                    <label>Name<span style="color:red;">*</span> </label>
+                    <input id="txtPayMode" type="text" class="form-control" />
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button onclick="fn_InsertUpdatePayMode();" type="button" class="btn btn-success waves-effect">Save</button>
+                <button type="button" class="btn btn-danger waves-effect" data-dismiss="modal">Cancel</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="modal fade" data-backdrop="static" id="mdlInstructionModal">
+    <div class="modal-dialog modal-small">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h4 class="modal-title">Instructions</h4>
+                <button type="button" class="close" data-dismiss="modal">&times;</button>
+            </div>
+            <div class="modal-body">
+                <div class="">
+                    <label>Instruction <span style="color:red;">*</span></label>
+                    <input id="txtInstructionName" type="text" class="form-control" />
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button onclick="fn_InsertUpdateInstructionRecord();" type="button" class="btn btn-success waves-effect">Save</button>
+                <button type="button" class="btn btn-danger waves-effect" data-dismiss="modal">Cancel</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="modal fade" data-backdrop="static" id="mdlLabsModal">
+    <div class="modal-dialog modal-middle">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h4 class="modal-title">Lab</h4>
+                <button type="button" class="close" data-dismiss="modal">&times;</button>
+            </div>
+            <div class="modal-body">
+                <div class="row">
+                    <div class="form-group col-sm-6">
+                        <label>Lab Name<span style="color:red;">*</span> </label>
+                        <input id="txtLabName" type="text" class="form-control" />
+                    </div>
+                    <div class="form-group col-sm-6">
+                        <label>Mobile Number</label>
+                        <input id="txtLabMobile" type="text" class="form-control" />
+                    </div>
+                    <div class="form-group col-sm-6">
+                        <label>Status</label>
+                        <select id="ddlLabStatus" class="form-control">
+                            <option value="Active">Active</option>
+                            <option value="Deactive">Deactive</option>
+
+                        </select>
+                    </div>
+                    <div class="form-group col-sm-6">
+                        <label>Is Default</label>
+                        <select id="ddlLabIsDefault" class="form-control">
+                            <option value="Yes">Yes</option>
+                            <option value="No">No</option>
+
+                        </select>
+                    </div>
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button onclick="fn_InsertUpdateLabRecord();" type="button" class="btn btn-success waves-effect">Save</button>
+                <button type="button" class="btn btn-danger waves-effect" data-dismiss="modal">Cancel</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="modal fade" data-backdrop="static" id="mdlDealersModal">
+    <div class="modal-dialog modal-middle">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h4 class="modal-title">Dealers</h4>
+                <button type="button" class="close" data-dismiss="modal">&times;</button>
+            </div>
+            <div class="modal-body">
+                <div class="row">
+                    <div class="form-group col-sm-6">
+                        <label>Dealer Name</label>
+                        <input id="txtDealerName" type="text" class="form-control" />
+                    </div>
+                    <div class="form-group col-sm-6">
+                        <label>Mobile Number</label>
+                        <input id="txtDealerMobileNo" type="text" class="form-control" />
+                    </div>
+                    <div class="form-group col-sm-6">
+                        <label>Status</label>
+                        <select id="ddlDealerStatus" class="form-control">
+                            <option value="Active">Active</option>
+                            <option value="Deactive">Deactive</option>
+
+                        </select>
+                    </div>
+                    <div class="form-group col-sm-6">
+                        <label>Is Default</label>
+                        <select id="ddlDealerIsDefault" class="form-control">
+                            <option value="Yes">Yes</option>
+                            <option value="No">No</option>
+
+                        </select>
+                    </div>
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button onclick="fn_InsertUpdateDealerRecord();" type="button" class="btn btn-success waves-effect">Save</button>
+                <button type="button" class="btn btn-danger waves-effect" data-dismiss="modal">Cancel</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="modal fade" data-backdrop="static" id="mdlRelationModal">
+    <div class="modal-dialog modal-small">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h4 class="modal-title">Relations</h4>
+                <button type="button" class="close" data-dismiss="modal">&times;</button>
+            </div>
+            <div class="modal-body">
+                <div class="">
+                    <label>Relation Type<span style="color:red;">*</span></label>
+                    <input id="txtRelationType" type="text" class="form-control" />
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button id="btnSubmitRelationType" type="button" class="btn btn-success waves-effect">Save</button>
+                <button type="button" class="btn btn-danger waves-effect" data-dismiss="modal">Cancel</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="modal fade" data-backdrop="static" id="mdlTemplateModal">
+    <div class="modal-dialog modal-small">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h4 class="modal-title">Templates</h4>
+                <button type="button" class="close" data-dismiss="modal">&times;</button>
+            </div>
+            <div class="modal-body">
+
+                <div class="">
+                    <label>Template Name<span style="color:red;">*</span></label>
+                    <input id="txtTemplateName" type="text" class="form-control" />
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button onclick="fn_InsertUpdateTemplateRecord();" type="button" class="btn btn-success waves-effect">Save</button>
+                <button type="button" class="btn btn-danger waves-effect" data-dismiss="modal">Cancel</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="modal fade" data-backdrop="static" id="TemplateFormModal">
+    <div class="modal-dialog modal-lg">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h4 class="modal-title">Create Form</h4>
+                <button type="button" class="close" data-dismiss="modal">&times;</button>
+            </div>
+            <div class="modal-body">
+                <div class="row">
+                    <div class="col-12">
+                        <div class="form-group">
+                            <label>Create Template</label>
+                            <div id="divTemplateForm" class="form-control"></div>
+                        </div>
+                    </div>
+                </div>
+
+
+            </div>
+            <div class="modal-footer">
+                <button id="btnSubmitConsentForm" type="button" class="btn btn-success waves-effect">Save</button>
+                <button type="button" class="btn btn-danger waves-effect" data-dismiss="modal">Cancel</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+<script type="text/javascript" src="JS/Controllers/ClinicalSettings.js"></script>

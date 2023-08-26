@@ -1,0 +1,590 @@
+﻿<style type="text/css">
+    .TreatmentCardPrint .list-group {
+        position: sticky;
+        top: 75px;
+    }
+
+    .TreatmentCardPrint .list-group-item {
+        padding: 0;
+    }
+
+        .TreatmentCardPrint .list-group-item .checkbox {
+            padding: 6px 10px;
+            display: block;
+        }
+
+    @page {
+        size: A4 portrait;
+        padding: 15px;
+    }
+
+    @media print {
+        body * {
+            visibility: hidden;
+        }
+        .headerinside{
+            height:150px!important;
+        }
+        .table > thead > tr > td, .table > thead > tr > th, .table > tbody > tr > th {
+            font-size: 1.5rem !important;
+        }
+        .PrintReceipts .tdpatch h3.tdheader {
+            font-size: 1.7rem !important;
+        }
+
+        .PrintReceipts, .PrintReceipts * {
+            visibility: visible;
+            font-size: 1.5rem;
+        }
+
+        .PrintReceipts {
+            position: absolute;
+            left: 0;
+            top: 0;
+        }
+
+        .tdpatch{
+            padding-top:35px;
+        }
+        
+    }
+
+    /*@media print {
+        .TreatmentCardPrint {
+            padding: 0;
+        }
+
+            .TreatmentCardPrint .row {
+                padding: 0;
+                margin: 0;
+            }
+
+            .TreatmentCardPrint [class*=col] {
+                padding: 0;
+            }
+
+            .TreatmentCardPrint .left {
+                max-width: 100% !important;
+                flex: 0 0 100% !important;
+            }
+
+            .TreatmentCardPrint .right {
+                display: none;
+            }
+    }*/
+</style>
+<div class="container-fluid TreatmentCardPrint">
+    <div class="row">
+        <div class="col-md-9 left">
+            <div class="Prints">
+                <div class="btns">
+                    <button class="btn btn-outline-first" onclick="history.go(-1);"><i class="fa fa-arrow-left"></i><span>Go Back</span></button>
+                    <button class="btn btn-first" onclick="whatsup();"><i class="fa fa-whatsapp"></i><span>Whatsapp</span></button>
+                    <button class="btn btn-first" onclick="window.print();"><i class="fa fa-print"></i><span>Print</span></button>
+                    <!--onclick="receiptPrint();-->
+                </div>
+                <div class="PrintReceipts">
+                    <table>
+                        <thead>
+                            <tr>
+                                <th class="headerheight">
+                                    <div class="header" style="border-bottom: 1px solid #666;">
+                                        <div class="headerinside ">
+                                            <div class="headerleft clsHEADER">
+                                                <div class="DrName DrName1"></div>
+                                                <span id="q1"></span>
+                                                <span id="r1"></span>
+                                                <span id="m1"> </span>
+                                            </div>
+                                            <div class="headercenter clsHEADER" style="display:block">
+                                                <div class="ClinicLogo"></div>
+                                                <div class="ClinicName"></div>
+                                                <div class="ClinicAddress"></div>
+                                            </div>
+                                            <div class="headerright clsHEADER" style="min-width: 150px; ">
+                                                <div class="DrName DrName2"></div>
+                                                <span id="q2"></span>
+                                                <span id="r2"></span>
+                                                <span id="m2"> </span>
+                                            </div>
+                                        </div>
+                                        <div class="twopart ">
+                                            <div class="left">
+                                                PID : <span id="patid"></span>
+                                            </div>
+                                            <div class="right">
+                                                Date: <span id="cdate"></span>
+                                            </div>
+                                        </div>
+                                        <div class="twopart">
+                                            <div class="left">
+                                                Patient : <span id="patname"></span><span class="divider">|</span><span id="patgender"></span><span class="divider">|</span><span id="patage"></span>
+                                            </div>
+                                            <div class="right">
+                                                Mobile: <span id="patMobile"></span>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </th>
+                            </tr>
+                        </thead>
+                        <tbody style="padding-top:20px;">
+                            <tr class="clsMH">
+                                <td class="tdpatch" style="padding-top:15px;">
+                                    <h3 class="tdheader">Medical History</h3>
+                                    <div id="mh">NA</div>
+                                </td>
+                            </tr>
+                            <tr class="clsTREATNAME">
+                                <td class="tdpatch">
+                                    <h3 class="tdheader">Treatement Name</h3>
+                                    <div id="divtreatname"></div>
+                                </td>
+                            </tr>
+                            <tr class="clsTOOTHNO">
+                                <td class="tdpatch">
+                                    <h3 class="tdheader">Tooth No</h3>
+                                    <div id="divtoothnumber"></div>
+                                </td>
+                            </tr>
+                            <tr class="clsWORKDONE">
+                                <td class="tdpatch">
+                                    <h3 class="tdheader">O/E, RX-ADV, W/D</h3>
+                                    <pre id="workdone" style="font-size: 100%;border:0px; font-family: inherit;">
+                                      
+                                        </pre>
+                                </td>
+                            </tr>
+                            <tr class="clsPRESC">
+                                <td class="tdpatch">
+                                    <h3 class="tdheader">Prescription</h3>
+                                    <div>
+                                        <img src="https://doctor.oramo.in/images/RX_logo.png" style=" width: 20px; margin: 5px 0 0;" /><!--../images/RX_logo.png-->
+                                        <table class="table table-bordered">
+                                            <thead>
+                                                <tr>
+                                                    <th>Medicine Name</th>
+                                                    <th class="text-center">Quantity</th>
+                                                    <th>Instructions</th>
+                                                    <th class="text-center">Days</th>
+                                                </tr>
+                                            </thead>
+                                            <tbody id="tblPrescription">
+                                            </tbody>
+                                        </table>
+                                    </div>
+                                </td>
+                            </tr>
+                            <tr class="clsPAYMENT">
+                                <td class="tdpatch">
+                                    <h3 class="tdheader">Payment</h3>
+                                    <div>
+                                        <div style="font-size: 1.2rem; font-weight: 600; border: 1px solid #dee2e6; padding:5px 20px; display:inline-block;">
+                                            Paid Amount : <span id="paidfees" class="inr"> 2500</span>
+                                        </div>
+                                    </div>
+                                </td>
+                            </tr>
+                            <tr class="clsNEXTAPT">
+                                <td class="tdpatch">
+                                    <h3 class="tdheader">Next Appointment</h3>
+                                    <table class="table table-borderless">
+                                        <tbody>
+                                            <tr>
+                                                <td>
+                                                    <strong class="black">FOR :</strong> <span id="nextapttreat"></span>
+                                                </td>
+                                                <td>
+                                                    <strong class="black">DATE :</strong>  <span id="nextaptdata"></span>
+                                                </td>
+                                                <td><strong class="black">DAY :</strong>  <span id="nextaptday"></span></td>
+                                                <td><strong class="black">TIME :</strong> <span id="nextapttime"></span></td>
+                                            </tr>
+                                        </tbody>
+                                    </table>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>
+                                    <div style="width:200mm!important; margin:0;">
+                                        <div class="Sign">
+                                            <img style="display:none" id="imgdoctorsign" src="../images/DemoSign.jpg" />
+                                            <strong id="doctorsignname"></strong>
+                                        </div>
+
+                                    </div>
+                                   
+
+                                </td>
+                            </tr>
+                        </tbody>
+                        <tfoot>
+                            <tr>
+                                <td class="footerheight">
+                                    <div class="footer">
+                                        <div class="footerinside">
+                                            <div class="ClinicName"></div>
+                                            <div class="ClinicAddress"></div>
+                                        </div>
+                                    </div>
+                                </td>
+                            </tr>
+                        </tfoot>
+                    </table>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-3 right">
+            <ul class="list-group">
+
+                <li class="list-group-item">
+                    <label class="checkbox">
+                        <input id="chkheader" type="checkbox" />
+                        <i></i><span>Show Header</span>
+                    </label>
+                </li>
+                <li class="list-group-item">
+                    <label class="checkbox">
+                        <input id="chklogo" type="checkbox" />
+                        <i></i><span>Show Logo</span>
+                    </label>
+                </li>
+                <li class="list-group-item">
+                    <label class="checkbox">
+                        <input id="chkheaderspace" type="checkbox" />
+                        <i></i><span>Show Header Space</span>
+                    </label>
+                </li>
+                <li class="list-group-item">
+                    <label class="checkbox">
+                        <input id="chkMH" type="checkbox" />
+                        <i></i><span>Medical History</span>
+                    </label>
+                </li>
+                <li class="list-group-item">
+                    <label class="checkbox">
+                        <input id="chkTreatName" type="checkbox" />
+                        <i></i><span>Treatement Name</span>
+                    </label>
+                </li>
+                <li class="list-group-item">
+                    <label class="checkbox">
+                        <input id="chkToothNo" type="checkbox" />
+                        <i></i><span>Tooth No</span>
+                    </label>
+                </li>
+                <li class="list-group-item">
+                    <label class="checkbox">
+                        <input id="chkOE" type="checkbox" />
+                        <i></i><span>O/E, RX-ADV, W/D</span>
+                    </label>
+                </li>
+                <li class="list-group-item">
+                    <label class="checkbox">
+                        <input id="chkPresc" type="checkbox" />
+                        <i></i><span>Prescription</span>
+                    </label>
+                </li>
+                <li class="list-group-item">
+                    <label class="checkbox">
+                        <input id="chkPayment" type="checkbox" />
+                        <i></i><span>Payment</span>
+                    </label>
+                </li>
+                <li class="list-group-item">
+                    <label class="checkbox">
+                        <input id="chkNextApt" type="checkbox" />
+                        <i></i><span>Next Appointment</span>
+                    </label>
+                </li>
+                <li class="list-group-item">
+                    <label class="checkbox btn-first">
+                        <input id="chkRS" type="checkbox" />
+                        <i></i><span>Remember Selection</span>
+                    </label>
+                </li>
+            </ul>
+        </div>
+    </div>
+</div>
+
+<script type="text/javascript" src="JS/Controllers/DownloadReciptPDF.js"></script>
+<script type="text/javascript">
+    setTimeout(function () {
+        var thead = $('.header').height();
+        var tfoot = $('.footer').height();
+        $('.headerheight').css("height", thead + 60 + 40);
+        $('.footerheight').css("height", tfoot + 20 + 20);
+    }, 100);
+
+
+    var _LocationId = $qc.Cookie("locationid"), _SubLocationId = $qc.Cookie("sublocationid"), _UserName = $qc.Cookie("username");
+    var _rtnQuery = getQueryParams(document.location.search);
+
+    $(document).ready(function () {
+        if (_rtnQuery.type == 's') {
+            var _param = ["PrintStepCard", _rtnQuery.pat, _rtnQuery.T, 0, "", _LocationId, 0];
+            GetDataFromDatabase(38, 'GetDetails', _param, 'DentalParams');
+        } else {
+            var _param = ["PrintTreatCard", _rtnQuery.pat, _rtnQuery.T, 0, "", _LocationId, 0];
+            GetDataFromDatabase(38, 'GetDetails', _param, 'DentalParams');
+        }
+
+
+        $("#chkRS").click(function () {
+            var strSelected = '';
+
+
+            if ($("#chkheader").prop('checked') == true) { strSelected += ',header'; }
+            if ($("#chkheaderspace").prop('checked') == true) { strSelected += ',headerspace'; }
+            if ($("#chkMH").prop('checked') == true) { strSelected += ',MH'; }
+            if ($("#chkTreatName").prop('checked') == true) { strSelected += ',TreatName'; }
+            if ($("#chkToothNo").prop('checked') == true) { strSelected += ',ToothNo'; }
+            if ($("#chkOE").prop('checked') == true) { strSelected += ',OE'; }
+            if ($("#chkPresc").prop('checked') == true) { strSelected += ',Presc'; }
+            if ($("#chkPayment").prop('checked') == true) { strSelected += ',Payment'; }
+            if ($("#chkNextApt").prop('checked') == true) { strSelected += ',NextApt'; }
+            if ($("#chklogo").prop('checked') == true) { strSelected += ',logo'; }
+
+            var objRecords = ["UpdateSQL", "Update ClinicInfo set TreatPrintSettings=`" + strSelected + "` where ClinicID=" + _LocationId];
+            UpdateDataToDatabase(13, 'UpdateImgURL', objRecords, 'DentalParams');
+
+        });
+
+        $("input[type='checkbox']").click(function () {
+            hideshowcolumns();
+        });
+
+    });
+
+    function hideshowcolumns() {
+        if ($("#chkheader").prop('checked') == true) { $(".headerinside").show(); $(".clsHEADER").show(); $("tfoot").show(); } else { $(".headerinside").hide(); $(".clsHEADER").hide(); $("tfoot").hide(); }
+        if ($("#chkheaderspace").prop('checked') == true) { $(".headerinside").show(); $(".headerinside").attr('style', 'height:100px;'); } else {
+            $(".headerinside").removeAttr('style');
+        }
+        if ($("#chkMH").prop('checked') == true) { $(".clsMH").show(); } else { $(".clsMH").hide(); }
+        if ($("#chkTreatName").prop('checked') == true) { $(".clsTREATNAME").show(); } else { $(".clsTREATNAME").hide(); }
+        if ($("#chkToothNo").prop('checked') == true) { $(".clsTOOTHNO").show(); } else { $(".clsTOOTHNO").hide(); }
+        if ($("#chkOE").prop('checked') == true) { $(".clsWORKDONE").show(); } else { $(".clsWORKDONE").hide(); }
+        if ($("#chkPresc").prop('checked') == true) { $(".clsPRESC").show(); } else { $(".clsPRESC").hide(); }
+        if ($("#chkPayment").prop('checked') == true) { $(".clsPAYMENT").show(); } else { $(".clsPAYMENT").hide(); }
+        if ($("#chkNextApt").prop('checked') == true) { $(".clsNEXTAPT").show(); } else { $(".clsNEXTAPT").hide(); }
+        if ($("#chklogo").prop('checked') == true) { $(".ClinicLogo").show(); } else { $(".ClinicLogo").hide(); }
+    }
+
+    function onGetDataSuccess(data, context) {
+        if (context == 'GetDetails') {
+            if (data == '') { $(".PrintReceipts").hide(); return false; }
+            eval('var obj=' + data);
+            if (obj) {
+                $(".DrName1").html(obj[0]["docname1"]);
+
+                $(".DrName2").html(obj[0]["docname2"]);
+                if (obj[0]["docname2"] == '') {
+                    $(".DrName2").parent().html('');
+                }
+
+                $("#doctorsignname").html(obj[0]["docname1"]);
+                $("#q1").html(obj[0]["q1"]); $("#q2").html(obj[0]["q2"]);
+                $("#r1").html('Reg No.' + obj[0]["regno1"]); $("#r2").html('Reg No.' + obj[0]["regno2"]);
+                $("#m1").html('<i class="fa fa-phone"></i> ' + obj[0]["m1"]); $("#m2").html('<i class="fa fa-phone"></i> ' + obj[0]["m2"]);
+
+                $("#patname").html(obj[0]["patname"]); $("#patgender").html(obj[0]["gender"]); $("#patage").html(obj[0]["age"]); $("#patid").html(obj[0]["patid"]);
+                $("#patMobile").html(obj[0]["PatMobile"]);
+                $(".ClinicName").html(obj[0]["clinicname"]); $(".ClinicAddress").html(obj[0]["clinicadd"]);
+                var logo = RootFolderPath('ClinicLogo/' + _LocationId + '.jpg');
+                if (urlExists(logo)) {
+                    $(".ClinicLogo").html('<img src="' + logo + '" style="height: 40px;" />');
+                }
+
+                $("#mh").html(obj[0]["mh"]);
+
+                $("#cdate").html(_GlobalPatHistory.CurrentDateDMY);
+
+                if (obj[0]["docname1"] != '') {
+                    $("#imgdoctorsign").attr('src', RootFolderPath(obj[0]["digitalsign"]));
+                    $("#imgdoctorsign").show();
+                } else {
+                    $("#imgdoctorsign").hide();
+                }
+
+                if (typeof obj[0]["tretsetting"] != 'undefined') {
+                    var treatsetting = obj[0]["tretsetting"];
+                    if (treatsetting != '') {
+                        var a = treatsetting.split(',');
+                        for (var i = 0; i < a.length; i++) {
+                            $("#chk" + a[i]).prop('checked', true);
+                        }
+                    }
+                }
+
+                $("#divtreatname").html(obj[0]["TreatmentName"]);
+                $("#divtoothnumber").html(obj[0]["ToothNo"]);
+                $("#workdone").html(obj[0]["Workdone"]);
+                $("#paidfees").html(obj[0]["PaidFees"]);
+
+                var str = '';
+                if (typeof obj[0]["Precription"] != '') {
+                    var p = obj[0]["Precription"];
+                    for (var i = 0; i < p.length; i++) {
+                        str += '<tr>';
+                        str += '<td>' + p[i]["MedicineName"] + '</td>';
+
+                        str += '<td>' + p[i]["Qty"] + '</td>';
+                        str += '<td>' + p[i]["InstructionName"] + '</td>';
+                        str += '<td>' + p[i]["NoOfDays"] + ' Days</td>';
+
+                        str += '</tr>';
+                    }
+                }
+                $("#tblPrescription").html(str);
+
+                if (typeof obj[0]["NextApt"] != '' && obj[0]["NextApt"].length > 0) {
+                    var nextapt = obj[0]["NextApt"];
+
+                    if (typeof nextapt[0]["TreatmentName"] != 'undefined') { $("#nextapttreat").html(nextapt[0]["TreatmentName"]); }
+                    if (typeof nextapt[0]["aptdate"] != 'undefined') { $("#nextaptdata").html(nextapt[0]["aptdate"]); }
+                    if (typeof nextapt[0]["weekdayname"] != 'undefined') { $("#nextaptday").html(nextapt[0]["weekdayname"]); }
+                    if (typeof nextapt[0]["StartTime"] != 'undefined') { $("#nextapttime").html(nextapt[0]["StartTime"]); }
+                }
+
+                hideshowcolumns();
+            }
+        }
+
+        else if (context == 'UpdateReceiptURL') {
+            if (data == 0 || data == '') { return false; }
+            var JSONPath = {
+                "Proc": 65,
+                "Params": 'Patient Essentials|' + data + '|0|0|0|0|' + $qc.Cookie("userid") + '|' + $qc.Cookie("usercategory") + '|0|0|' + $qc.Cookie('locationid') + '|',
+                "ParamPath": "DentalParams"
+            }
+            fn_sendInstantCommunication(JSONPath, "SendNotification");
+        }
+    }
+
+
+    function urlExists(url) {
+        var http = new XMLHttpRequest();
+        http.open('HEAD', url, false);
+        http.send();
+        return http.status != 404;
+
+    }
+
+    function whatsup() {
+        var _filename = 'PrintReceipt_' + _rtnQuery.pat + '_' + _rtnQuery.T
+        fn_GenerateExamPaperPDF(_filename);
+    }
+
+    function fn_GenerateExamPaperPDF(FileName) {
+
+        var _print = '<html class="Downloadpdf">';
+        _print += '<head>';
+        _print += '<title>Print Treatment Report</title>';
+        _print += '<meta charset="utf-8" />';
+        _print += '<link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.css" />';
+        _print += '<link rel="stylesheet" type="text/css" href="https://doctor.oramo.in/CSS/bootstrap.min.css" />';
+        _print += '<link rel="stylesheet" type="text/css" href="https://doctor.oramo.in/CSS/admin.min.css" />';
+        _print += '<style type="text/css">.TreatmentCardPrint .list-group {position: sticky;top: 75px;}.TreatmentCardPrint .list-group-item {padding: 0;}.TreatmentCardPrint .list-group-item .checkbox {padding: 6px 10px;display: block;}@media print {.TreatmentCardPrint {padding: 0;}.TreatmentCardPrint .row {padding: 0;margin: 0;}.TreatmentCardPrint [class*=col] {padding: 0;}.TreatmentCardPrint .right {display: none;}}</style>';
+        _print += '<style type="text/css">*, ::after, ::before {box-sizing: border-box;}html, body{background:#fff;}.header{padding:15px 0 0; margin:0;width:100%!important;}.headerinside{display: block;}.headerinside:after{content:""; display:table; clear:both;}.headerleft{float: left; width: 25%; text-align:left;}.headercenter{display:block;float: left;width: 50%;}.headerright{float: left; width: 25%; text-align:left;}.twopart{}.twopart:after{content:""; display:table; clear:both;}.twopart .left{width: 50%;float: left;text-align: left;}.twopart .right{width: 50%;float: left;text-align: right;}.tdpatch{padding:0 15px!important;}.tdpatch .table{width:202mm!important;}.tdpatch > div{margin-bottom:20px!important;}.footer{padding:0 15px 15px;}';
+
+        //_print += '@media screen{';
+        //_print += '.mainpage{';
+        //_print += 'padding:20px; border:1px solid #000;';
+        //_print += '}';
+        //_print += '.mainpage + .mainpage{margin - top:30px!important;}';
+        //_print += '}';
+        //_print += '@page{';
+        //_print += 'size:A4 portrait; margin:10px;';
+        //_print += '}';
+        //_print += '@media print {';
+        //_print += '.mainpage{page-break-after:always;}';
+        //_print += '}';
+        _print += '</style>';
+        _print += '</head>';
+        _print += '<body><div class="PrintReceipts">' + $(".PrintReceipts").html() + '</div>';
+
+        _print += '</body>';
+        _print += '</html>';
+
+        //var myWindow = window.open('', 'FeeReceipt');
+        //myWindow.document.write(_print);
+        //myWindow.print();
+
+
+        var options = {
+            format: 'A4',
+            orientation: "portrait", // portrait or landscape
+            //border: "0"             // default is 0, units: mm, cm, in, px
+
+            //border: {
+            //    "top": "0.1in",            // default is 0, units: mm, cm, in, px
+            //    "right": "0.2in",
+            //    "bottom": "0.1in",
+            //    "left": "0.2in"
+            //}
+
+            //,watermark: document.location.origin
+
+        };
+        GeneratePDF("GeneratePDF/" + _LocationId, FileName, 'pdf', options, _print, 'DownloadExamQuesPaper');
+    }
+
+    function onGeneratePDF(data, context) {
+        if (context == 'DownloadExamQuesPaper') {
+            if (data == '') { return false; }
+            var strSQL = '';
+
+            var _url = 'https://doctor.oramo.in/uploads/' + pgLoadVariableQaurus.ClientNo + '/uploadedfiles/' + data;
+            if (_rtnQuery.type == 't') {
+                strSQL = 'insert into pdfurls(ParentId,PatientId,LocationId,DoctorId,ReceiptURL,PageType,moddate)';
+                strSQL += ' values(' + _rtnQuery.T + ',' + _rtnQuery.pat + ',' + _LocationId + ',0,`' + _url + '`,`TreatmentReceipt`,getdate())';
+                strSQL += ' select SCOPE_IDENTITY() ';
+            } else {
+                strSQL = 'insert into pdfurls(ParentId,PatientId,LocationId,DoctorId,ReceiptURL,PageType,moddate)';
+                strSQL += ' values(' + _rtnQuery.T + ',' + _rtnQuery.pat + ',' + _LocationId + ',0,`' + _url + '`,`StepsReceipt`,getdate())';
+                strSQL += ' select SCOPE_IDENTITY() ';
+            }
+
+
+            var objParams = ["UpdateSQL", strSQL];
+            UpdateDataToDatabase(13, 'UpdateReceiptURL', objParams, 'DentalParams');
+
+
+            /* Download PDF On this code */
+            //console.log(data);
+            //var _url = RootFolderPath(data);
+            //var link = document.createElement('a');
+            //link.href = _url;
+            //link.download = _ExamName + '.pdf';
+            //link.target = "_blank";
+            //link.dispatchEvent(new MouseEvent('click'));
+        }
+    }
+
+    function receiptPrint() {
+
+        var _print = '<link rel="stylesheet" type="text/css" href="https://doctor.oramo.in/CSS/bootstrap.min.css" />';
+        _print += '<link rel="stylesheet" type="text/css" href="https://doctor.oramo.in/CSS/admin.min.css" />';
+        // _print += '<style type="text/css">.TreatmentCardPrint .list-group {position: sticky;top: 75px;}.TreatmentCardPrint .list-group-item {padding: 0;}.TreatmentCardPrint .list-group-item .checkbox {padding: 6px 10px;display: block;}@media print {.TreatmentCardPrint {padding: 0;}.TreatmentCardPrint .row {padding: 0;margin: 0;}.TreatmentCardPrint [class*=col] {padding: 0;}.TreatmentCardPrint .right {display: none;}}</style>';
+        _print += '<style type="text/css">.TreatmentCardPrint { padding: 0; }    .TreatmentCardPrint.row { padding: 0; margin: 0; }    .TreatmentCardPrint[class*= col] { padding: 0; }    .TreatmentCardPrint.left { max - width: 100 % !important; flex: 0 0 100 % !important; }    .TreatmentCardPrint.right { display: none; }     </style > ';
+
+        var myWindow = window.open('', 'FeeReceipt');
+        myWindow.document.write('<html><head><title>Fee Receipt</title>');
+        myWindow.document.write(_print);
+        myWindow.document.write('<style type="text/css" media="print">@page { size:portrait; }</style>');
+        myWindow.document.write('</head><body>');
+        myWindow.document.write('<div class="PrintReceipts">' + $(".PrintReceipts").html() + '</div>');
+        myWindow.document.write('</body></html>');
+        //myWindow.onload = function () {
+        //    myWindow.focus();
+        //    myWindow.print();
+        //    myWindow.close();
+        //};
+        myWindow.print();
+        // myWindow.close();
+    }
+</script>
+
+

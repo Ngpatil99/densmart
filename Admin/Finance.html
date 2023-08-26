@@ -1,0 +1,160 @@
+﻿<div class="container-fluid">
+    <div class="page-wrapper bg-white mb-4">
+        <div class="page-body">
+            <div class="row p-2 withoutlabelblock">
+                <div class="col-md-6 col-lg-4 form-inline">
+                    <span class="fromtodate">
+                        <label>From</label>
+                        <input id="txtFdate" style="width: 125px;" type="date" onchange="fn_RefreshTable();" class="form-control" />
+                        <label>To</label>
+                        <input id="txtTdate" style="width: 125px;" type="date" onchange="fn_RefreshTable();" class="form-control" />
+                    </span>
+                </div>
+                <div class="col-md-6 col-lg-5  form-inline">
+                    <select id="ddlPayView" onchange="fn_RefreshTable();" class="form-control">
+                        <option selected="selected" value="RecordView"> RecordView </option>
+                        <option value="DayView"> Day View </option>
+                        <option value="MonthView"> Month View </option>
+                        <option value="YearView"> Year View </option>
+                    </select>
+                    <span class="p-2 clsView"> of </span>
+                    <select id="ddlPayType" onchange="fn_RefreshTable();" class="form-control clsView">
+                        <option selected="selected" value="Credits"> Credits </option>
+                        <option value="Debits"> Debits </option>
+                        <option value="Pendings"> Pendings </option>
+                    </select>
+                </div>
+                <!--<div class="col-md-3">
+                    <div class="input-group">
+                        <input id="txtSearch" type="text" class="form-control" placeholder="Search" />
+                        <div class="input-group-append">
+                            <button id="btnSearch" onclick="fn_RefreshTable();" class="btn btn-first"><i class="fa fa-search"></i></button>
+                        </div>
+                    </div>
+                </div>-->
+            </div>
+        </div>
+    </div>
+    <div class="page-wrapper bg-white mb-4">
+        <div class="page-body">
+            <div class="row p-2 clsView">
+                <div class="col-md-2 col-sm-6 m-2 clsClinicRights" data-mid="53">
+                    <label>Doctor :&nbsp;</label>
+                    <select id="ddlDoctors"  class="form-control">
+                        <option value="0">All</option>
+                    </select>
+                </div>
+                <div class="col-md-2 col-sm-6 m-2 clsClinicRights" data-mid="54">
+                    <label>Treatment :&nbsp;</label>
+                    <select id="ddlTreatments" onchange="fn_RefreshTable();" class="form-control">
+                        <option selected="selected" value="">All</option>
+
+                    </select>
+                </div>
+                <div class="col-md-2 col-sm-6 m-2 clsClinicRights"  data-mid="55">
+                    <label>Patient Reffered By:&nbsp;</label>
+                    <select id="ddlPatientRefferedBy" onchange="fn_RefreshTable();" class="form-control"> </select>
+                    <!--<input type="text" onchange="fn_RefreshTable();" id="ddlPatientRefferedBy" class="form-control" />-->
+                </div>
+                <div class="col-md-2 col-sm-6 m-2 clsClinicRights"  data-mid="56">
+                    <label>Mode of Payment :&nbsp;</label>
+                    <select id="ddlModeOfPayment" onchange="fn_RefreshTable();" class="form-control"> </select>
+                    <!--<input type="text" onchange="fn_RefreshTable();" id="ddlModeOfPayment" class="form-control" />-->
+                </div>
+                <div class="col-md-2 col-sm-6 m-2 form-inline align-items-end">
+                    <!--<button class="btn btn-outline-first mr-2">Export to PDF</button>-->
+                    <button id="btnExporttoExcel" class="btn btn-first">Export to Excel</button>
+                </div>
+            </div>
+            <div class="table-responsive">
+                <table id="tblRecordView" class="table table-bordered">
+                    <thead>
+                        <tr>
+                            <th class="text-center">Sr.No.</th>
+                            <th class="text-center">Date</th>
+                            <th class="text-center" id="lblRecordView1">Patient Name</th>
+                            <th class="text-center clsMobileNumber" >Mobile Number</th>
+                            <th class="text-center">Doctor Name</th>
+                            <th class="text-center" id="lblRecordView2">Treatement Name</th>
+                            <th class="text-center" id="lblRecordView">Credited Amount</th>
+                            <th class="text-center">Mode of Payment</th>
+                        </tr>
+                    </thead>
+                    <tbody id="tblValue">
+                    </tbody>
+                </table>
+                <table id="tblDoctorRecordView" class="table table-bordered" style="display:none">
+                    <thead>
+                        <tr>
+                            <th class="text-center">Sr.No.</th>
+                            <th class="text-center">Date</th>
+                            <th class="text-center" id="lblRecordView1">Patient Name</th>
+                            <th class="text-center" id="lblRecordView2">Treatement Name</th>
+                            <th class="text-center">Mode of Payment</th>
+                            <th class="text-center" id="lblRecordView">Credited Amount</th>
+                            <th class="text-center">Consultatnt Amount</th>
+                            <th class="text-center">Admin Amount</th>
+
+                        </tr>
+                    </thead>
+                    <tbody id="tblDcotorValue">
+                    </tbody>
+                </table>
+                <table id="tblOtherView" class="table table-bordered" style="display:none">
+                    <thead>
+                        <tr>
+                            <th class="text-center">Sr.No.</th>
+                            <th class="text-center">Date</th>
+                            <th class="text-center">Credited Amount</th>
+                            <th class="text-center">Debited Amount</th>
+                            <th class="text-center">Balance Amount</th>
+
+                        </tr>
+                    </thead>
+                    <tbody id="tblDayValue">
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+    <div class="page-wrapper bg-white FinanceCalc">
+        <div class="page-body p-2">
+            <div class="table-responsive">
+                <table class="table table-borderless">
+                    <tbody>
+                        <tr>
+                            <td>
+                                <label>Total Credit</label>
+                                <input id="txtTotalCredits" onchange="calTotalAmounts();" type="text" class="form-control alert-success" />
+                            </td>
+                            <td class="icon">
+                                -
+                            </td>
+                            <td>
+                                <label>Total Debit</label>
+                                <input id="txtTotalDebits" onchange="calTotalAmounts();" type="text" class="form-control alert-success" />
+                            </td>
+                            <td class="icon">
+                                =
+                            </td>
+                            <td>
+                                <label>Total Income</label>
+                                <input id="txtTotalIncome"  type="text" class="form-control alert-success" />
+                            </td>
+                            <td class="icon" rowspan="2">
+                                <span>|</span>
+                            </td>
+                            <td>
+                                <label>Total Pendings</label>
+                                <input id="txtTotalPendings"  type="text" class="form-control alert-danger" />
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+<script type="text/javascript" src="JS/Controllers/Finance.js?v=1"></script>

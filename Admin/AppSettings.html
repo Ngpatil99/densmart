@@ -1,0 +1,250 @@
+﻿<!--@{
+    ViewBag.Title = "App Settings";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}-->
+
+<div class="container-fluid">
+    <div class="page-wrapper bg-white">
+        <div class="page-header">
+            <h2>App Settings</h2>
+
+        </div>
+        <div class="page-body">
+            <div class="nav-tabs-left">
+                <ul class="nav nav-tabs">
+                    <!--<li id="liAdvanceTab" class="nav-item">
+        <a class="nav-link active waves-effect" data-toggle="tab" href="#AdvancedSettingsTab" target="_self">Advanced Settings</a>
+    </li>
+    <li id="liPrintTab" class="nav-item">
+        <a class="nav-link waves-effect" data-toggle="tab" href="#PrintTab" target="_self">Print</a>
+    </li>-->
+                    <li id="liSMSTab" class="nav-item">
+                        <a class="nav-link active waves-effect" data-toggle="tab" href="#SMSServicesTab" target="_self">SMS Services</a>
+                    </li>
+                    <li id="liWATab" class="nav-item">
+                        <a class="nav-link waves-effect" data-toggle="tab" href="#WAServicesTab" target="_self">Whatsup Services</a>
+                    </li>
+                </ul>
+
+                <div class="nav-tabs-left-container">
+                    <div class="tab-content">
+                        <!--<div class="tab-pane active" id="AdvancedSettingsTab">
+        <div class="p-3 justify-content-center">
+            <div class="mb-2">
+                <label class="checkbox mr-3">
+                    <input id="cksBiomatricsServices" type="checkbox" name="checkbox" />
+                    <i></i><span>Biometric Services</span>
+                </label>
+            </div>
+            <div class="mb-2">
+                <label class="checkbox mr-3">
+                    <input id="chkWebcamServices" type="checkbox" name="checkbox" />
+                    <i></i><span>Webcam Services</span>
+                </label>
+            </div>
+            <div class="mb-2">
+                <label class="checkbox mr-3">
+                    <input id="chkCustomPId" type="checkbox" name="checkbox" />
+                    <i></i><span>Custom PID</span>
+                </label>
+            </div>
+            <div class="mb-2">
+                <label class="checkbox mr-3">
+                    <input id="chkSmartCard" type="checkbox" name="checkbox" />
+                    <i></i><span>Smart Card</span>
+                </label>
+            </div>
+            <div class="mb-2 form-inline">
+                <label>
+                    Smart Card Discount :&nbsp;
+                </label>
+                <input id="txtSmartCardDiscount" type="text" class="form-control" />
+            </div>
+        </div>
+    </div>
+    <div class="tab-pane fade" id="PrintTab">
+        <div class="p-3 justify-content-center">
+            <div class="mb-2">
+                <label class="checkbox mr-3">
+                    <input id="chkShowHeader" type="checkbox" name="checkbox" />
+                    <i></i><span>Show Header</span>
+                </label>
+            </div>
+            <div class="mb-2">
+                <label class="checkbox mr-3">
+                    <input id="chkShowHeaderSpan" type="checkbox" name="checkbox" />
+                    <i></i><span>Show Header Space</span>
+                </label>
+            </div>
+            <div class="mb-2">
+                <label class="checkbox mr-3">
+                    <input id="chkOnlyPrescription" type="checkbox" name="checkbox" />
+                    <i></i><span>Only Prescription</span>
+                </label>
+            </div>
+            <div class="mb-2">
+                <label class="checkbox mr-3">
+                    <input id="chkMedicalHistory" type="checkbox" name="checkbox" />
+                    <i></i><span>Medical History</span>
+                </label>
+            </div>
+            <div class="mb-2">
+                <label class="checkbox mr-3">
+                    <input id="chkTreatmentName" type="checkbox" name="checkbox" />
+                    <i></i><span>Treatment Name</span>
+                </label>
+            </div>
+            <div class="mb-2">
+                <label class="checkbox mr-3">
+                    <input id="chkTooNumber" type="checkbox" name="checkbox" />
+                    <i></i><span>Tooth No</span>
+                </label>
+            </div>
+            <div class="mb-2">
+                <label class="checkbox mr-3">
+                    <input id="chkWorkDone" type="checkbox" name="checkbox" />
+                    <i></i><span>Work Done</span>
+                </label>
+            </div>
+            <div class="mb-2">
+                <label class="checkbox mr-3">
+                    <input id="chkPrescription" type="checkbox" name="checkbox" />
+                    <i></i><span>Prescription</span>
+                </label>
+            </div>
+            <div class="mb-2">
+                <label class="checkbox mr-3">
+                    <input id="chkPayment" type="checkbox" name="checkbox" />
+                    <i></i><span>Payment</span>
+                </label>
+            </div>
+        </div>
+    </div>-->
+                        <div class="tab-pane fade active show" id="SMSServicesTab">
+                            <div id="GridResult"></div>
+
+                        </div>
+                        <div class="tab-pane fade" id="WAServicesTab">
+                            <div id="GridResult1"></div>
+
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="modal fade" data-backdrop="static" id="SMSServicesModal">
+    <div class="modal-dialog modal-middle">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h4 class="modal-title">SMS Service</h4>
+                <button type="button" class="close" data-dismiss="modal">&times;</button>
+            </div>
+            <div class="modal-body">
+                <div class="row">
+                    <div class="form-group col-sm-12">
+                        <label>Template Name</label>
+                        <select id="ddlSMSTemplate" class="form-control">
+                        </select>
+                    </div>
+                    <div class="form-group col-sm-6">
+                        <label>Trigger</label>
+                        <select id="ddlSMSSendingType" class="form-control">
+                            <option selected="selected" value="Instant">Instant</option>
+                            <option value="One Day Before @ time">One Day Before Appointment Date @Time</option>
+                            <!--<option value="One Day Before @ time">One Day Before Appointment Date @Morning</option>-->
+                            <option value="Same Day @ time">Same Day of Appointment Date @Time</option>
+                            <!--<option value="Same Day of Birthday @@Afternoon">Same Day of Birthday @@Afternoon</option>-->
+                        </select>
+                    </div>
+                    <div class="form-group col-sm-6 clsMsgTime" style="display:none">
+                        <label>Time</label>
+                        <input type="time" class="form-control" id="messagetime" />
+                    </div>
+                    <div class="form-group col-sm-6">
+                        <label>SMS Language</label>
+                        <select id="ddlLanguage" class="form-control">
+                            <option selected="selected" value="EN">English</option>
+                            <option value="HI">Hindi</option>
+                            <option value="MR">Marathi</option>
+                        </select>
+                    </div>
+                    <div class="form-group col-sm-6">
+                        <label>SMS Mode</label>
+                        <select id="ddlSMSMode" class="form-control">
+                            <option selected="selected" value="Auto">Auto</option>
+                            <option value="Manual">Manual</option>
+                        </select>
+                    </div>
+                    <div class="form-group col-sm-6">
+                        <label>Status</label>
+                        <select id="ddlSMSStatus" class="form-control">
+                            <option selected="selected" value="1">Enable</option>
+                            <option value="0">Disable</option>
+                        </select>
+                    </div>
+                    <div class="form-group col-sm-12">
+                        <label>SMS Text</label>
+                        <textarea id="txtSMSText" disabled rows="3" class="form-control"></textarea>
+                    </div>
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button type="button" onclick="javascript:fn_InsertSMSTemplate();" class="btn btn-success waves-effect">Submit</button>
+                <button type="button" class="btn btn-danger waves-effect" data-dismiss="modal">Close</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="modal fade" data-backdrop="static" id="WAServicesModal">
+    <div class="modal-dialog modal-middle">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h4 class="modal-title">WhatsApp Service</h4>
+                <button type="button" class="close" data-dismiss="modal">&times;</button>
+            </div>
+            <div class="modal-body">
+                <div class="row">
+                    <div class="form-group col-sm-12">
+                        <label>Template Name</label>
+                        <select id="ddlWATemplate" class="form-control">
+                        </select>
+                    </div>
+                    <div class="form-group col-sm-6">
+                        <label>Trigger</label>
+                        <select id="ddlWASendingType" class="form-control">
+                            <option selected="selected" value="Instant">Instant</option>
+                            <option value="One Day Before @ time">One Day Before Appointment Date @Time</option>
+                            <option value="Same Day @ time">Same Day @ time</option>
+                            <!--<option value="Same Day of Birthday @@Afternoon">Same Day of Birthday @@Afternoon</option>-->
+                        </select>
+                    </div>
+                    <div class="form-group col-sm-6 clsWATime" style="display:none">
+                        <label>Time</label>
+                        <input type="time" class="form-control" id="watime" />
+                    </div>
+
+                    <div class="form-group col-sm-6">
+                        <label>Status</label>
+                        <select id="ddlWAStatus" class="form-control">
+                            <option selected="selected" value="1">Enable</option>
+                            <option value="0">Disable</option>
+                        </select>
+                    </div>
+                    <div class="form-group col-sm-12">
+                        <label>WA Text</label>
+                        <textarea id="txtWAText" disabled rows="3" class="form-control"></textarea>
+                    </div>
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button type="button" onclick="javascript:fn_InsertWATemplate();" class="btn btn-success waves-effect">Submit</button>
+                <button type="button" class="btn btn-danger waves-effect" data-dismiss="modal">Close</button>
+            </div>
+        </div>
+    </div>
+</div>
+<script type="text/javascript" src="JS/Controllers/AppSettings.js"></script>

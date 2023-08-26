@@ -1,0 +1,798 @@
+﻿<style type="text/css">
+    .clsSMSCount span, .clsWACount span {
+        font-weight: 600;
+        padding: 0 13px;
+    }
+</style>
+
+<div class="container">
+    <div class="page-wrapper bg-white">
+
+        <div class="page-body">
+            <ul class="line nav nav-tabs">
+                <li id="liSMS" class="nav-item">
+                    <a class="nav-link waves-effect active" data-toggle="tab" href="#SMS" target="_self">SMS</a>
+                </li>
+                <li id="liWA" class="nav-item">
+                    <a class="nav-link waves-effect" data-toggle="tab" href="#Whatsup" target="_self">Whatsup</a>
+                </li>
+                <li id="liSW" class="nav-item">
+                    <a class="nav-link waves-effect" data-toggle="tab" href="#Software" target="_self">Software License</a>
+                </li>
+            </ul>
+            <div class="tab-content">
+
+                <div class="row">
+                    <div class="col-3">
+                        <div class="form-group">
+                            <label>
+                                Clinic Name<span style="color: Red;">*</span>
+                            </label>
+                            <select class="form-control" id="ddlClinicList"></select>
+                        </div>
+                    </div>
+                    <div class="auto form-inline">
+                        <button onclick="fn_SearchGrid()" class="btn btn-first">Search</button>
+                        <button id="btnPurchaseOnline" style="margin-left: 6px;" class="btn btn-first">Purchase SMS</button>
+                        <button id="btnPurchaseWAOnline" style="margin-left: 6px;display:none;" class="btn btn-first">Purchase WA</button>
+                        <button id="btnRenewSoftware" style="margin-left: 6px;display:none;" class="btn btn-first">Renew Software</button>
+                    </div>
+                </div>
+
+                <div class="tab-pane fade show active p-3" id="SMS">
+                    <div class="row">
+                        <div class="col-12"><div class="clsSMSCount"></div></div>
+                        <div class="col-12">
+                            <div id="GridResult"></div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="tab-pane fade p-3" id="Whatsup">
+                    <div class="row">
+                        <div class="col-12"><div class="clsWACount"></div></div>
+                        <div class="col-12">
+                            <div id="GridResult1"></div>
+                        </div>
+                    </div>
+                </div>
+                <div class="tab-pane fade p-3" id="Software">
+                    <div class="row">
+                        <div class="col-12"><div class="clsSWCount">Left Days: <span id="spnswleftday">0</span></div></div>
+                        <div class="col-12">
+                            <div id="GridResult2"></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="modal fade" id="mdlPurchaseSMS" tabindex="-1" role="large" aria-hidden="true" style="display: none;">
+    <div class="modal-dialog modal-lg">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal">
+                    &times;
+                </button>
+                <h4 class="modal-title">
+                    Purchase SMS
+                </h4>
+            </div>
+            <div class="modal-body">
+                <div class="row">
+
+
+                    <div class="col-6 col-md-4 col-lg-4">
+                        <div class="form-group">
+                            <label>
+                                Service Type<span style="color: Red;">*</span>
+                            </label>
+                            <select class="form-control" id="ddlServiceType">
+                                <option value="SMS">SMS</option>
+                                <!--<option value="WhatsApp">Whats App</option>
+                                <option value="Software">Software Renew</option>-->
+
+                            </select>
+                        </div>
+                    </div>
+
+                    <div class="col-6 col-md-4 col-lg-4">
+                        <div class="form-group">
+                            <label>
+                                Service Name<span style="color: Red;">*</span>
+                            </label>
+                            <select class="form-control" id="ddlServiceName">
+                                <option value="RouteMobile">Route Mobile</option>
+                            </select>
+                        </div>
+                    </div>
+
+
+                    <div class="col-6 col-md-4 col-lg-4">
+                        <div class="form-group">
+                            <label>
+                                <span data-lang="span">Quantity</span><span style="color: Red;">*</span>
+                            </label>
+                            <input type="number" onchange="calculatesmscharges();" id="txtSMSQuantity" autocomplete="off" class="form-control" />
+                        </div>
+                    </div>
+
+                    <div class="col-6 col-md-4 col-lg-4 clsAdminView">
+                        <div class="form-group">
+                            <label>
+                                <span data-lang="span">Total Charges</span>
+                            </label>
+                            <input type="number" onchange="calculatesmscharges();" readonly="readonly" id="txtSMSCharges" autocomplete="off" class="form-control" />
+                        </div>
+                    </div>
+
+                    <div class="col-6 col-md-4 col-lg-4 clsAdminView">
+                        <div class="form-group">
+                            <label>
+                                <span data-lang="span">Discount</span>
+                            </label>
+                            <input type="number" onchange="calculatesmscharges();" readonly="readonly" value="0" id="txtSMSDiscCharges" autocomplete="off" class="form-control" />
+                        </div>
+                    </div>
+                    <div class="col-6 col-md-4 col-lg-4 clsAdminView">
+                        <div class="form-group">
+                            <label>
+                                <span data-lang="span">Final Charges</span>
+                            </label>
+                            <input type="number" readonly="readonly" value="0" id="txtSMSFinalCharges" autocomplete="off" class="form-control" />
+                        </div>
+                    </div>
+                    <div class="col-6 col-md-4 col-lg-4">
+                        <div class="form-group">
+                            <label>
+                                <span data-lang="span">Payble Charges</span>
+                            </label>
+                            <input type="number" id="txtSMSPaidCharges" value="0" autocomplete="off" class="form-control" />
+                        </div>
+                    </div>
+
+                    <div class="col-6 col-md-4 col-lg-4">
+                        <div class="form-group">
+                            <label>
+                                <span data-lang="span">Validity Date</span><span style="color: Red;">*</span>
+                            </label>
+                            <input type="date" id="txtValidityDate" autocomplete="off" class="form-control" />
+                        </div>
+                    </div>
+                    <div class="col-6 col-md-4 col-lg-4 clsAdminView">
+                        <div class="form-group">
+                            <label>
+                                Approval<span style="color: Red;">*</span>
+                            </label>
+                            <select class="form-control" id="ddlApproval">
+                                <option value="0">No</option>
+                                <option value="1">Yes</option>
+
+                            </select>
+                        </div>
+                    </div>
+                    <div class="col-6 col-md-4 col-lg-4 clsAdminView">
+                        <div class="form-group">
+                            <label>
+                                Payment Mode<span style="color: Red;">*</span>
+                            </label>
+                            <select class="form-control" id="ddlPayMode">
+                            </select>
+                        </div>
+                    </div>
+                    <div class="col-12">
+                        <div class="form-group">
+                            <label>
+                                Payment History<span style="color: Red;">*</span>
+                            </label>
+                            <input type="text" class="form-control" id="ddlPayHistory" />
+
+                        </div>
+                    </div>
+
+                    <div class="col-2">
+                        <div>
+                            <a data-fancybox="Photogallery" class="Photo" target="_self" href="#" download="download">
+                                <img id="SMSReceiptImage" style="width:100%" src="images/receipt.png" alt="" />
+                            </a>
+                        </div>
+                    </div>
+                    <div class="col-10">
+                        <div class="d-flex flex-wrap align-content-center">
+
+                            <label class="btn-file btn btn-first  waves-effect m-2">
+                                <input type="file" accept="*/images" class="uplUploadSMSReceipt" />
+                                <i class="fa fa-cloud-upload"></i><span>Upload Transaction Receipt</span>
+                            </label>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button id="btnSubmitSMS" class="btnRights btn btn-first" data-rname="Submit Meeting">Submit</button>
+
+
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="modal fade" id="mdlPurchaseWA" tabindex="-1" role="large" aria-hidden="true" style="display: none;">
+    <div class="modal-dialog modal-lg">
+        <div class="modal-content">
+            <div class="modal-header">
+
+                <h4 class="modal-title">
+                    Purchase Whats App
+                </h4>
+            </div>
+            <div class="modal-body">
+                <div class="row">
+
+
+                    <div class="col-6 col-md-4 col-lg-4">
+                        <div class="form-group">
+                            <label>
+                                Service Type<span style="color: Red;">*</span>
+                            </label>
+                            <select class="form-control" id="ddlWAServiceType">
+                                <option value="WA">WA</option>
+                                <!--<option value="WhatsApp">Whats App</option>
+                                <option value="Software">Software Renew</option>-->
+
+                            </select>
+                        </div>
+                    </div>
+
+                    <div class="col-6 col-md-4 col-lg-4">
+                        <div class="form-group">
+                            <label>
+                                Service Name<span style="color: Red;">*</span>
+                            </label>
+                            <select class="form-control" id="ddlWAServiceName">
+                                <option value="Oramo">Oramo</option>
+                            </select>
+                        </div>
+                    </div>
+
+
+                    <div class="col-6 col-md-4 col-lg-4">
+                        <div class="form-group">
+                            <label>
+                                <span data-lang="span">Quantity</span><span style="color: Red;">*</span>
+                            </label>
+                            <input type="number" onchange="calculatewacharges();" id="txtWAQuantity" autocomplete="off" class="form-control" />
+                        </div>
+                    </div>
+
+                    <div class="col-6 col-md-4 col-lg-4 clsAdminView">
+                        <div class="form-group">
+                            <label>
+                                <span data-lang="span">Total Charges</span>
+                            </label>
+                            <input type="number" onchange="calculatewacharges();" readonly="readonly" id="txtWACharges" autocomplete="off" class="form-control" />
+                        </div>
+                    </div>
+
+                    <div class="col-6 col-md-4 col-lg-4 clsAdminView">
+                        <div class="form-group">
+                            <label>
+                                <span data-lang="span">Discount</span>
+                            </label>
+                            <input type="number" onchange="calculatewacharges();" readonly="readonly" value="0" id="txtWADiscCharges" autocomplete="off" class="form-control" />
+                        </div>
+                    </div>
+                    <div class="col-6 col-md-4 col-lg-4 clsAdminView">
+                        <div class="form-group">
+                            <label>
+                                <span data-lang="span">Final Charges</span>
+                            </label>
+                            <input type="number" readonly="readonly" value="0" id="txtWAFinalCharges" autocomplete="off" class="form-control" />
+                        </div>
+                    </div>
+                    <div class="col-6 col-md-4 col-lg-4">
+                        <div class="form-group">
+                            <label>
+                                <span data-lang="span">Payble Charges</span>
+                            </label>
+                            <input type="number" id="txtWAPaidCharges" value="0" autocomplete="off" class="form-control" />
+                        </div>
+                    </div>
+
+                    <div class="col-6 col-md-4 col-lg-4">
+                        <div class="form-group">
+                            <label>
+                                <span data-lang="span">Validity Date</span><span style="color: Red;">*</span>
+                            </label>
+                            <input type="date" id="txtWAValidityDate" autocomplete="off" class="form-control" />
+                        </div>
+                    </div>
+                    <div class="col-6 col-md-4 col-lg-4 clsAdminView">
+                        <div class="form-group">
+                            <label>
+                                Approval<span style="color: Red;">*</span>
+                            </label>
+                            <select class="form-control" id="ddlWAApproval">
+                                <option value="0">No</option>
+                                <option value="1">Yes</option>
+
+                            </select>
+                        </div>
+                    </div>
+
+                    <div class="col-6 col-md-4 col-lg-4 clsAdminView">
+                        <div class="form-group">
+                            <label>
+                                Payment Mode<span style="color: Red;">*</span>
+                            </label>
+                            <select class="form-control" id="ddlWAPayMode">
+                            </select>
+                        </div>
+                    </div>
+                    <div class="col-12">
+                        <div class="form-group">
+                            <label>
+                                Payment History<span style="color: Red;">*</span>
+                            </label>
+                            <input type="text" class="form-control" id="ddlWAPayHistory" />
+
+                        </div>
+                    </div>
+                    <div class="col-12">
+
+                    </div>
+                    <div class="col-2">
+                        <div>
+                            <a data-fancybox="Photogallery" class="Photo" target="_self" href="#" download="download">
+                                <img id="WAReceiptImage" style="width:100%" src="images/receipt.png" alt="" />
+                            </a>
+                        </div>
+                    </div>
+                    <div class="col-10">
+                        <div class="d-flex flex-wrap align-content-center">
+
+                            <label class="btn-file btn btn-first  waves-effect m-2">
+                                <input type="file" accept="*/images" class="uplUploadWAReceipt" />
+                                <i class="fa fa-cloud-upload"></i><span>Upload Transaction Receipt</span>
+                            </label>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button id="btnSubmitWA" class="btnRights btn btn-first" data-rname="Submit Meeting">Submit</button>
+
+
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="modal fade" id="mdlPurchaseSW" tabindex="-1" role="large" aria-hidden="true" style="display: none;">
+    <div class="modal-dialog modal-lg">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal">
+                    &times;
+                </button>
+                <h4 class="modal-title">
+                    Purchase Software Renewal
+                </h4>
+            </div>
+            <div class="modal-body">
+                <div class="row">
+
+
+                    <div class="col-6 col-md-4 col-lg-4">
+                        <div class="form-group">
+                            <label>
+                                Service Type<span style="color: Red;">*</span>
+                            </label>
+                            <select class="form-control" id="ddlSWServiceType">
+                                <option value="SW">SW</option>
+                                <!--<option value="WhatsApp">Whats App</option>
+                                <option value="Software">Software Renew</option>-->
+
+                            </select>
+                        </div>
+                    </div>
+
+                    <div class="col-6 col-md-4 col-lg-4">
+                        <div class="form-group">
+                            <label>
+                                Service Name<span style="color: Red;">*</span>
+                            </label>
+                            <select class="form-control" id="ddlSWServiceName">
+                                <option value="Oramo">Oramo Dental</option>
+                            </select>
+                        </div>
+                    </div>
+
+
+                    <div class="col-6 col-md-4 col-lg-4">
+                        <div class="form-group">
+                            <label>
+                                <span data-lang="span">Quantity</span><span style="color: Red;">*</span>
+                            </label>
+                            <input type="number" onchange="calculateswcharges();" id="txtSWQuantity" autocomplete="off" class="form-control" />
+                        </div>
+                    </div>
+
+                    <div class="col-6 col-md-4 col-lg-4 clsAdminView">
+                        <div class="form-group">
+                            <label>
+                                <span data-lang="span">Total Charges</span>
+                            </label>
+                            <input type="number" onchange="calculateswcharges();" readonly="readonly" id="txtSWCharges" autocomplete="off" class="form-control" />
+                        </div>
+                    </div>
+
+                    <div class="col-6 col-md-4 col-lg-4 clsAdminView">
+                        <div class="form-group">
+                            <label>
+                                <span data-lang="span">Discount</span>
+                            </label>
+                            <input type="number" onchange="calculateswcharges();" readonly="readonly" value="0" id="txtSWDiscCharges" autocomplete="off" class="form-control" />
+                        </div>
+                    </div>
+                    <div class="col-6 col-md-4 col-lg-4 clsAdminView">
+                        <div class="form-group">
+                            <label>
+                                <span data-lang="span">Final Charges</span>
+                            </label>
+                            <input type="number" readonly="readonly" value="0" id="txtSWFinalCharges" autocomplete="off" class="form-control" />
+                        </div>
+                    </div>
+                    <div class="col-6 col-md-4 col-lg-4">
+                        <div class="form-group">
+                            <label>
+                                <span data-lang="span">Payble Charges</span>
+                            </label>
+                            <input type="number" id="txtSWPaidCharges" value="0" autocomplete="off" class="form-control" />
+                        </div>
+                    </div>
+
+                    <div class="col-6 col-md-4 col-lg-4">
+                        <div class="form-group">
+                            <label>
+                                <span data-lang="span">Validity Date</span><span style="color: Red;">*</span>
+                            </label>
+                            <input type="date" id="txtSWValidityDate" autocomplete="off" class="form-control" />
+                        </div>
+                    </div>
+                    <div class="col-6 col-md-4 col-lg-4 clsAdminView">
+                        <div class="form-group">
+                            <label>
+                                Approval<span style="color: Red;">*</span>
+                            </label>
+                            <select class="form-control" id="ddlSWApproval">
+                                <option value="0">No</option>
+                                <option value="1">Yes</option>
+
+                            </select>
+                        </div>
+                    </div>
+
+                    <div class="col-6 col-md-4 col-lg-4 clsAdminView">
+                        <div class="form-group">
+                            <label>
+                                Payment Mode<span style="color: Red;">*</span>
+                            </label>
+                            <select class="form-control" id="ddlSWPayMode">
+                            </select>
+                        </div>
+                    </div>
+                    <div class="col-12">
+                        <div class="form-group">
+                            <label>
+                                Payment History<span style="color: Red;">*</span>
+                            </label>
+                            <input type="text" class="form-control" id="ddlSWPayHistory" />
+
+                        </div>
+                    </div>
+                    <div class="col-12">
+
+                    </div>
+                    <div class="col-2">
+                        <div>
+                            <a data-fancybox="Photogallery" class="Photo" target="_self" href="#" download="download">
+                                <img id="SWReceiptImage" style="width:100%" src="images/receipt.png" alt="" />
+                            </a>
+                        </div>
+                    </div>
+                    <div class="col-10">
+                        <div class="d-flex flex-wrap align-content-center">
+
+                            <label class="btn-file btn btn-first  waves-effect m-2">
+                                <input type="file" accept="*/images" class="uplUploadSWReceipt" />
+                                <i class="fa fa-cloud-upload"></i><span>Upload Transaction Receipt</span>
+                            </label>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button id="btnSubmitSW" class="btnRights btn btn-first" data-rname="Submit Meeting">Submit</button>
+
+
+            </div>
+        </div>
+    </div>
+</div>
+
+
+<div class="modal fade" id="mdlOnlinePurchase" tabindex="-1" role="large" aria-hidden="true" style="display: none;">
+    <div class="modal-dialog modal-xl">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal">
+                    &times;
+                </button>
+                <h4 class="modal-title">
+                    Purchase SMS
+                </h4>
+            </div>
+            <div class="modal-body" style="padding-top: 0px; padding-bottom: 0px">
+                <div class="row" style="background: url('images/smsback.jpg'); min-height: 500px; background-repeat: no-repeat; background-size: 100% 100%;">
+                    <table style="width: 100%; color: #fff;">
+                        <tr><td style="text-align:center;height:30px;">Oramo Technologies</td></tr>
+                        <tr><td id="tdclinicname" style="text-align: center; height: 30px;font-size:50px;">Clinic Name</td></tr>
+                        <tr>
+                            <td style="vertical-align:top;">
+                                <table style="width: 100%; font-size: 18px; font-weight: 600;">
+                                    <tr>
+                                        <td></td>
+                                        <td style="text-align: left; width: 340px;"><div style="display: flex"><span style="width: 120px;">Doctor Name</span>:<span id="spndoctorname"></span></div></td>
+
+                                    </tr>
+                                    <tr>
+                                        <td></td>
+                                        <td style="text-align: left; width: 340px;"><div style="display: flex"><span style="width: 120px;">Mobile</span>:<span id="spnmobile"></span></div></td>
+                                    </tr>
+                                    <tr>
+                                        <td></td>
+                                        <td style="text-align: left; width: 340px;"><div style="display: flex"><span style="width: 120px;">Email</span>:<span id="spnemail"></span></div></td>
+                                    </tr>
+                                    <tr>
+                                        <td></td>
+                                        <td style="text-align: left; width: 340px; display: flex"><span>Current SMS Balance</span>:<span id="spnsmsbalance">0</span></td>
+                                    </tr>
+
+                                    <tr>
+                                        <td></td>
+                                        <td style="text-align: left; width: 340px; padding-top:40px;"><span>Add SMS Credit</span></td>
+                                    </tr>
+                                    <tr>
+                                        <td></td>
+                                        <td style="text-align: left; width: 340px; ">
+                                            <table>
+                                                <tr><td style="font-size:x-large">Rs</td><td style="font-size:x-large">SMS</td></tr>
+                                                <tr>
+                                                    <td>
+                                                        <select id="ddlSMSCount" onchange="fn_changesmsvalue(this)">
+                                                            <option value="1">1</option>
+                                                            <!--<option value="100">100</option>-->
+                                                            <option value="100">100</option>
+                                                            <option value="300">300</option>
+                                                            <option value="500">500</option>
+                                                            <option value="1000">1000</option>
+                                                            <option value="1500">1500</option>
+                                                            <option value="2000">2000</option>
+                                                            <option value="3000">3000</option>
+                                                            <option value="5000">5000</option>
+                                                            <option value="10000">10000</option>
+                                                        </select>
+                                                    </td>
+                                                    <td><input id="txtsmscount" value="1" type="text" /></td>
+
+                                                </tr>
+                                                <tr>
+                                                    <td colspan="2" style="text-align:center ;width:50px;"><button onclick="fn_PayNow()" style="background-color: aqua; border-radius: 8px;">PAY NOW</button></td>
+                                                </tr>
+                                            </table>
+                                        </td>
+                                    </tr>
+
+
+                                </table>
+                            </td>
+                        </tr>
+                    </table>
+
+
+
+                </div>
+            </div>
+            <!--<div class="modal-footer">
+
+
+
+            </div>-->
+        </div>
+    </div>
+</div>
+
+
+<div class="modal fade" id="mdlOnlineWAPurchase" tabindex="-1" role="large" aria-hidden="true" style="display: none;">
+    <div class="modal-dialog modal-xl">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal">
+                    &times;
+                </button>
+                <h4 class="modal-title">
+                    Purchase Whatsapp
+                </h4>
+            </div>
+            <div class="modal-body" style="padding-top: 0px; padding-bottom: 0px">
+                <div class="row" style="background: url('images/smsback.jpg'); min-height: 500px; background-repeat: no-repeat; background-size: 100% 100%;">
+                    <table style="width: 100%; color: #fff;">
+                        <tr><td style="text-align:center;height:30px;">Oramo Technologies</td></tr>
+                        <tr><td style="text-align: center; height: 30px;font-size:50px;" id="tdclinicnamewa">Clinic Name</td></tr>
+                        <tr>
+                            <td style="vertical-align:top;">
+                                <table style="width: 100%; font-size: 18px; font-weight: 600;">
+                                    <tr>
+                                        <td></td>
+                                        <td style="text-align: left; width: 340px;"><div style="display: flex"><span style="width: 120px;">Doctor Name</span>:<span id="spndoctornamewa"></span></div></td>
+
+                                    </tr>
+                                    <tr>
+                                        <td></td>
+                                        <td style="text-align: left; width: 340px;"><div style="display: flex"><span style="width: 120px;">Mobile</span>:<span id="spnmobilewa"></span></div></td>
+                                    </tr>
+                                    <tr>
+                                        <td></td>
+                                        <td style="text-align: left; width: 340px;"><div style="display: flex"><span style="width: 120px;">Email</span>:<span id="spnemailwa"></span></div></td>
+                                    </tr>
+                                    <tr>
+                                        <td></td>
+                                        <td style="text-align: left; width: 340px; display: flex"><span>Balance WA Payment</span>:<span id="spnwabalance"></span></td>
+                                    </tr>
+
+                                    <tr>
+                                        <td></td>
+                                        <td style="text-align: left; width: 340px; padding-top:40px;"><span>Add Whats App Credit</span></td>
+                                    </tr>
+                                    <tr>
+                                        <td></td>
+                                        <td style="text-align: left; width: 340px; ">
+                                            <table>
+                                                <tr><td style="font-size:x-large">Rs</td><td style="font-size:x-large">User/Day</td></tr>
+                                                <tr>
+                                                    <td>
+                                                        <select id="ddlWACount" onchange="fn_changesmsvalue(this)">
+                                                            <option value="2">2</option>
+                                                            <!--<option value="100">100</option>-->
+                                                            <option value="100">100</option>
+                                                            <option value="300">300</option>
+                                                            <option value="500">500</option>
+                                                            <option value="1000">1000</option>
+                                                            <option value="1500">1500</option>
+                                                            <option value="2000">2000</option>
+                                                            <option value="3000">3000</option>
+                                                            <option value="5000">5000</option>
+                                                            <option value="10000">10000</option>
+                                                        </select>
+                                                    </td>
+                                                    <td><input id="txtwacount" value="1" type="text" /></td>
+
+                                                </tr>
+                                                <tr>
+                                                    <td colspan="2" style="text-align:center ;width:50px;"><button onclick="fn_PayNowwa()" style="background-color: aqua; border-radius: 8px;">PAY NOW</button></td>
+                                                </tr>
+                                            </table>
+                                        </td>
+                                    </tr>
+
+
+                                </table>
+                            </td>
+                        </tr>
+                    </table>
+
+
+
+                </div>
+            </div>
+            <!--<div class="modal-footer">
+
+
+
+            </div>-->
+        </div>
+    </div>
+</div>
+
+<div class="modal fade" id="mdlOnlineRenewSoftware" tabindex="-1" role="large" aria-hidden="true" style="display: none;">
+    <div class="modal-dialog modal-xl">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal">
+                    &times;
+                </button>
+                <h4 class="modal-title">
+                    Renew Software
+                </h4>
+            </div>
+            <div class="modal-body" style="padding-top: 0px; padding-bottom: 0px">
+                <div class="row" style="background: url('images/smsback.jpg'); min-height: 500px; background-repeat: no-repeat; background-size: 100% 100%;">
+                    <table style="width: 100%; color: #fff;">
+                        <tr><td style="text-align:center;height:30px;">Oramo Technologies</td></tr>
+                        <tr><td style="text-align: center; height: 30px;font-size:50px;" id="tdclinicnamesw">Clinic Name</td></tr>
+                        <tr>
+                            <td style="vertical-align:top;">
+                                <table style="width: 100%; font-size: 18px; font-weight: 600;">
+                                    <tr>
+                                        <td></td>
+                                        <td style="text-align: left; width: 340px;"><div style="display: flex"><span style="width: 120px;">Doctor Name</span>:<span id="spndoctornamesw"></span></div></td>
+
+                                    </tr>
+                                    <tr>
+                                        <td></td>
+                                        <td style="text-align: left; width: 340px;"><div style="display: flex"><span style="width: 120px;">Mobile</span>:<span id="spnmobilesw"></span></div></td>
+                                    </tr>
+                                    <tr>
+                                        <td></td>
+                                        <td style="text-align: left; width: 340px;"><div style="display: flex"><span style="width: 120px;">Email</span>:<span id="spnemailsw"></span></div></td>
+                                    </tr>
+                                    <tr>
+                                        <td></td>
+                                        <td style="text-align: left; width: 340px;"><div style="display: flex"><span style="width: 120px;">Left Days</span>:<span id="spnswbalance"></span></div></td>
+                                    </tr>
+
+                                    <tr>
+                                        <td></td>
+                                        <td style="text-align: left; width: 340px; padding-top:40px;"><span>Renwal Amount</span></td>
+                                    </tr>
+                                    <tr>
+                                        <td></td>
+                                        <td style="text-align: left; width: 340px; ">
+                                            <table>
+                                                <tr><td style="font-size:x-large">Rs</td><td style="font-size:x-large">Days</td></tr>
+                                                <tr>
+                                                    <td>
+                                                        <select id="ddlRenewalSoftware" onchange="fn_changesmsvalue(this)">
+                                                            
+
+                                                            <option value="6000">6000</option>
+                                                        </select>
+                                                    </td>
+                                                    <td><input id="txtLeftDays" value="365" type="text" /></td>
+
+                                                </tr>
+                                                <tr>
+                                                    <td colspan="2" style="text-align:center ;width:50px;"><button onclick="fn_PayNowsw()" style="background-color: aqua; border-radius: 8px;">PAY NOW</button></td>
+                                                </tr>
+                                            </table>
+                                        </td>
+                                    </tr>
+
+
+                                </table>
+                            </td>
+                        </tr>
+                    </table>
+
+
+
+                </div>
+            </div>
+            <!--<div class="modal-footer">
+
+
+
+            </div>-->
+        </div>
+    </div>
+</div>
+
+<script type="text/javascript" src="JS/Controllers/purchase.js"></script>
+
+

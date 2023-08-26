@@ -1,0 +1,100 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Densmart</title>
+    <link href="CSS/bootstrap.min.css" rel="stylesheet" />
+
+
+    <link href="CSS/font-awesome.min.css" rel="stylesheet" />
+    <link href="CSS/jquery.fancybox.3.4.1.min.css" rel="stylesheet" />
+    <link href="CSS/font-awesome.min.css" rel="stylesheet" />
+    <link href="CSS/admin.css" rel="stylesheet" />
+</head>
+<body class="LoginBodybg">
+    <div class="LoginLeft">
+
+        <img src="images/loginbanner.jpg" alt="" class="LoginbgImg" />
+    </div>
+    <div class="LoginRight">
+        <div autocomplete="off" novalidate class="LoginBody">
+            <div id="LoginBox">
+                <!--<h1>Densmart</h1>-->
+                <img src="images/logo.png" alt="" class="img-fluid mb-5" />
+                <h3>Login</h3>
+
+                <div class="Inputgroupbdr">
+                    <input id="txtLoginId" onchange="fillclinic();" type="text" name="" required />
+                    <span class="inputbar"></span>
+                    <label class="black">Login ID</label>
+                </div>
+
+                <div class="Inputgroupbdr">
+                    <input id="txtPassword" onchange="fillclinic();" onkeypress="keypresschecklogin(this)" type="password" name="password" required />
+                    <span class="inputbar"></span>
+                    <label class="black">Password</label>
+                </div>
+                <div class="Inputgroupbdr clsClinicDetails" style="display:none;">
+                    <select id="ddlLocation"></select>
+                    <span class="inputbar"></span>
+                    <!--<label class="black">User Name</label>-->
+                </div>
+                <div class="Inputgroupbdr">
+                    <a id="btnSubmitLogin" style="display:none;" href="#" class="loginbtn btn-block waves-effect">
+                        Submit
+                    </a>
+                </div>
+                <div class="text-right">
+                    <a class="btn btn-link LoginSwitch"><i class="fa fa-key"></i><span>Forgot Password ?</span></a>
+                </div>
+                <!--<div class="or-sep">OR</div>
+                <div class="SignInwith">
+                    <h3>
+                        Sign In with
+                    </h3>
+                    <ul>
+                        <li><a href="" target="_blank" class="Facebook"><i class="fa fa-facebook"></i></a></li>
+                        <li><a href="" target="_blank" class="Google"><i class="fa fa-google"></i></a></li>
+                        <li><a href="" target="_blank" class="Linkedin"><i class="fa fa-linkedin"></i></a></li>
+                    </ul>
+                </div>-->
+            </div>
+            <div id="ForgotPassword">
+                <img src="images/logo.png" alt="" class="img-fluid mb-5" />
+                <h3>Forgot Password ?</h3>
+                <div class="Inputgroupbdr">
+                    <input type="text" name="Username" required />
+                    <span class="inputbar"></span>
+                    <label class="black">User Name</label>
+                </div>
+                <div class="or-sep">OR</div>
+                <div class="Inputgroupbdr">
+                    <input type="text" name="Username" required />
+                    <span class="inputbar"></span>
+                    <label class="black">Email</label>
+                </div>
+                <div class="Inputgroupbdr">
+                    <button class="loginbtn btn-block waves-effect" data-dismiss="modal">
+                        Get Password
+                    </button>
+                </div>
+                <div class="text-right">
+                    <a class="btn btn-link LoginSwitch"><i class="fa fa-arrow-circle-left"></i><span>Login</span></a>
+                </div>
+            </div>
+        </div>
+    </div>
+    <script src="JS/jquery-1.11.2.min.js"></script>
+    <script src="JS/bootstrap.min.js"></script>
+    <script src="JS/CommonPgVariables.js"></script>
+    <script src="JS/getQueryStringParam.js"></script>
+    <script src="JS/jquery.cookie.js"></script>
+    <script src="JS/CrossPagePosting.js"></script>
+    <script src="JS/getJSHandler.js"></script>
+
+    <script type="text/javascript" src="JS/Controllers/loginpage.js">
+
+    </script>
+</body>
+</html>
